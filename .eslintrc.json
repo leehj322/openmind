@@ -1,0 +1,52 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:jsx-a11y/recommended",
+    "plugin:import/recommended"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "rules": {
+    "prettier/prettier": "error",
+    "no-console": "warn",
+    "no-unused-vars": "warn",
+    "react/react-in-jsx-scope": "off",
+    "consistent-return": "warn",
+    "curly": "warn",
+    "eqeqeq": "error",
+    "func-call-spacing": "warn",
+    "key-spacing": "warn",
+    "no-duplicate-imports": "warn",
+    "no-multi-assign": "warn",
+    "no-multi-spaces": "warn",
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal"],
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "external",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["builtin"],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
+}
