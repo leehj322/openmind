@@ -21,6 +21,7 @@
     "prettier/prettier": "error",
     "no-console": "warn",
     "no-unused-vars": "warn",
+    "import/no-unresolved": "off",
     "react/react-in-jsx-scope": "off",
     "consistent-return": "warn",
     "curly": "warn",
