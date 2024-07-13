@@ -1,5 +1,5 @@
 function AnswererSelector() {
-  return <div>AnswererSelector page</div>;
+  return <div>AnswererSelector</div>;
 }
 
 export default AnswererSelector;
