@@ -18,29 +18,48 @@ const fontWeight = {
 };
 
 const light = {
-  // background: '#fff',
-  // fontPrimary: 'black',
-  // fontSecondary: 'gray',
-  // primary: '#00a0ff',
-  // secondary: '#ddd',
-  // hover: '#00a0ff50',
+  background: 'var(--gray20)',
+  fontPrimary: 'var(--gray60)',
+  fontSecondary: 'var(gray10)',
+  hoverBlue: 'var(--blue)',
+  buttonPriamary: 'var(--brown40)',
+  buttonSecondary: 'var(--brown10)',
+  buttonPrimaryPressed: 'var(--brown50)',
+  buttonSecondaryPressed: 'var(--brown20)',
+  BorderBrown: 'var(--brown40)',
+  BorderGray: 'var(--gray40)',
+  ButtonInactivOpacity: '0.4',
 };
 
+// light랑 똑같이 두었는데, 구현 시에 색상만 바꾸면 됨
 const dark = {
-  // background: '#fff',
-  // fontPrimary: 'black',
-  // fontSecondary: 'gray',
-  // primary: '#00a0ff',
-  // secondary: '#ddd',
-  // hover: '#00a0ff50',
+  background: 'var(--gray20)',
+  fontPrimary: 'var(--gray60)',
+  fontSecondary: 'var(gray10)',
+  hoverBlue: 'var(--blue)',
+  buttonPriamary: 'var(--brown40)',
+  buttonSecondary: 'var(--brown10)',
+  buttonPrimaryPressed: 'var(--brown50)',
+  buttonSecondaryPressed: 'var(--brown20)',
+  BorderBrown: 'var(--brown40)',
+  BorderGray: 'var(--gray40)',
+  ButtonInactivOpacity: '0.4',
 };
 
-const theme = {
+const settings = {
   windowSize,
   fontSize,
   fontWeight,
+};
+
+const modes = {
   light,
   dark,
+};
+
+const theme = {
+  settings,
+  modes,
 };
 
 export default theme;
