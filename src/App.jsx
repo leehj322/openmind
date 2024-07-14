@@ -6,13 +6,16 @@ import theme from './styles/@shared/theme';
 
 function App() {
   const queryClient = new QueryClient();
+
+  const mode = 'light';
+  const themeSet = { ...theme.settings, ...theme.modes[mode] };
+
   return (
     <QueryClientProvider client={queryClient}>
-      <GlobalStyle>
-        <ThemeProvider theme={theme}>
-          <PageRouter />
-        </ThemeProvider>
-      </GlobalStyle>
+      <GlobalStyle />
+      <ThemeProvider theme={themeSet}>
+        <PageRouter />
+      </ThemeProvider>
     </QueryClientProvider>
   );
 }
