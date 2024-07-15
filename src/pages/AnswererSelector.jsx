@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import Header from '../components/AnswererSelector/Header';
 
+import DropdownBox from '../components/@shared/DropdownBox';
+import editImgUrl from '../assets/images/Edit.png';
+
 const StyledAnswererSelectorPageContainer = styled.div`
   margin: 40px auto 100px;
   width: 1200px;
@@ -16,10 +19,16 @@ const StyledAnswererSelectorPageContainer = styled.div`
   }
 `;
 
+const itemList = [
+  { title: '이름순', value: 'name', url: editImgUrl },
+  { title: '최신순', value: 'recent', url: editImgUrl },
+];
+
 function AnswererSelector() {
   return (
     <StyledAnswererSelectorPageContainer>
       <Header />
+      <DropdownBox isDropdownVisible={true} minWidth={80} itemList={itemList} />
     </StyledAnswererSelectorPageContainer>
   );
 }
