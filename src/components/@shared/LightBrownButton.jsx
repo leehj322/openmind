@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import rightArrowUrl from '../../assets/images/arrow-right.svg';
+import rightArrowImgUrl from '../../assets/images/arrow-right.svg';
 
 const Button = styled.button`
   background-color: var(--brown10);
@@ -32,7 +32,7 @@ function LightBrownButton({ children }) {
   return (
     <Button>
       {children}
-      <ArrowImg src={rightArrowUrl} />
+      <ArrowImg src={rightArrowImgUrl} />
     </Button>
   );
 }
