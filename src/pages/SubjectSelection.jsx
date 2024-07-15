@@ -2,9 +2,8 @@ import styled from 'styled-components';
 import Header from '../components/AnswererSelector/Header';
 
 import DropdownBox from '../components/@shared/DropdownBox';
-import editImgUrl from '../assets/images/Edit.png';
 
-const StyledAnswererSelectorPageContainer = styled.div`
+const StyledSubjectSelectionPageContainer = styled.div`
   margin: 40px auto 100px;
   width: 1200px;
 
@@ -20,17 +19,17 @@ const StyledAnswererSelectorPageContainer = styled.div`
 `;
 
 const itemList = [
-  { title: '이름순', value: 'name', url: editImgUrl },
-  { title: '최신순', value: 'recent', url: editImgUrl },
+  { title: '이름순', value: 'name', url: null },
+  { title: '최신순', value: 'recent', url: null },
 ];
 
-function AnswererSelector() {
+function SubjectSelection() {
   return (
-    <StyledAnswererSelectorPageContainer>
+    <StyledSubjectSelectionPageContainer>
       <Header />
       <DropdownBox isDropdownVisible={true} minWidth={80} itemList={itemList} />
-    </StyledAnswererSelectorPageContainer>
+    </StyledSubjectSelectionPageContainer>
   );
 }
 
-export default AnswererSelector;
+export default SubjectSelection;

@@ -1,5 +1,5 @@
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import AnswererSelector from './pages/AnswererSelector';
+import SubjectSelection from './pages/SubjectSelection';
 import AnswerManger from './pages/AnswerManger';
 import QnAPortal from './pages/QnAPortal';
 import QuerySample from './pages/QuerySample';
@@ -10,7 +10,7 @@ function PageRouter() {
     <BrowserRouter>
       <Routes>
         <Route path={'/'} element={<QnAPortal />} />
-        <Route path={'/list'} element={<AnswererSelector />} />
+        <Route path={'/list'} element={<SubjectSelection />} />
         <Route path={'/post/:id'}>
           <Route index element={<QuestionArchive />} />
           <Route path={'answer'} element={<AnswerManger />} />
