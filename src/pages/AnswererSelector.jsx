@@ -19,16 +19,16 @@ const StyledAnswererSelectorPageContainer = styled.div`
   }
 `;
 
-const itemList = {
-  itemNameList: ['수정', '최신순'],
-  itemImgList: [editImgUrl, editImgUrl],
-};
+const itemList = [
+  { title: '이름순', url: null },
+  { title: '최신순', url: null },
+];
 
 function AnswererSelector() {
   return (
     <StyledAnswererSelectorPageContainer>
       <Header />
-      <DropdownBox isDropdownVisible={true} minWidth="80px" itemList={itemList} currentItem="최신순" />
+      <DropdownBox isDropdownVisible={true} minWidth={80} itemList={itemList} currentItem="최신순" />
     </StyledAnswererSelectorPageContainer>
   );
 }
