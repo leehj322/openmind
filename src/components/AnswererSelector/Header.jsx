@@ -6,6 +6,15 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  @media screen and (min-width: 768px) and (max-width: 1199px) {
+    padding: 0 50px;
+  }
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    flex-direction: column;
+    gap: 20px;
+  }
 `;
 
 const LogoImg = styled.img`
