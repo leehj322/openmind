@@ -3,7 +3,7 @@ import AnswererSelector from './pages/AnswererSelector';
 import AnswerManger from './pages/AnswerManger';
 import QnAPortal from './pages/QnAPortal';
 import QuerySample from './pages/QuerySample';
-import QuestionArchive from './pages/QuestionArchive';
+import IndividualFeed from './pages/IndividualFeed';
 
 function PageRouter() {
   return (
@@ -12,7 +12,7 @@ function PageRouter() {
         <Route path={'/'} element={<QnAPortal />} />
         <Route path={'/list'} element={<AnswererSelector />} />
         <Route path={'/post/:id'}>
-          <Route index element={<QuestionArchive />} />
+          <Route index element={<IndividualFeed />} />
           <Route path={'answer'} element={<AnswerManger />} />
         </Route>
         {/* 팀원분들 Suspense + tanstack-query 예시용 샘플 */}
