@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import filter from '../../styles/@shared/filter';
+import { useState } from 'react';
 
 const StyledDropdownListContainer = styled.div`
   display: ${({ $isVisible }) => ($isVisible ? `inline-flex` : `none`)};
@@ -53,17 +54,27 @@ const ItemImg = styled.img`
  * dropdown trigger를 통해서 isDropdownVisible을 toggle시에 꺼졌다 켜졌다 하는 dropdown list box
  * @param {boolean} isDropdownVisible : dropdown box 끄기(false), 켜기(true)
  * @param {number} minWidth : min-width (ex. 80)
- * @param {object} itemList : [{title: '수정순', url: imgUrl}, {title: '최신순', img: imgUrl} ...]
- * @param {string} currentItem : itemNameList의 요소와 같은 값 입력, 현재 활성화된 값임을 파란색으로 표시 (ex. itemNameList: ['수정', '최신순'] 에서 '최신순'을 넘겨줄 시 최신순이 파란색으로 활성화)
+ * @param {object} itemList : [{title: '이름순', value: 'name' url: imgUrl}, {title: '최신순', value: 'recent', img: imgUrl} ...]
+ * @param {function} onItemClick : 해당 item을 click 했을때 value값을 파라미터로 하는 onItemClick함수 실행
  */
-function DropdownBox({ isDropdownVisible, minWidth, itemList, currentItem }) {
+function DropdownBox({ isDropdownVisible, minWidth, itemList, onItemClick }) {
+  const [currentItem, setCurrentItem] = useState(null);
+
+  const handleItemClick = event => {
+    const value = event.currentTarget.dataset.value;
+    console.log(value);
+    setCurrentItem(value);
+    onItemClick(value);
+  };
+
   return (
     <StyledDropdownListContainer $isVisible={isDropdownVisible} $minWidth={minWidth}>
       {itemList.map(item => {
+        const { title, value, url } = item;
         return (
-          <StyledItemArea key={item.title} $isCurrent={currentItem === item.title}>
-            {item.url && <ItemImg src={item.url} />}
-            {item.title}
+          <StyledItemArea data-value={value} key={value} $isCurrent={currentItem === value} onClick={handleItemClick}>
+            {url && <ItemImg src={url} />}
+            {title}
           </StyledItemArea>
         );
       })}
