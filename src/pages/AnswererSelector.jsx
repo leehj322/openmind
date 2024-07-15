@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import Header from '../components/AnswererSelector/Header';
 
+import DropdownBox from '../components/@shared/DropdownBox';
+
 const StyledAnswererSelectorPageContainer = styled.div`
   margin: 40px auto 100px;
   width: 1200px;
@@ -20,6 +22,7 @@ function AnswererSelector() {
   return (
     <StyledAnswererSelectorPageContainer>
       <Header />
+      <DropdownBox isVisible={true} minWidth="80px" />
     </StyledAnswererSelectorPageContainer>
   );
 }
