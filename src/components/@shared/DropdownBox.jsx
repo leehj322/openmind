@@ -4,6 +4,7 @@ import filter from '../../styles/@shared/filter';
 const StyledDropdownListContainer = styled.div`
   display: ${({ isVisible }) => (isVisible ? `inline-flex` : `none`)};
   flex-direction: column;
+  position: absolute;
 
   min-width: ${({ minWidth }) => minWidth};
 
