@@ -61,8 +61,7 @@ function DropdownBox({ isDropdownVisible, minWidth, itemList, onItemClick }) {
   const [currentItem, setCurrentItem] = useState(null);
 
   const handleItemClick = event => {
-    const value = event.currentTarget.dataset.value;
-    console.log(value);
+    const { value } = event.currentTarget.dataset;
     setCurrentItem(value);
     onItemClick(value);
   };
