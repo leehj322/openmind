@@ -1,5 +1,11 @@
+import Header from '../components/AnswererSelector/Header';
+
 function AnswererSelector() {
-  return <div>AnswererSelector</div>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default AnswererSelector;
