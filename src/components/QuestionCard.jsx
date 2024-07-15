@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import dummyCat from '../assets/images/cute_cat_img.png';
-import receivedQuestionIcon from '../assets/images/Messages_icon.svg';
+import receivedQuestionIcon from '../assets/images/messages_icon.png';
 
 const QuestionCardContainer = styled.section`
   min-width: 186px;
-  width: 20%;
+  width: 220px;
   height: 187px;
   border-radius: 16px;
   border: 1px solid var(--gray40);
@@ -34,6 +34,8 @@ const ReceivedQuestionArea = styled.div`
 
 const ReceivedQuestionIcon = styled.img`
   width: 18px;
+  filter: brightness(0) saturate(100%) invert(59%) sepia(16%) saturate(0%) hue-rotate(213deg) brightness(83%)
+    contrast(98%);
 `;
 
 const ReceivedQuestionText = styled.p`
