@@ -37,13 +37,13 @@ const dark = {
   fontPrimary: 'var(--gray60)',
   fontSecondary: 'var(gray10)',
   hoverBlue: 'var(--blue)',
-  buttonPriamary: 'var(--brown40)',
+  buttonPrimary: 'var(--brown40)',
   buttonSecondary: 'var(--brown10)',
   buttonPrimaryPressed: 'var(--brown50)',
   buttonSecondaryPressed: 'var(--brown20)',
   BorderBrown: 'var(--brown40)',
   BorderGray: 'var(--gray40)',
-  ButtonInactivOpacity: '0.4',
+  ButtonInactiveOpacity: '0.4',
 };
 
 const settings = {
