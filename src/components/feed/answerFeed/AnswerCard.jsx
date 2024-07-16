@@ -1,10 +1,11 @@
 import styled from 'styled-components';
-import { StyledPeedCardContainer } from '../../styles/peedCard/peedCardStyles';
-import Answer from '../questionPeed/Answer';
-import AnswerStatus from '../questionPeed/AnswerStatus';
-import QuestionTitle from '../questionPeed/QuestionTitle';
-import Reaction from '../questionPeed/Reaction';
+import { StyledFeedCardContainer } from '../../../styles/feed/feedCardStyles';
+import AnswerStatus from '../AnswerStatus';
 import MoreButton from './MoreButton';
+import QuestionTitle from '../QuestionTitle';
+import Answer from '../Answer';
+import Reaction from '../Reaction';
+import { useState } from 'react';
 
 /**
  * 질문 피드 페이지에서의 질문 카드
@@ -36,24 +37,36 @@ function AnswerCard({
   isRejected = false,
   answerCreatedAt = '2024-07-05',
 }) {
+  const [isEditing, setIsEditing] = useState(false);
+
   /*
   TODO:
     - 케밥 메뉴 버튼 구현
     - 받아온 qustionId, answerId 사용해서 질문 수정, 삭제, 답변 수정 삭제 구현
     - 답변이 있으면 답변을 표출하고, 없으면 입력창과 등록 버튼이 보이도록
+
+    - Answer내부의 상태
+      1. 답변 생성 이전 입력창과 답변 완료 버튼 -> 생성하기 API 호출
+      2. 답변 수정 상태에서의 입력창과 수정 완료 버튼 -> 수정하기 API 호출
+      차이점: 생성인가 수정인가에 따른 API 호출
   */
-  const isHasAnswer = !!answer;
 
   return (
-    <StyledPeedCardContainer>
+    <StyledFeedCardContainer>
       <StyledCardUpperArea>
-        <AnswerStatus isHasAnswer={isHasAnswer} />
+        <AnswerStatus answer={answer} />
         <MoreButton />
       </StyledCardUpperArea>
       <QuestionTitle qustion={qustion} questionCreateAt={questionCreateAt} />
-      <Answer answer={answer} answerCreatedAt={answerCreatedAt} isRejected={isRejected} />
+      <Answer
+        answerId={answerId}
+        answer={answer}
+        isEditing={isEditing}
+        answerCreatedAt={answerCreatedAt}
+        isRejected={isRejected}
+      />
       <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
-    </StyledPeedCardContainer>
+    </StyledFeedCardContainer>
   );
 }
 

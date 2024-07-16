@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import moreIcon from '../../assets/images/more-icon.png';
+import moreIcon from '../../../assets/images/more-icon.png';
 
 function MoreButton() {
   return (

@@ -1,16 +1,20 @@
 import { styled } from 'styled-components';
 import profileImg from '../../assets/images/samples/profile-sample.png';
 import getElapsedPeriod from '../../utils/getElapsedPeriod';
+import AnswerContent from './AnswerContent';
 
 /**
  * 답변 내용과 답변 거절 유무를 보여준다
  * @param props
+ * @param {string} props.answerId 답변 아이디
  * @param {string} props.answer 답변 내용
- * @param {string} props.isRejected 답변 거절 유무
+ * @param {string} props.isEditing 답변 수정중인가
  * @param {string} props.answerCreatedAt 답변 생성 시간
+ * @param {string} props.isRejected 답변 거절 유무
  */
-function Answer({ answerCreatedAt, answer, isRejected }) {
-  const elapedPeriod = getElapsedPeriod(answerCreatedAt);
+function Answer({ answerId, answer, isEditing, answerCreatedAt, isRejected }) {
+  const isHasAnswer = !!answer;
+  const elapedPeriod = isHasAnswer && getElapsedPeriod(answerCreatedAt);
 
   return (
     <StyledAnswerContainer>
@@ -18,9 +22,9 @@ function Answer({ answerCreatedAt, answer, isRejected }) {
       <StyledAnswerArea $isRejected={isRejected}>
         <div>
           <span>아초는 고양이</span>
-          <span>{elapedPeriod}</span>
+          {isHasAnswer && <span>{elapedPeriod}</span>}
         </div>
-        <p>{isRejected ? '답변 거절' : answer}</p>
+        <AnswerContent answerId={answerId} answer={answer} isRejected={isRejected} isEditing={isEditing} />
       </StyledAnswerArea>
     </StyledAnswerContainer>
   );
@@ -43,6 +47,8 @@ const StyledProfileImage = styled.img`
 `;
 
 const StyledAnswerArea = styled.section`
+  width: 100%;
+
   & div {
     display: flex;
     justify-content: flex-start;

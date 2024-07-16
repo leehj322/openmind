@@ -1,8 +1,8 @@
-import AnswerStatus from './AnswerStatus';
-import QuestionTitle from './QuestionTitle';
-import Answer from './Answer';
-import Reaction from './Reaction';
-import { StyledPeedCardContainer } from '../../styles/peedCard/peedCardStyles';
+import { StyledFeedCardContainer } from '../../../styles/feed/feedCardStyles';
+import Answer from '../Answer';
+import AnswerStatus from '../AnswerStatus';
+import QuestionTitle from '../QuestionTitle';
+import Reaction from '../Reaction';
 
 /**
  * 질문 피드 페이지에서의 질문 카드
@@ -30,15 +30,13 @@ function QuestionCard({
   isRejected = false,
   answerCreatedAt = '2024-07-05',
 }) {
-  const isHasAnswer = !!answer;
-
   return (
-    <StyledPeedCardContainer>
-      <AnswerStatus isHasAnswer={isHasAnswer} />
+    <StyledFeedCardContainer>
+      <AnswerStatus answer={answer} />
       <QuestionTitle qustion={qustion} questionCreateAt={questionCreateAt} />
       <Answer answer={answer} answerCreatedAt={answerCreatedAt} isRejected={isRejected} />
       <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
-    </StyledPeedCardContainer>
+    </StyledFeedCardContainer>
   );
 }
 
