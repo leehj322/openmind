@@ -1,13 +1,13 @@
 import styled from 'styled-components';
-import LogoImgUrl from '../../assets/images/logo.svg';
-import ProfileImgUrl from '../../assets/images/profile.png';
-import LinkIconUrl from '../../assets/images/ic_Link.png';
-import KakaoIconUrl from '../../assets/images/ic_Kakao.png';
-import FacebookIconUrl from '../../assets/images/ic_Facebook.png';
+import LogoImgUrl from '../../../assets/images/logo.svg';
+import ProfileImgUrl from '../../../assets/images/profile.png';
+import LinkIconUrl from '../../../assets/images/ic_Link.png';
+import KakaoIconUrl from '../../../assets/images/ic_Kakao.png';
+import FacebookIconUrl from '../../../assets/images/ic_Facebook.png';
 
 const StyledHeader = styled.header`
   width: 100%;
-  position: fixed;
+  position: absolute;
   top: 0px;
 `;
 
@@ -18,24 +18,43 @@ const StyledHeaderContainer = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 12px;
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    margin: 40px auto 0px;
+    width: 150px;
+  }
 `;
 
 const LogoImg = styled.img`
   display: block;
   width: 170px;
   height: 67px;
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    width: 124px;
+    height: 49px;
+  }
 `;
 
 const ProfileImg = styled.img`
   display: block;
   width: 136px;
   height: 136px;
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    width: 104px;
+    height: 104px;
+  }
 `;
 
 const StyledNameSection = styled.section`
   font-size: 32px;
   font-weight: 400;
   color: var(--gray60);
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    font-size: 24px;
+  }
 `;
 
 const StyledSharingArea = styled.div`
