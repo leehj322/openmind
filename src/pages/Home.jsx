@@ -30,7 +30,7 @@ function Home() {
         pagePath="/post/123"
         disabled={isButtonDisabled()}
         shape="pill"
-        btnColor="dark"
+        $btnColor="dark"
         imgSrc={DarkArrow}
         style={{ width: '500px', height: '50px' }}>
         질문하러 가기
