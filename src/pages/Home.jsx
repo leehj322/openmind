@@ -17,7 +17,7 @@ function Home() {
   const [inputValue, setInputValue] = useState('');
 
   const isButtonDisabled = () => {
-    return inputValue.trim() === 'ff';
+    return inputValue.trim() === '';
   };
 
   return (
