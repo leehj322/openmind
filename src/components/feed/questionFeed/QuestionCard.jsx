@@ -1,8 +1,8 @@
-import styled from 'styled-components';
-import AnswerStatus from './AnswerStatus';
-import QuestionTitle from './QuestionTitle';
-import Answer from './Answer';
-import Reaction from './Reaction';
+import { StyledFeedCardContainer } from '../../../styles/feed/feedCardStyles';
+import Answer from '../Answer';
+import AnswerStatus from '../AnswerStatus';
+import QuestionTitle from '../QuestionTitle';
+import Reaction from '../Reaction';
 
 /**
  * 질문 피드 페이지에서의 질문 카드
@@ -31,25 +31,13 @@ function QuestionCard({
   answerCreatedAt = '2024-07-05',
 }) {
   return (
-    <StyledQuestionCardContainer>
+    <StyledFeedCardContainer>
       <AnswerStatus answer={answer} />
       <QuestionTitle qustion={qustion} questionCreateAt={questionCreateAt} />
       <Answer answer={answer} answerCreatedAt={answerCreatedAt} isRejected={isRejected} />
       <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
-    </StyledQuestionCardContainer>
+    </StyledFeedCardContainer>
   );
 }
 
 export default QuestionCard;
-
-const StyledQuestionCardContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-
-  max-width: 684px;
-  padding: 32px;
-
-  box-shadow: var(--shadow1pt);
-  border-radius: 16px;
-`;
