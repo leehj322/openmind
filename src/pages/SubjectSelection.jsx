@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Header from '../components/AnswererSelector/Header';
 import TitledDropdown from '../components/AnswererSelector/TitledDropdown';
+import { useState } from 'react';
 
 const StyledSubjectSelectionPageContainer = styled.div`
   margin: 40px auto 100px;
@@ -18,10 +19,12 @@ const StyledSubjectSelectionPageContainer = styled.div`
 `;
 
 function SubjectSelection() {
+  const [sortBy, setSortBy] = useState('name'); // 기본 이름순
+
   return (
     <StyledSubjectSelectionPageContainer>
       <Header />
-      <TitledDropdown />
+      <TitledDropdown sortBy={sortBy} onSortChoice={setSortBy} />
     </StyledSubjectSelectionPageContainer>
   );
 }
