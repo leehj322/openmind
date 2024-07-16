@@ -30,9 +30,11 @@ function QuestionCard({
   isRejected = false,
   answerCreatedAt = '2024-07-05',
 }) {
+  const isHasAnswer = !!answer;
+
   return (
     <StyledPeedCardContainer>
-      <AnswerStatus answer={answer} />
+      <AnswerStatus isHasAnswer={isHasAnswer} />
       <QuestionTitle qustion={qustion} questionCreateAt={questionCreateAt} />
       <Answer answer={answer} answerCreatedAt={answerCreatedAt} isRejected={isRejected} />
       <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />

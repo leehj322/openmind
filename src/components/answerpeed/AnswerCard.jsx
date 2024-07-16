@@ -42,11 +42,12 @@ function AnswerCard({
     - 받아온 qustionId, answerId 사용해서 질문 수정, 삭제, 답변 수정 삭제 구현
     - 답변이 있으면 답변을 표출하고, 없으면 입력창과 등록 버튼이 보이도록
   */
+  const isHasAnswer = !!answer;
 
   return (
     <StyledPeedCardContainer>
       <StyledCardUpperArea>
-        <AnswerStatus answer={answer} />
+        <AnswerStatus isHasAnswer={isHasAnswer} />
         <MoreButton />
       </StyledCardUpperArea>
       <QuestionTitle qustion={qustion} questionCreateAt={questionCreateAt} />
