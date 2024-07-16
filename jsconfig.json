@@ -3,6 +3,6 @@
     "module": "commonjs",
     "target": "ES6"
   },
-  "include": ["src", "src/pages/IndividualFeed.jsx"],
+  "include": ["src", "src/pages/QuestionFeed.jsx"],
   "exclude": ["node_modules", "dist"]
 }
