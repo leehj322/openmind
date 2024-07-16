@@ -1,5 +1,11 @@
+import AnswerCard from '../components/answerpeed/AnswerCard';
+
 function AnswerPeed() {
-  return <div>AnswerPeed page</div>;
+  return (
+    <div>
+      <AnswerCard />
+    </div>
+  );
 }
 
 export default AnswerPeed;
