@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import dummyCat from '../assets/images/cute_cat_img.png';
 import receivedQuestionIcon from '../assets/images/messages_icon.png';
 
-const StyledQuestionCardContainer = styled.section`
+const StyledQuestionCardContainer = styled.li`
   min-width: 186px;
   width: 100%;
   height: 187px;
@@ -70,18 +70,34 @@ const StyledReceivedQuestionText = styled.p`
   }
 `;
 
-function QuestionCard() {
+function QuestionCard({ subject }) {
   return (
     <StyledQuestionCardContainer>
-      <StyledProfileImg src={dummyCat} alt="답변자 프로필 사진" />
-      <StyledUserName>이름</StyledUserName>
-      <StyledReceivedQuestionArea>
-        <div>
-          <StyledReceivedQuestionIcon src={receivedQuestionIcon} alt="받은 질문 아이콘" />
-          <StyledReceivedQuestionText>받은 질문</StyledReceivedQuestionText>
-        </div>
-        <StyledReceivedQuestionText>n개</StyledReceivedQuestionText>
-      </StyledReceivedQuestionArea>
+      {subject ? (
+        <>
+          <StyledProfileImg src={subject.imageSource} alt="답변자 프로필 사진" />
+          <StyledUserName>{subject.name}</StyledUserName>
+          <StyledReceivedQuestionArea>
+            <div>
+              <StyledReceivedQuestionIcon src={receivedQuestionIcon} alt="받은 질문 아이콘" />
+              <StyledReceivedQuestionText>받은 질문</StyledReceivedQuestionText>
+            </div>
+            <StyledReceivedQuestionText>{subject.questionCount}개</StyledReceivedQuestionText>
+          </StyledReceivedQuestionArea>
+        </>
+      ) : (
+        <>
+          <StyledProfileImg src={dummyCat} alt="답변자 프로필 사진" />
+          <StyledUserName>이름</StyledUserName>
+          <StyledReceivedQuestionArea>
+            <div>
+              <StyledReceivedQuestionIcon src={receivedQuestionIcon} alt="받은 질문 아이콘" />
+              <StyledReceivedQuestionText>받은 질문</StyledReceivedQuestionText>
+            </div>
+            <StyledReceivedQuestionText>n개</StyledReceivedQuestionText>
+          </StyledReceivedQuestionArea>
+        </>
+      )}
     </StyledQuestionCardContainer>
   );
 }
