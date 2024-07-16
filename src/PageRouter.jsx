@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
-import AnswererSelector from './pages/AnswererSelector';
-import AnswerManger from './pages/AnswerManger';
-import QnAPortal from './pages/QnAPortal';
+import SubjectSelection from './pages/SubjectSelection';
+import AnswerFeed from './pages/AnswerFeed';
+import Home from './pages/Home';
 import QuerySample from './pages/QuerySample';
-import QuestionArchive from './pages/QuestionArchive';
+import QuestionFeed from './pages/QuestionFeed';
 
 function PageRouter() {
   return (
