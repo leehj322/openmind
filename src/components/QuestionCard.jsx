@@ -9,33 +9,55 @@ const StyledQuestionCardContainer = styled.section`
   border-radius: 16px;
   border: 1px solid var(--gray40);
   padding: 20px;
+  @media (max-width: 767px) {
+    height: 168px;
+    padding: 16px;
+  }
 `;
 
 const StyledProfileImg = styled.img`
   width: 60px;
-  border-radius: 9999px;
+  height: 60px;
+  border-radius: 50%;
+  @media (max-width: 767px) {
+    width: 48px;
+    height: 48px;
+  }
 `;
 
 const StyledUserName = styled.h1`
   font-size: 20px;
   font-weight: 400;
   line-height: 25px;
-  margin: 10px 0;
+  margin: 12px 0;
+  @media (max-width: 767px) {
+    font-size: 18px;
+  }
 `;
 
 const StyledReceivedQuestionArea = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: 20%;
+  align-items: center;
+  margin-top: 28px;
   & div {
     display: flex;
+  }
+  @media (max-width: 767px) {
+    margin-top: 30px;
   }
 `;
 
 const StyledReceivedQuestionIcon = styled.img`
-  width: 18px;
+  width: 20px;
+  height: 20px;
+  margin-right: 4px;
   filter: brightness(0) saturate(100%) invert(59%) sepia(16%) saturate(0%) hue-rotate(213deg) brightness(83%)
     contrast(98%);
+  @media (max-width: 767px) {
+    width: 18px;
+    height: 18px;
+  }
 `;
 
 const StyledReceivedQuestionText = styled.p`
@@ -43,6 +65,9 @@ const StyledReceivedQuestionText = styled.p`
   font-weight: 400;
   line-height: 22px;
   color: var(--gray40);
+  @media (max-width: 767px) {
+    font-size: 14px;
+  }
 `;
 
 function QuestionCard() {
