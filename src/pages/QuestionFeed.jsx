@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import styled from 'styled-components';
 import HeroImgUrl from '../assets/images/HeroImage.png';
 import Header from '../components/QuestionFeed/Header';
@@ -35,6 +36,15 @@ function QuestionFeed() {
       </StyledHeroImgWrapper>
       <Header />
     </StyledQuestionFeedPageContainer>
+=======
+import QuestionCard from '../components/feed/questionFeed/QuestionCard';
+
+function QuestionFeed() {
+  return (
+    <div>
+      <QuestionCard />
+    </div>
+>>>>>>> a571b94c74d9d8198e8a881b431e0098945feb96
   );
 }
 

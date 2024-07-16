@@ -1,5 +1,11 @@
+import AnswerCard from '../components/feed/answerFeed/AnswerCard';
+
 function AnswerFeed() {
-  return <div>AnswerFeed page</div>;
+  return (
+    <div>
+      <AnswerCard />
+    </div>
+  );
 }
 
 export default AnswerFeed;
