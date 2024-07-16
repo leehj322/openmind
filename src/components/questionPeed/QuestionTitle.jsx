@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import getElapsedPeriod from '../../utils/getElapsedPeriod';
 
 /**
  * 질문 내용과 생성 시간을 보여준다
@@ -7,9 +8,11 @@ import { styled } from 'styled-components';
  * @param {string} props.questionCreateAt 질문 생성 시간
  */
 function QuestionTitle({ questionCreateAt, qustion }) {
+  const elapedPeriod = getElapsedPeriod(questionCreateAt);
+
   return (
     <StyledQuestionTitleArea>
-      <p>질문 · {questionCreateAt}</p>
+      <p>질문 · {elapedPeriod}</p>
       <h3>{qustion}</h3>
     </StyledQuestionTitleArea>
   );

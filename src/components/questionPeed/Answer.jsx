@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import profileImg from '../../assets/images/samples/profile-sample.png';
+import getElapsedPeriod from '../../utils/getElapsedPeriod';
 
 /**
  * 답변 내용과 답변 거절 유무를 보여준다
@@ -9,13 +10,15 @@ import profileImg from '../../assets/images/samples/profile-sample.png';
  * @param {string} props.answerCreatedAt 답변 생성 시간
  */
 function Answer({ answerCreatedAt, answer, isRejected }) {
+  const elapedPeriod = getElapsedPeriod(answerCreatedAt);
+
   return (
     <StyledAnswerContainer>
       <StyledProfileImage src={profileImg} alt={'프로필 이미지'} />
       <StyledAnswerArea $isRejected={isRejected}>
         <div>
           <span>아초는 고양이</span>
-          <span>{answerCreatedAt}</span>
+          <span>{elapedPeriod}</span>
         </div>
         <p>{isRejected ? '답변 거절' : answer}</p>
       </StyledAnswerArea>
