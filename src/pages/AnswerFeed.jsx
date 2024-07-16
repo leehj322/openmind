@@ -1,7 +1,11 @@
-import React from 'react';
+import AnswerCard from '../components/feed/answerFeed/AnswerCard';
 
 function AnswerFeed() {
-  return <h1>AnswerFeed</h1>;
+  return (
+    <div>
+      <AnswerCard />
+    </div>
+  );
 }
 
 export default AnswerFeed;

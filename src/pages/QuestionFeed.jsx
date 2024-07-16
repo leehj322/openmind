@@ -1,7 +1,11 @@
-import React from 'react';
+import QuestionCard from '../components/feed/questionFeed/QuestionCard';
 
 function QuestionFeed() {
-  return <h1>QuestionFeed</h1>;
+  return (
+    <div>
+      <QuestionCard />
+    </div>
+  );
 }
 
 export default QuestionFeed;

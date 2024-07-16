@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import styled from 'styled-components';
 import Button from '../components/@shared/Button';
 //import LightArrow from '../assets/images/lightarrow.png';
@@ -36,6 +37,10 @@ function Home() {
       </Button>
     </ButtonContainer>
   );
+=======
+function Home() {
+  return <div>Home page</div>;
+>>>>>>> origin/dev
 }
 
 export default Home;
