@@ -5,6 +5,7 @@ import DarkArrow from '../assets/images/darkarrow.png';
 import { useState } from 'react';
 
 const ButtonContainer = styled.div`
+  padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +17,7 @@ function Home() {
   const [inputValue, setInputValue] = useState('');
 
   const isButtonDisabled = () => {
-    return inputValue.trim() === 'ㄹㄹ';
+    return inputValue.trim() === 'ff';
   };
 
   return (
@@ -28,9 +29,9 @@ function Home() {
         type="button"
         pagePath="/post/123"
         disabled={isButtonDisabled()}
-        shape="square"
-        btnColor="light"
-        imgSrc={LightArrow}
+        shape="pill"
+        btnColor="dark"
+        imgSrc={DarkArrow}
         style={{ width: '500px', height: '50px' }}>
         질문하러 가기
       </Button>

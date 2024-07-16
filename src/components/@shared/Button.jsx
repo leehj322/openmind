@@ -21,9 +21,9 @@ const StyledButton = styled.button`
   border-radius: ${({ shape }) => (shape === 'square' ? '8px' : '200px')};
 
   &:hover {
-    border: 1px solid;
+    border: 1.5px solid;
     border-color: ${({ btnColor }) => (btnColor === 'light' ? lightButtonStyle.border : darkButtonStyle.border)};
-    opacity: ${props => (props.disabled ? '0.5' : '0.8')};
+    opacity: ${props => (props.disabled ? '0.5' : '1.0')};
   }
 
   &:active {
