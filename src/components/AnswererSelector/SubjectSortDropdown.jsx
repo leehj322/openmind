@@ -8,6 +8,7 @@ const DropdownToggler = styled.div`
   justify-content: center;
   align-items: center;
   gap: 4px;
+  position: relative;
 
   border: 1px solid var(--gray40);
   border-radius: 8px;
@@ -42,7 +43,14 @@ function SubjectSortDropdown({ sortBy, onSortChoice }) {
     <DropdownToggler onClick={handleTogglerClick}>
       {ITEM_LIST.find(item => item.value === sortBy).title}
       <ArrowImg src={arrowDownImgUrl} alt="드롭다운화살표" />
-      <DropdownBox isDropdownVisible={isVisible} minWidth={80} itemList={ITEM_LIST} onItemClick={onSortChoice} />
+      <DropdownBox
+        isDropdownVisible={isVisible}
+        minWidth={80}
+        topPosition={2.7}
+        leftPosition={-0.1}
+        itemList={ITEM_LIST}
+        onItemClick={onSortChoice}
+      />
     </DropdownToggler>
   );
 }
