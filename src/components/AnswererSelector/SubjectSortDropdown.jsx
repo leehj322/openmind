@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import DropdownBox from '../@shared/DropdownBox';
 import useToggle from '../../hooks/useToggle';
+import arrowDownImgUrl from '../../assets/images/Arrow-down.svg';
 
 const DropdownToggler = styled.div`
   display: flex;
@@ -20,6 +21,11 @@ const DropdownToggler = styled.div`
   cursor: pointer;
 `;
 
+const ArrowImg = styled.img`
+  width: 14px;
+  height: 14px;
+`;
+
 const ITEM_LIST = [
   { title: '이름순', value: 'name', url: null },
   { title: '최신순', value: 'time', url: null },
@@ -35,6 +41,7 @@ function SubjectSortDropdown({ sortBy, onSortChoice }) {
   return (
     <DropdownToggler onClick={handleTogglerClick}>
       {ITEM_LIST.find(item => item.value === sortBy).title}
+      <ArrowImg src={arrowDownImgUrl} alt="드롭다운화살표" />
       <DropdownBox isDropdownVisible={isVisible} minWidth={80} itemList={ITEM_LIST} onItemClick={onSortChoice} />
     </DropdownToggler>
   );
