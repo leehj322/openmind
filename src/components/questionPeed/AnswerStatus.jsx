@@ -13,6 +13,7 @@ function AnswerStatus({ answer }) {
 export default AnswerStatus;
 
 const StyledAnswerStatus = styled.article`
+  height: fit-content;
   width: fit-content;
   padding: 4px 12px;
   border: ${({ theme }) => `1px solid ${theme.borderBrown}`};

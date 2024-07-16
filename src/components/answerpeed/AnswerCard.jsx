@@ -1,8 +1,10 @@
+import styled from 'styled-components';
 import { StyledPeedCardContainer } from '../../styles/peedCard/peedCardStyles';
 import Answer from '../questionPeed/Answer';
 import AnswerStatus from '../questionPeed/AnswerStatus';
 import QuestionTitle from '../questionPeed/QuestionTitle';
 import Reaction from '../questionPeed/Reaction';
+import MoreButton from './MoreButton';
 
 /**
  * 질문 피드 페이지에서의 질문 카드
@@ -40,9 +42,13 @@ function AnswerCard({
     - 받아온 qustionId, answerId 사용해서 질문 수정, 삭제, 답변 수정 삭제 구현
     - 답변이 있으면 답변을 표출하고, 없으면 입력창과 등록 버튼이 보이도록
   */
+
   return (
     <StyledPeedCardContainer>
-      <AnswerStatus answer={answer} />
+      <StyledCardUpperArea>
+        <AnswerStatus answer={answer} />
+        <MoreButton />
+      </StyledCardUpperArea>
       <QuestionTitle qustion={qustion} questionCreateAt={questionCreateAt} />
       <Answer answer={answer} answerCreatedAt={answerCreatedAt} isRejected={isRejected} />
       <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
@@ -51,3 +57,8 @@ function AnswerCard({
 }
 
 export default AnswerCard;
+
+const StyledCardUpperArea = styled.section`
+  display: flex;
+  justify-content: space-between;
+`;
