@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Header from '../components/AnswererSelector/Header';
-import TitledDropdown from '../components/AnswererSelector/TitledDropdown';
+import Header from '../components/SubjectSelection/Header';
+import TitledDropdown from '../components/SubjectSelection/TitledDropdown';
 import { useState } from 'react';
 
 const StyledSubjectSelectionPageContainer = styled.div`
