@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LightBrownButton from '../@shared/LightBrownButton';
 import LogoImgUrl from '../../assets/images/logo.svg';
 
-const StyledHeader = styled.header`
+const StyledHeaderArea = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,10 +25,10 @@ const LogoImg = styled.img`
 
 function Header() {
   return (
-    <StyledHeader>
+    <StyledHeaderArea>
       <LogoImg src={LogoImgUrl} />
       <LightBrownButton>답변하러 가기</LightBrownButton>
-    </StyledHeader>
+    </StyledHeaderArea>
   );
 }
 
