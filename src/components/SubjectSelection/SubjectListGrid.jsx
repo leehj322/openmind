@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import useSubjectsQuery from '../../queries/useSubjectsQuery';
+import useWindowSize from '../../hooks/useWindowSize';
 
 const SubjectList = styled.ol`
   display: grid;
@@ -22,6 +23,9 @@ const TestQuestionCard = styled.li`
 `;
 
 function SubjectListGrid({ sortBy }) {
+  const windowSize = useWindowSize();
+  console.log(windowSize.width);
+
   const LIMIT = 8;
   const OFFSET = 0;
   const { data } = useSubjectsQuery(LIMIT, OFFSET, sortBy);
