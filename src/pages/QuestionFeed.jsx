@@ -28,7 +28,7 @@ const StyledHeroImgWrapper = styled.div`
   align-items: center;
 `;
 
-const HeroImg = styled.img`
+const StyledHeroImg = styled.img`
   width: 1200px;
   height: 234px;
 
@@ -62,7 +62,7 @@ function QuestionFeed() {
   return (
     <StyledQuestionFeedPageContainer>
       <StyledHeroImgWrapper>
-        <HeroImg src={HeroImgUrl} alt="히어로 이미지" />
+        <StyledHeroImg src={HeroImgUrl} alt="히어로 이미지" />
       </StyledHeroImgWrapper>
       <Header />
       {/* QuestionCardList 컴포넌트에 데이터를 props로 전달 */}

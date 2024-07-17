@@ -4,7 +4,7 @@ import { StyledQuestionCountArea } from '../../../styles/feed/questionCountStyle
 import MessagesIconUrl from '../../../assets/images/ic_Messages.svg';
 import QuestionCard from './QuestionCard';
 
-const MessagesImg = styled.img`
+const StyledMessagesImg = styled.img`
   width: 24px;
   height: 24px;
 
@@ -18,7 +18,7 @@ function QuestionCardList({ questionCount, questions, subjectId }) {
   return (
     <StyledFeedCardListContainer>
       <StyledQuestionCountArea>
-        <MessagesImg src={MessagesIconUrl} />
+        <StyledMessagesImg src={MessagesIconUrl} />
         {questionCount}개의 질문이 있습니다
       </StyledQuestionCountArea>
       {questions.map(question => {

@@ -25,7 +25,7 @@ const StyledHeaderContainer = styled.div`
   }
 `;
 
-const LogoImg = styled.img`
+const StyledLogoImg = styled.img`
   display: block;
   width: 170px;
   height: 67px;
@@ -36,7 +36,7 @@ const LogoImg = styled.img`
   }
 `;
 
-const ProfileImg = styled.img`
+const SyledProfileImg = styled.img`
   display: block;
   width: 136px;
   height: 136px;
@@ -72,8 +72,8 @@ function Header() {
   return (
     <StyledHeader>
       <StyledHeaderContainer>
-        <LogoImg src={LogoImgUrl} />
-        <ProfileImg src={ProfileImgUrl} />
+        <StyledLogoImg src={LogoImgUrl} />
+        <SyledProfileImg src={ProfileImgUrl} />
         <StyledNameSection>아초는고양이</StyledNameSection>
         <StyledSharingArea>
           <StyledSharingImg src={LinkIconUrl} alt="링크 복사" />
