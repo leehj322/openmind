@@ -26,7 +26,7 @@ function SubjectSelection() {
     <StyledSubjectSelectionPageContainer>
       <Header />
       <TitledDropdown sortBy={sortBy} onSortChoice={setSortBy} />
-      <SubjectList />
+      <SubjectList sortBy={sortBy} />
     </StyledSubjectSelectionPageContainer>
   );
 }
