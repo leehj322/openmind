@@ -1,36 +1,31 @@
 import { styled } from 'styled-components';
 import profileImg from '../../assets/images/samples/profile-sample.png';
 import getElapsedPeriod from '../../utils/getElapsedPeriod';
-import AnswerContent from './AnswerContent';
 
 /**
  * 답변 내용과 답변 거절 유무를 보여준다
  * @param props
- * @param {string} props.answerId 답변 아이디
- * @param {string} props.answer 답변 내용
- * @param {string} props.isEditing 답변 수정중인가
- * @param {string} props.answerCreatedAt 답변 생성 시간
- * @param {string} props.isRejected 답변 거절 유무
+ * @param {string} props.questionCreateAt 질문 생성 시점
  */
-function Answer({ answerId, answer, isEditing, answerCreatedAt, isRejected }) {
-  const isHasAnswer = !!answer;
-  const elapedPeriod = isHasAnswer && getElapsedPeriod(answerCreatedAt);
+function AnswerTemplate({ children, questionCreateAt = '2023-06-03' }) {
+  const { imageSource, name } = sessionStorage.getItem('profile') || { imageSource: profileImg, name: '아초는 고양이' };
+  const elapsedPeriod = getElapsedPeriod(questionCreateAt);
 
   return (
     <StyledAnswerContainer>
-      <StyledProfileImage src={profileImg} alt={'프로필 이미지'} />
-      <StyledAnswerArea $isRejected={isRejected}>
+      <StyledProfileImage src={imageSource} alt={'프로필 이미지'} />
+      <StyledAnswerArea>
         <div>
-          <span>아초는 고양이</span>
-          {isHasAnswer && <span>{elapedPeriod}</span>}
+          <span>{name}</span>
+          <span>{elapsedPeriod}</span>
         </div>
-        <AnswerContent answerId={answerId} answer={answer} isRejected={isRejected} isEditing={isEditing} />
+        {children}
       </StyledAnswerArea>
     </StyledAnswerContainer>
   );
 }
 
-export default Answer;
+export default AnswerTemplate;
 
 const StyledAnswerContainer = styled.div`
   display: flex;
@@ -68,12 +63,5 @@ const StyledAnswerArea = styled.section`
       line-height: 18px;
       color: var(--gray40);
     }
-  }
-
-  & p {
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 22px;
-    color: ${({ $isRejected }) => $isRejected && 'var(--red)'};
   }
 `;

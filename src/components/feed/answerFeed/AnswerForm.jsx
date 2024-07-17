@@ -9,13 +9,9 @@ import styled from 'styled-components';
  * @param {string} props.isRejected 답변 거절 유무
  * @param {string} props.isEditing 답변 수정중인가
  */
-function AnswerContent({ answerId, answer, isRejected, isEditing }) {
-  const [inputText, setInputText] = useState('');
+function AnswerForm({ currentAnswer, onSubmitForm, buttonText }) {
+  const [inputText, setInputText] = useState(currentAnswer);
   const [disabled, setDisabled] = useState(false);
-
-  // const isHasAnswer = !!answer;
-  const isHasAnswer = false;
-  const buttonText = isEditing ? '수정 완료' : '답변 완료';
 
   const handleInputChange = event => {
     const { value } = event.target;
@@ -24,27 +20,10 @@ function AnswerContent({ answerId, answer, isRejected, isEditing }) {
     setInputText(value);
   };
 
-  const handleFormSubmit = event => {
-    event.preventDefault();
-
-    if (isEditing) {
-      // answerId, inputText로 수정 API 호출
-    } else {
-      // answerId, inputText로 답변 생성 API 호출
-    }
-  };
-
-  if (isRejected) {
-    return <p>답변 거절</p>;
-  }
-  if (isHasAnswer) {
-    return <p>{answer}</p>;
-  }
-
   return (
-    <StyledAnswerForm onSubmit={handleFormSubmit}>
+    <StyledAnswerForm onSubmit={e => onSubmitForm(e, inputText)}>
       <textarea placeholder={'답변을 입력해주세요'} value={inputText} onChange={handleInputChange} />
-      {/* TODO: 리나님이 공통 버튼 컴포넌트 만들어지면 갈아끼우기 */}
+      {/* TODO: 리나님 공통 버튼 컴포넌트 만들어지면 갈아끼우기 */}
       <button
         disabled={disabled}
         style={{
@@ -59,7 +38,7 @@ function AnswerContent({ answerId, answer, isRejected, isEditing }) {
     </StyledAnswerForm>
   );
 }
-export default AnswerContent;
+export default AnswerForm;
 
 const StyledAnswerForm = styled.form`
   & textarea {
