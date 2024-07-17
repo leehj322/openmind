@@ -9,7 +9,8 @@ import getElapsedPeriod from '../../utils/getElapsedPeriod';
  * @param {string} props.answerCreatedAt 답변 생성 시기
  */
 function AnswerTemplate({ children, answerCreatedAt }) {
-  const { imageSource, name } = sessionStorage.getItem('profile') || { imageSource: profileImg, name: '아초는 고양이' };
+  const profile = JSON.parse(sessionStorage.getItem('profile'));
+  const { imageSource, name } = profile || { imageSource: profileImg, name: '아초는 고양이' };
   const elapsedPeriod = answerCreatedAt ? getElapsedPeriod(answerCreatedAt) : ''; // 아직 답변이 없는 경우
 
   return (
