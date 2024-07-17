@@ -19,11 +19,11 @@ const getSubjects = async ({ limit, offset, sort }) => {
     // if (response.ok) {
     //   console.log(response.status);
     // }
-
     const { data } = response;
     return data;
   } catch (error) {
     console.log(error);
+    return { count: 0, next: null, previous: null, results: [] };
   }
 };
 
