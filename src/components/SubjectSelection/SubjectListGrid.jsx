@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import PageNavigator from './PageNavigator';
 import useSubjectsQuery from '../../queries/useSubjectsQuery';
 import useWindowSize from '../../hooks/useWindowSize';
 
@@ -30,12 +31,16 @@ function SubjectListGrid({ sortBy }) {
   const { count, results } = data;
 
   return (
-    <SubjectList>
-      {/* 아래 값은 실제로 QuestionCard가 완성되면 사용 */}
-      {/* {results.map(result => (
+    <>
+      <SubjectList>
+        123
+        {/* 아래 값은 실제로 QuestionCard가 완성되면 사용 */}
+        {/* {results.map(result => (
         <QuestionCard key={result.id} subject={result} />
       ))} */}
-    </SubjectList>
+      </SubjectList>
+      <PageNavigator />
+    </>
   );
 }
 
