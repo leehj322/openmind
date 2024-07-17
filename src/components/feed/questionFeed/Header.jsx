@@ -36,7 +36,7 @@ const StyledLogoImg = styled.img`
   }
 `;
 
-const SyledProfileImg = styled.img`
+const StyledProfileImg = styled.img`
   display: block;
   width: 136px;
   height: 136px;
@@ -67,14 +67,14 @@ const StyledSharingImg = styled.img`
   width: 40px;
   height: 40px;
 `;
-
-function Header() {
+// 질문 페이지에서 profileImg prop 받아오면 적용시켜주기
+function Header({ name }) {
   return (
     <StyledHeader>
       <StyledHeaderContainer>
         <StyledLogoImg src={LogoImgUrl} />
-        <SyledProfileImg src={ProfileImgUrl} />
-        <StyledNameSection>아초는고양이</StyledNameSection>
+        <StyledProfileImg src={ProfileImgUrl} />
+        <StyledNameSection>{name}</StyledNameSection>
         <StyledSharingArea>
           <StyledSharingImg src={LinkIconUrl} alt="링크 복사" />
           <StyledSharingImg src={KakaoIconUrl} alt="카카오 공유" />

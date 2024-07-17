@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+
 import HeroImgUrl from '../assets/images/HeroImage.png';
+import profileImg from '../assets/images/profile.png';
+
 import Header from '../components/feed/questionFeed/Header';
 import QuestionCardList from '../components/feed/questionFeed/QuestionCardList';
 
@@ -40,6 +43,7 @@ const StyledHeroImg = styled.img`
 function QuestionFeed() {
   const [questionCount, setQuestionCount] = useState();
   const [questions, setQuestions] = useState([]);
+  const { imageSource, name } = sessionStorage.getItem('profile') || { imageSource: profileImg, name: '아초는고양이' };
 
   useEffect(() => {
     // URL에서 subjectId 추출
@@ -64,8 +68,8 @@ function QuestionFeed() {
       <StyledHeroImgWrapper>
         <StyledHeroImg src={HeroImgUrl} alt="히어로 이미지" />
       </StyledHeroImgWrapper>
-      <Header />
-      {/* QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
+      {/* Header, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
+      <Header imageSource={imageSource} name={name} />
       <QuestionCardList questionCount={questionCount} questions={questions} />
     </StyledQuestionFeedPageContainer>
   );
