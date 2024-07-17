@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import dummyCat from '../assets/images/cute_cat_img.png';
 import receivedQuestionIcon from '../assets/images/messages_icon.png';
 import filter from '../styles/@shared/filter';
-import { useEffect } from 'react';
 
 const StyledQuestionCardContainer = styled.li`
   min-width: 186px;
@@ -73,7 +72,7 @@ const StyledReceivedQuestionText = styled.p`
   }
 `;
 
-function QuestionCard({ subject }) {
+function SubjectCard({ subject }) {
   if (subject) {
     const profile = {
       id: subject.id,
@@ -118,4 +117,4 @@ function QuestionCard({ subject }) {
   );
 }
 
-export default QuestionCard;
+export default SubjectCard;
