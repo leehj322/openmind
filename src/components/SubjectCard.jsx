@@ -91,31 +91,15 @@ function SubjectCard({ subject }) {
   return (
     <Link to={`/post/${subject.id}`}>
       <StyledQuestionCardContainer>
-        {subject ? (
-          <>
-            <StyledProfileImg src={subject.imageSource} alt="답변자 프로필 사진" />
-            <StyledUserName>{subject.name}</StyledUserName>
-            <StyledReceivedQuestionArea>
-              <div>
-                <StyledReceivedQuestionIcon src={receivedQuestionIcon} alt="받은 질문 아이콘" />
-                <StyledReceivedQuestionText>받은 질문</StyledReceivedQuestionText>
-              </div>
-              <StyledReceivedQuestionText>{subject.questionCount}개</StyledReceivedQuestionText>
-            </StyledReceivedQuestionArea>
-          </>
-        ) : (
-          <>
-            <StyledProfileImg src={dummyCat} alt="답변자 프로필 사진" />
-            <StyledUserName>이름</StyledUserName>
-            <StyledReceivedQuestionArea>
-              <div>
-                <StyledReceivedQuestionIcon src={receivedQuestionIcon} alt="받은 질문 아이콘" />
-                <StyledReceivedQuestionText>받은 질문</StyledReceivedQuestionText>
-              </div>
-              <StyledReceivedQuestionText>n개</StyledReceivedQuestionText>
-            </StyledReceivedQuestionArea>
-          </>
-        )}
+        <StyledProfileImg src={dummyCat} alt="답변자 프로필 사진" />
+        <StyledUserName>이름</StyledUserName>
+        <StyledReceivedQuestionArea>
+          <div>
+            <StyledReceivedQuestionIcon src={receivedQuestionIcon} alt="받은 질문 아이콘" />
+            <StyledReceivedQuestionText>받은 질문</StyledReceivedQuestionText>
+          </div>
+          <StyledReceivedQuestionText>n개</StyledReceivedQuestionText>
+        </StyledReceivedQuestionArea>
       </StyledQuestionCardContainer>
     </Link>
   );
