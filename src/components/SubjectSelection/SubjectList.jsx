@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 import PageNavigator from './PageNavigator';
+import SubjectListGrid from './SubjectListGrid';
+import { Suspense } from 'react';
 
 const SubjectListArea = styled.section`
   margin: 0 auto 40px;
@@ -16,38 +18,12 @@ const SubjectListArea = styled.section`
   }
 `;
 
-const SubjectListGrid = styled.ol`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-
-  @media screen and (min-width: 768px) and (max-width: 868px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media screen and (min-width: 375px) and (max-width: 767px) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`;
-
-const TestQuestionCard = styled.li`
-  background-color: black;
-  width: 100%;
-`;
-
-function SubjectList() {
+function SubjectList({ sortBy }) {
   return (
     <SubjectListArea>
-      <SubjectListGrid>
-        <TestQuestionCard>1</TestQuestionCard>
-        <TestQuestionCard>1</TestQuestionCard>
-        <TestQuestionCard>1</TestQuestionCard>
-        <TestQuestionCard>1</TestQuestionCard>
-        <TestQuestionCard>1</TestQuestionCard>
-        <TestQuestionCard>1</TestQuestionCard>
-        <TestQuestionCard>1</TestQuestionCard>
-        <TestQuestionCard>1</TestQuestionCard>
-      </SubjectListGrid>
+      <Suspense fallback={<div>Loading...</div>}>
+        <SubjectListGrid sortBy={sortBy} />
+      </Suspense>
       <PageNavigator />
     </SubjectListArea>
   );
