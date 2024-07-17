@@ -21,7 +21,7 @@ const SubjectListArea = styled.section`
 function SubjectList({ sortBy }) {
   return (
     <SubjectListArea>
-      <Suspense>
+      <Suspense fallback={<div>Loading...</div>}>
         <SubjectListGrid sortBy={sortBy} />
       </Suspense>
       <PageNavigator />
