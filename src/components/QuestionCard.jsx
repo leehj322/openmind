@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import dummyCat from '../assets/images/cute_cat_img.png';
 import receivedQuestionIcon from '../assets/images/messages_icon.png';
 import filter from '../styles/@shared/filter';
+import { useEffect } from 'react';
 
 const StyledQuestionCardContainer = styled.li`
   min-width: 186px;
@@ -73,6 +74,19 @@ const StyledReceivedQuestionText = styled.p`
 `;
 
 function QuestionCard({ subject }) {
+  if (subject) {
+    const profile = {
+      id: subject.id,
+      name: subject.name,
+      imageSource: subject.imageSource,
+      questionCount: subject.questionCount,
+      createdAt: subject.createdAt,
+    };
+
+    // JSON 문자열로 변환하여 세션 스토리지에 저장
+    sessionStorage.setItem('profile', JSON.stringify(profile));
+  }
+
   return (
     <StyledQuestionCardContainer>
       {subject ? (
