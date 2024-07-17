@@ -98,7 +98,7 @@ function AnswerCard({
       </StyledAnswerCardUpperArea>
       <QuestionTitle question={questionContent} questionCreateAt={questionCreateAt} />
       <AnswerTemplate answerCreatedAt={answerCreatedAt}>{renderAnswerContent()}</AnswerTemplate>
-      <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
+      <Reaction likeCount={likeCount} dislikeCount={dislikeCount} questionId={questionId} />
     </StyledFeedCardContainer>
   );
 }
