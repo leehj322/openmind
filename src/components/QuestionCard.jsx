@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import dummyCat from '../assets/images/cute_cat_img.png';
 import receivedQuestionIcon from '../assets/images/messages_icon.png';
+import filter from '../styles/@shared/filter';
 
 const StyledQuestionCardContainer = styled.li`
   min-width: 186px;
@@ -42,6 +43,8 @@ const StyledReceivedQuestionArea = styled.div`
   margin-top: 28px;
   & div {
     display: flex;
+    justify-content: center;
+    align-items: center;
   }
   @media (max-width: 767px) {
     margin-top: 30px;
@@ -49,14 +52,13 @@ const StyledReceivedQuestionArea = styled.div`
 `;
 
 const StyledReceivedQuestionIcon = styled.img`
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   margin-right: 4px;
-  filter: brightness(0) saturate(100%) invert(59%) sepia(16%) saturate(0%) hue-rotate(213deg) brightness(83%)
-    contrast(98%);
+  filter: ${filter.gray50};
   @media (max-width: 767px) {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 `;
 
