@@ -1,5 +1,9 @@
 import styled from 'styled-components';
-import ProfileImgArea from './@shared/ProfileImgArea';
+
+const ProfileImg = styled.img`
+  width: 60px;
+  border-radius: 9999px;
+`;
 
 const UserNameWrapper = styled.h1`
   font-size: 32px;
@@ -10,7 +14,7 @@ const UserNameWrapper = styled.h1`
 function ProfileArea() {
   return (
     <>
-      <ProfileImgArea />
+      <ProfileImg />
       <UserNameWrapper>이름</UserNameWrapper>
     </>
   );
