@@ -7,8 +7,8 @@ import AnswerTemplate from '../AnswerTemplate';
 import Reaction from '../Reaction';
 import { useState } from 'react';
 import AnswerForm from './AnswerForm';
-import putAnswer from '../../../apis/putAnswer';
-import postAnswer from '../../../apis/postAnswer';
+import useCreateAnswerMutation from '../../../queries/useCreateAnswerMutation';
+import useUpdateAnswerMutation from '../../../queries/useUpdateAnswerMutation';
 
 /**
  * 질문 피드 페이지에서의 질문 카드
@@ -32,23 +32,25 @@ function AnswerCard({
   const isHasAnswer = !!answer;
   const [currentAnswer, setCurrentAnswer] = useState(isHasAnswer ? answer.content : '');
   const [isEditing, setIsEditing] = useState(false);
+  const { mutate: createAnswerMutate } = useCreateAnswerMutation();
+  const { mutate: updateAnswerMutate } = useUpdateAnswerMutation();
 
   const handleEditButtonClick = () => {
     setIsEditing(true);
   };
 
-  const handleEditFormSubmit = (event, inputText) => {
-    event.preventDefault();
-
-    putAnswer({ answerId: answer.id, content: inputText });
-    setIsEditing(false);
-    setCurrentAnswer(inputText);
-  };
-
   const handleCreateFormSubmit = (event, inputText) => {
     event.preventDefault();
 
-    postAnswer({ questionId: questionId, content: inputText });
+    createAnswerMutate({ questionId: questionId, content: inputText });
+    setCurrentAnswer(inputText);
+  };
+
+  const handleEditFormSubmit = (event, inputText) => {
+    event.preventDefault();
+
+    updateAnswerMutate({ answerId: answer.id, content: inputText });
+    setIsEditing(false);
     setCurrentAnswer(inputText);
   };
 
