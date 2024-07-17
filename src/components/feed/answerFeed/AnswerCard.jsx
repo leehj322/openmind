@@ -17,7 +17,7 @@ import useUpdateAnswerMutation from '../../../queries/useUpdateAnswerMutation';
  * @param {string} props.questionContent 질문 내용
  * @param {integer} props.likeCount 좋아요 수
  * @param {integer} props.dislikeCount 싫어요 수
- * @param {string} props.questionCreateAt 질문 생성 시간
+ * @param {string} props.questionCreatedAt 질문 생성 시간
  * @param {object || null} props.answer 답변 객체
  */
 function AnswerCard({
@@ -26,13 +26,12 @@ function AnswerCard({
   questionContent = '좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?',
   likeCount = 0,
   dislikeCount = 0,
-  questionCreateAt = '2024-07-05',
+  questionCreateAt = '',
   answer,
 }) {
   const isHasAnswer = !!answer;
   const [currentAnswer, setCurrentAnswer] = useState(isHasAnswer ? answer.content : '');
-  //TODO: 답변 생성되면 생성 시간 새로 렌더링 해야함
-  const [createAt, setCreateAt] = useState(questionCreateAt);
+  const [answerCreatedAt, setAnswerCreatedAt] = useState(answer ? answer.createdAt : '');
   const [isEditing, setIsEditing] = useState(false);
   const { mutate: createAnswerMutate } = useCreateAnswerMutation();
   const { mutate: updateAnswerMutate } = useUpdateAnswerMutation();
@@ -44,7 +43,13 @@ function AnswerCard({
   const handleCreateFormSubmit = (event, inputText) => {
     event.preventDefault();
 
-    createAnswerMutate({ questionId: questionId, content: inputText });
+    createAnswerMutate(
+      { questionId: questionId, content: inputText },
+      {
+        onSuccess: data => data && setAnswerCreatedAt(data.createdAt),
+      }
+    );
+
     setCurrentAnswer(inputText);
   };
 
@@ -78,8 +83,8 @@ function AnswerCard({
         <AnswerStatus isHasAnswer={isHasAnswer} />
         <MoreButton handleEditButtonClick={handleEditButtonClick} />
       </StyledAnswerCardUpperArea>
-      <QuestionTitle question={questionContent} createAt={createAt} />
-      <AnswerTemplate questionCreateAt={questionCreateAt}>{renderAnswerContent()}</AnswerTemplate>
+      <QuestionTitle question={questionContent} questionCreateAt={questionCreateAt} />
+      <AnswerTemplate answerCreatedAt={answerCreatedAt}>{renderAnswerContent()}</AnswerTemplate>
       <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
     </StyledFeedCardContainer>
   );

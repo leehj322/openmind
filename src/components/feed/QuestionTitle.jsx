@@ -8,11 +8,11 @@ import getElapsedPeriod from '../../utils/getElapsedPeriod';
  * @param {string} props.questionCreateAt 질문 생성 시간
  */
 function QuestionTitle({ questionCreateAt, question }) {
-  const elapsedPeriod = getElapsedPeriod(questionCreateAt);
+  const elapsedPeriod = questionCreateAt ? getElapsedPeriod(questionCreateAt) : '';
 
   return (
     <StyledQuestionTitleArea>
-      <p>질문 · {elapsedPeriod}</p>
+      <p>{`질문${elapsedPeriod ? ' · ' + elapsedPeriod : ''}`}</p>
       <h3>{question}</h3>
     </StyledQuestionTitleArea>
   );
