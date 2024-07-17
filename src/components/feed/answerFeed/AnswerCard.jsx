@@ -65,16 +65,20 @@ function AnswerCard({
     if (answer?.isRejected) {
       // 답변 거절의 경우
       return <StyledAnswerText $isRejected>답변 거절</StyledAnswerText>;
-    } else if (isEditing) {
+    }
+
+    if (isEditing) {
       // 답변 거절은 아니지만, 수정 하기 버튼을 누른 경우
       return <AnswerForm currentAnswer={currentAnswer} buttonText="수정 완료" onSubmitForm={handleEditFormSubmit} />;
-    } else if (!currentAnswer) {
+    }
+
+    if (!currentAnswer) {
       // 답변 거절도 아니고, 수정중도 아니지만, 받아온 답변이 빈값인 경우
       return <AnswerForm currentAnswer={currentAnswer} buttonText="답변 완료" onSubmitForm={handleCreateFormSubmit} />;
-    } else {
-      // 답변 거절도 아니고, 수정중도 아니지만, 받아온 답변이 존재하는 경우
-      return <StyledAnswerText>{currentAnswer}</StyledAnswerText>;
     }
+
+    // 답변 거절도 아니고, 수정중도 아니고, 받아온 답변이 빈값도 아닌 경우
+    return <StyledAnswerText>{currentAnswer}</StyledAnswerText>;
   };
 
   return (
