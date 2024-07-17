@@ -33,6 +33,7 @@ function AnswerCard({
   const [currentAnswer, setCurrentAnswer] = useState(isHasAnswer ? answer.content : '');
   const [answerCreatedAt, setAnswerCreatedAt] = useState(answer ? answer.createdAt : '');
   const [isEditing, setIsEditing] = useState(false);
+  const [isRejected, setIsRejected] = useState(answer ? answer.isRejected : false);
   const { mutate: createAnswerMutate } = useCreateAnswerMutation();
   const { mutate: updateAnswerMutate } = useUpdateAnswerMutation();
 
@@ -43,26 +44,34 @@ function AnswerCard({
   const handleCreateFormSubmit = (event, inputText) => {
     event.preventDefault();
 
+    setCurrentAnswer(inputText);
     createAnswerMutate(
       { questionId: questionId, content: inputText },
       {
         onSuccess: data => data && setAnswerCreatedAt(data.createdAt),
       }
     );
-
-    setCurrentAnswer(inputText);
   };
 
   const handleEditFormSubmit = (event, inputText) => {
     event.preventDefault();
 
-    updateAnswerMutate({ answerId: answer.id, content: inputText });
-    setIsEditing(false);
     setCurrentAnswer(inputText);
+    setIsEditing(false);
+    updateAnswerMutate({ answerId: answer.id, content: inputText });
+  };
+
+  const handleRejectButtonToggle = event => {
+    event.preventDefault();
+
+    setIsRejected(prevState => {
+      // updateAnswerMutate({ answerId: answer.id, content: inputText, isRejected: !prevState });
+      return !prevState;
+    });
   };
 
   const renderAnswerContent = () => {
-    if (answer?.isRejected) {
+    if (isRejected) {
       // 답변 거절의 경우
       return <StyledAnswerText $isRejected>답변 거절</StyledAnswerText>;
     }
@@ -84,8 +93,8 @@ function AnswerCard({
   return (
     <StyledFeedCardContainer>
       <StyledAnswerCardUpperArea>
-        <AnswerStatus isHasAnswer={isHasAnswer} />
-        <MoreButton handleEditButtonClick={handleEditButtonClick} />
+        <AnswerStatus isComplete={isHasAnswer || isRejected} />
+        <MoreButton onEditButtonClick={handleEditButtonClick} onRejectButtonToggle={handleRejectButtonToggle} />
       </StyledAnswerCardUpperArea>
       <QuestionTitle question={questionContent} questionCreateAt={questionCreateAt} />
       <AnswerTemplate answerCreatedAt={answerCreatedAt}>{renderAnswerContent()}</AnswerTemplate>

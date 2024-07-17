@@ -7,11 +7,11 @@ import { axiosInstance } from './axiosSetup';
  * @param {string} content 답변 내용
  * @returns {object | null} 응답 객체
  */
-const putAnswer = async ({ answerId, content }) => {
+const putAnswer = async ({ answerId, content, isRejected = false }) => {
   try {
     const { data } = await axiosInstance.put(`${ANSWERS_QUERY_KEY}/${answerId}/`, {
       content: content,
-      isRejected: false,
+      isRejected: isRejected,
     });
 
     return data;
