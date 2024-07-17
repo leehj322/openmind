@@ -2,12 +2,11 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 /**
- * 답변 내용과 답변 거절 유무를 보여준다
+ * 답변 생성, 수정 시 사용할 입력 폼
  * @param props
- * @param {string} props.answerId 답변 아이디
- * @param {string} props.answer 답변 내용
- * @param {string} props.isRejected 답변 거절 유무
- * @param {string} props.isEditing 답변 수정중인가
+ * @param {string} props.currentAnswer 보여줄 답변 작성 내용
+ * @param {Function} props.onSubmitForm 폼 제출 이벤트 핸들러
+ * @param {string} props.buttonText 버튼에 들어갈 텍스트
  */
 function AnswerForm({ currentAnswer, onSubmitForm, buttonText }) {
   const [inputText, setInputText] = useState(currentAnswer);

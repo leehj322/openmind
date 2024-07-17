@@ -3,13 +3,14 @@ import profileImg from '../../assets/images/samples/profile-sample.png';
 import getElapsedPeriod from '../../utils/getElapsedPeriod';
 
 /**
- * 답변 내용과 답변 거절 유무를 보여준다
+ * 답변자의 프로필과 질문 시점으로부터 지난 기간을 보여주고, 답변 내용을 담을 템플릿
  * @param props
- * @param {string} props.questionCreateAt 질문 생성 시점
+ * @param {Node} props.children 자식 노드
+ * @param {string} props.questionCreateAt 질문 생성 시기
  */
-function AnswerTemplate({ children, questionCreateAt = '2023-06-03' }) {
+function AnswerTemplate({ children, questionCreateAt }) {
   const { imageSource, name } = sessionStorage.getItem('profile') || { imageSource: profileImg, name: '아초는 고양이' };
-  const elapsedPeriod = getElapsedPeriod(questionCreateAt);
+  const elapsedPeriod = questionCreateAt ? getElapsedPeriod(questionCreateAt) : ''; // 아직 답변이 없는 경우
 
   return (
     <StyledAnswerContainer>

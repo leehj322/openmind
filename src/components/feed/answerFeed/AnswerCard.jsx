@@ -11,7 +11,7 @@ import useCreateAnswerMutation from '../../../queries/useCreateAnswerMutation';
 import useUpdateAnswerMutation from '../../../queries/useUpdateAnswerMutation';
 
 /**
- * 질문 피드 페이지에서의 질문 카드
+ * 답변 피드 페이지에서의 답변 카드
  * @param props
  * @param {string} props.questionId 질문 id
  * @param {string} props.questionContent 질문 내용
@@ -31,6 +31,8 @@ function AnswerCard({
 }) {
   const isHasAnswer = !!answer;
   const [currentAnswer, setCurrentAnswer] = useState(isHasAnswer ? answer.content : '');
+  //TODO: 답변 생성되면 생성 시간 새로 렌더링 해야함
+  const [createAt, setCreateAt] = useState(questionCreateAt);
   const [isEditing, setIsEditing] = useState(false);
   const { mutate: createAnswerMutate } = useCreateAnswerMutation();
   const { mutate: updateAnswerMutate } = useUpdateAnswerMutation();
@@ -76,8 +78,8 @@ function AnswerCard({
         <AnswerStatus isHasAnswer={isHasAnswer} />
         <MoreButton handleEditButtonClick={handleEditButtonClick} />
       </StyledAnswerCardUpperArea>
-      <QuestionTitle question={questionContent} questionCreateAt={questionCreateAt} />
-      <AnswerTemplate>{renderAnswerContent()}</AnswerTemplate>
+      <QuestionTitle question={questionContent} createAt={createAt} />
+      <AnswerTemplate questionCreateAt={questionCreateAt}>{renderAnswerContent()}</AnswerTemplate>
       <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
     </StyledFeedCardContainer>
   );
