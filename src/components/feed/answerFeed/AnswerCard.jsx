@@ -9,6 +9,7 @@ import { useState } from 'react';
 import AnswerForm from './AnswerForm';
 import useCreateAnswerMutation from '../../../queries/useCreateAnswerMutation';
 import useUpdateAnswerMutation from '../../../queries/useUpdateAnswerMutation';
+import { LIMIT_DISLIKE_COUNT } from '../../../constants/feedCard';
 
 /**
  * 답변 피드 페이지에서의 답변 카드
@@ -31,9 +32,12 @@ function AnswerCard({
 }) {
   const isHasAnswer = !!answer;
   const [currentAnswer, setCurrentAnswer] = useState(isHasAnswer ? answer.content : '');
-  const [answerCreatedAt, setAnswerCreatedAt] = useState(answer ? answer.createdAt : '');
+  const [answerCreatedAt, setAnswerCreatedAt] = useState(isHasAnswer ? answer.createdAt : '');
   const [isEditing, setIsEditing] = useState(false);
-  const [isRejected, setIsRejected] = useState(answer ? answer.isRejected : false);
+  // 답변 객체가 존재하고, LIMIT_DISLIKE_COUNT보다 싫어요가 많거나 isRejected가 명시적으로 true인 경우 외에는 false;
+  const [isRejected, setIsRejected] = useState(
+    isHasAnswer && (answer.dislike >= LIMIT_DISLIKE_COUNT || answer.isRejected)
+  );
 
   const { mutate: createAnswerMutate } = useCreateAnswerMutation();
   const { mutate: updateAnswerMutate } = useUpdateAnswerMutation();
@@ -62,13 +66,13 @@ function AnswerCard({
     updateAnswerMutate({ answerId: answer.id, content: inputText });
   };
 
-  const handleRejectButtonToggle = event => {
+  const handleRejectButtonClick = event => {
     event.preventDefault();
-
-    setIsRejected(prevState => {
-      updateAnswerMutate({ answerId: answer.id, isRejected: !prevState });
-      return !prevState;
-    });
+    if (!isRejected) {
+      // isRejected가 false 인 경우에만 실행하면 됨
+      updateAnswerMutate({ answerId: answer.id, isRejected: true });
+      setIsRejected(true);
+    }
   };
 
   const renderAnswerContent = () => {
@@ -95,7 +99,7 @@ function AnswerCard({
     <StyledFeedCardContainer>
       <StyledAnswerCardUpperArea>
         <AnswerStatus isComplete={isHasAnswer || isRejected} />
-        <MoreButton onEditButtonClick={handleEditButtonClick} onRejectButtonToggle={handleRejectButtonToggle} />
+        <MoreButton onEditButtonClick={handleEditButtonClick} onRejectButtonClick={handleRejectButtonClick} />
       </StyledAnswerCardUpperArea>
       <QuestionTitle question={questionContent} questionCreateAt={questionCreateAt} />
       <AnswerTemplate answerCreatedAt={answerCreatedAt}>{renderAnswerContent()}</AnswerTemplate>
