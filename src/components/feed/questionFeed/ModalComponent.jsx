@@ -2,8 +2,8 @@ import Modal from 'react-modal';
 import { useState } from 'react';
 import styled from 'styled-components';
 import messageIcon from '../../../assets/images/message-icon.png';
-import Profile from '../../../assets/images/samples/profile-sample.png';
 import SendQuestionBtn from '../../@shared/Button';
+import theme from '../../../styles/@shared/theme';
 
 const StyledModal = styled(Modal)`
   width: 612px;
@@ -18,6 +18,13 @@ const StyledModal = styled(Modal)`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${({ theme }) => theme.windowSize.mobile} {
+    width: 90%;
+    height: 80%;
+    max-width: 300px;
+    max-height: 600px;
+  }
 `;
 
 const StyledModalHeader = styled.header`
@@ -55,7 +62,10 @@ const StyledCloseBtn = styled.button`
 `;
 
 const StyledModalContent = styled.main`
-  margin: 12px 15px;
+  margin: 15px 15px;
+  @media ${({ theme }) => theme.windowSize.mobile} {
+    margin: 10px 15px;
+  }
 `;
 
 const StyledUserInfo = styled.div`
@@ -84,9 +94,23 @@ const StyledTextArea = styled.textarea`
   background-color: var(--brown10);
   border-radius: 8px;
   padding: 16px;
+  @media ${({ theme }) => theme.windowSize.mobile} {
+    width: 279px;
+    height: 338px;
+  }
 `;
 
-function ModalComponent({ name }) {
+const StyledBtnContainer = styled.div`
+  width: 558px;
+  height: 50px;
+  @media ${({ theme }) => theme.windowSize.mobile} {
+    margin-top: 0;
+    width: 279px;
+    height: 40px;
+  }
+`;
+
+function ModalComponent({ profileImg, name }) {
   Modal.setAppElement('#root');
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
@@ -109,23 +133,26 @@ function ModalComponent({ name }) {
           </StyledModalTitleWrapper>
           <StyledCloseBtn onClick={closeModal}>X</StyledCloseBtn>
         </StyledModalHeader>
+
         <StyledModalContent>
           <StyledUserInfo>
             To.
-            <StyledProfileImg src={Profile} />
+            <StyledProfileImg src={profileImg} />
             <StyledUserName>{name}</StyledUserName>
           </StyledUserInfo>
           <StyledTextArea placeholder="질문을 입력해주세요!"></StyledTextArea>
         </StyledModalContent>
-        <SendQuestionBtn
-          type="submit"
-          pagePath="/post/123"
-          disabled={false}
-          width="558px"
-          height="50px"
-          style={{ backgroundColor: 'var(--brown20)', color: 'var(--gray40)' }}>
-          질문 보내기
-        </SendQuestionBtn>
+        <StyledBtnContainer>
+          <SendQuestionBtn
+            type="submit"
+            pagePath="/post/123"
+            width="100%"
+            height="100%"
+            disabled={false}
+            style={{ backgroundColor: 'var(--brown20)', color: 'var(--gray40)' }}>
+            질문 보내기
+          </SendQuestionBtn>
+        </StyledBtnContainer>
       </StyledModal>
     </div>
   );
