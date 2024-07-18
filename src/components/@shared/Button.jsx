@@ -52,7 +52,7 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
     background-color: ${({ btnColor }) => (btnColor === 'soft' ? softButtonStyle.pressed : deepButtonStyle.pressed)};
   }
 
-  ${({ style }) => style && css``}
+  ${({ style }) => style}
 `;
 
 function Button({
@@ -63,10 +63,10 @@ function Button({
   disabled,
   shape = 'square',
   btnColor,
-  style,
   width,
   height,
   type = 'button',
+  style,
 }) {
   const navigate = useNavigate();
 
