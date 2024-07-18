@@ -51,7 +51,9 @@ function SubjectListGrid({ sortBy }) {
   const isFirstPageNumList = pageNumList[0] === 1;
   const isLastPageNumList = totalPageCount === pageNumList[pageNumList.length - 1];
   useEffect(() => {
-    if (currentPage === 1) {
+    if (totalPageCount <= 1) {
+      setArrowBtnVisible('none');
+    } else if (currentPage === 1) {
       setArrowBtnVisible('right');
     } else if (currentPage === totalPageCount) {
       setArrowBtnVisible('left');
