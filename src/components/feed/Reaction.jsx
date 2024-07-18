@@ -1,15 +1,9 @@
-import { css, styled } from 'styled-components';
+import { styled } from 'styled-components';
 import likeIcon from '../../assets/images/like-icon.png';
 import dislikeIcon from '../../assets/images/dislike-icon.png';
-import {
-  jelloHorizontal,
-  jelloHorizontalAnimation,
-  shakeLeft,
-  shakeLeftAnimation,
-} from '../../styles/feed/feedCardStyles';
+import { jelloHorizontalAnimation, shakeLeftAnimation } from '../../styles/feed/feedCardStyles';
 import { useState } from 'react';
 import useSelectReactionMutation from '../../queries/useReactionMutation';
-import { useEffect } from 'react';
 
 /**
  * 좋아요 싫어요를 보여주고 선택할 수 있다
@@ -95,7 +89,7 @@ const StyledReactionButton = styled.button`
   }
 
   &.dislike-button {
-    color: ${({ $reactedType }) => $reactedType === 'like' && 'var(--red)'};
+    color: ${({ $reactedType }) => $reactedType === 'dislike' && 'var(--red)'};
 
     & .dislike-icon {
       filter: ${({ $reactedType }) =>

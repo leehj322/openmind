@@ -34,6 +34,7 @@ function AnswerCard({
   const [answerCreatedAt, setAnswerCreatedAt] = useState(answer ? answer.createdAt : '');
   const [isEditing, setIsEditing] = useState(false);
   const [isRejected, setIsRejected] = useState(answer ? answer.isRejected : false);
+
   const { mutate: createAnswerMutate } = useCreateAnswerMutation();
   const { mutate: updateAnswerMutate } = useUpdateAnswerMutation();
 
@@ -65,7 +66,7 @@ function AnswerCard({
     event.preventDefault();
 
     setIsRejected(prevState => {
-      // updateAnswerMutate({ answerId: answer.id, content: inputText, isRejected: !prevState });
+      updateAnswerMutate({ answerId: answer.id, isRejected: !prevState });
       return !prevState;
     });
   };
