@@ -49,6 +49,18 @@ function SubjectListGrid({ sortBy }) {
     const targetText = event.currentTarget.textContent;
     const nextCurrentPage = Number(targetText);
 
+    const changePageNumList = () => {
+      const isFirstPageNumList = pageNumList[0] === 1;
+      const isLastPageNumList = totalPageCount >= pageNumList[pageNumList.length - 1];
+      if (isFirstPageNumList || isLastPageNumList) {
+        return;
+      } else {
+        // nextCurrentPage값이 3, 4번 index 값인 경우 3번이면 +1, 4번이면 +2
+        const targetPageIdx = pageNumList.indexOf(nextCurrentPage); // 근데 이거로 하면 >나 < 눌렀을때 동작안함
+        // nextCurrentPage값이 1, 2번 index 값인 경우 1번이면 -2, 2번이면 -1
+      }
+    };
+
     // event target의 textContent가 <, > 인경우 NaN 이므로 falsy값
     if (nextCurrentPage) {
       setCurrentPage(nextCurrentPage);
@@ -65,17 +77,6 @@ function SubjectListGrid({ sortBy }) {
           setCurrentPage(prevCurrentPage => prevCurrentPage + 1);
         }
       }
-    }
-
-    // pageNumList의 마지막 값이 마지막 페이지 or 첫번째 값이 1페이지 인 경우 pageNumList 변경 X
-    const isLastPageNumList = totalPageCount >= pageNumList[pageNumList.length - 1];
-    const isFirstPageNumList = pageNumList[0] === 1;
-    if (isFirstPageNumList || isLastPageNumList) {
-      return;
-    } else {
-      // currentPage값이 3, 4번 index 값인 경우 3번이면 +1, 4번이면 +2
-      // currentPage값이 1, 2번 index 값인 경우 1번이면 -2, 2번이면 -1
-      console.log('페이지번호바꿔');
     }
   };
 
