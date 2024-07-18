@@ -5,8 +5,8 @@ import styled from 'styled-components';
  * @param props
  * @param {string} props.isHasAnswer 답변 유무
  */
-function AnswerStatus({ isHasAnswer }) {
-  const answerStatus = isHasAnswer ? '답변 완료' : '미답변';
+function AnswerStatus({ isComplete }) {
+  const answerStatus = isComplete ? '답변 완료' : '미답변';
   return <StyledAnswerStatus>{answerStatus}</StyledAnswerStatus>;
 }
 
