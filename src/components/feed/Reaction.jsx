@@ -5,6 +5,12 @@ import { jelloHorizontalAnimation, shakeLeftAnimation } from '../../styles/feed/
 import { useState } from 'react';
 import useSelectReactionMutation from '../../queries/useReactionMutation';
 
+const LIKE_ICON_FILTER =
+  'brightness(0) saturate(100%) invert(51%) sepia(61%) saturate(7062%) hue-rotate(203deg) brightness(97%) contrast(95%)';
+
+const DISLIKE_ICON_FILTER =
+  'brightness(0) saturate(100%) invert(27%) sepia(26%) saturate(3214%) hue-rotate(330deg) brightness(103%) contrast(101%)';
+
 /**
  * 좋아요 싫어요를 보여주고 선택할 수 있다
  * @param props
@@ -81,10 +87,7 @@ const StyledReactionButton = styled.button`
     color: ${({ $reactedType }) => $reactedType === 'like' && 'var(--blue)'};
 
     & .like-icon {
-      filter: ${({ $reactedType }) =>
-        $reactedType === 'like' &&
-        `brightness(0) saturate(100%) invert(51%) sepia(61%) saturate(7062%) hue-rotate(203deg) brightness(97%)
-          contrast(95%)`};
+      filter: ${({ $reactedType }) => $reactedType === 'like' && LIKE_ICON_FILTER};
     }
   }
 
@@ -92,10 +95,7 @@ const StyledReactionButton = styled.button`
     color: ${({ $reactedType }) => $reactedType === 'dislike' && 'var(--red)'};
 
     & .dislike-icon {
-      filter: ${({ $reactedType }) =>
-        $reactedType === 'dislike' &&
-        `brightness(0) saturate(100%) invert(27%) sepia(26%) saturate(3214%) hue-rotate(330deg) brightness(103%)
-          contrast(101%)`};
+      filter: ${({ $reactedType }) => $reactedType === 'dislike' && DISLIKE_ICON_FILTER};
     }
   }
 
@@ -107,16 +107,14 @@ const StyledReactionButton = styled.button`
 
       & .like-icon {
         ${({ $reactedType }) => ($reactedType === 'like' ? jelloHorizontalAnimation : shakeLeftAnimation)}
-        filter: brightness(0) saturate(100%) invert(51%) sepia(61%) saturate(7062%) hue-rotate(203deg) brightness(97%)
-          contrast(95%);
+        filter: ${LIKE_ICON_FILTER};
       }
     }
 
     &.dislike-button {
       color: var(--red);
       & .dislike-icon {
-        filter: brightness(0) saturate(100%) invert(27%) sepia(26%) saturate(3214%) hue-rotate(330deg) brightness(103%)
-          contrast(101%);
+        filter: ${DISLIKE_ICON_FILTER};
       }
     }
   }
