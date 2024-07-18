@@ -5,6 +5,59 @@ import messageIcon from '../../../assets/images/message-icon.png';
 import SendQuestionBtn from '../../@shared/Button';
 import theme from '../../../styles/@shared/theme';
 
+/**
+ * @param {object} props
+ * @param {string} props.profileImg - 사용자 프로필 이미지
+ * @param {string} props.name - 사용자 이름
+ * @param {boolean} props.isOpen - 모달 창 열림 상태
+ * @param {function} props.onRequestClose - 모달 창 닫기 요청 함수
+ */
+
+function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
+  Modal.setAppElement('#root');
+
+  return (
+    <div>
+      {/* 모달 창 */}
+      <StyledModal isOpen={isOpen} onRequestClose={onRequestClose}>
+        {/* 모달 창 - header */}
+        <StyledModalHeader>
+          <StyledModalTitleWrapper>
+            <StyledModalIcon src={messageIcon} alt="말풍선" />
+            <StyledModalTitle>질문을 작성하세요!</StyledModalTitle>
+          </StyledModalTitleWrapper>
+          <StyledCloseBtn onClick={onRequestClose}>X</StyledCloseBtn>
+        </StyledModalHeader>
+
+        {/* 모달 창 - main */}
+        <StyledModalContent>
+          <StyledUserInfo>
+            To.
+            <StyledProfileImg src={profileImg} />
+            <StyledUserName>{name}</StyledUserName>
+          </StyledUserInfo>
+          <StyledTextArea placeholder="질문을 입력해주세요!"></StyledTextArea>
+        </StyledModalContent>
+
+        {/* 모달 창 버튼 */}
+        <StyledBtnContainer>
+          <SendQuestionBtn
+            type="submit"
+            pagePath="/post/123"
+            width="100%"
+            height="100%"
+            disabled={false}
+            style={{ backgroundColor: 'var(--brown20)', color: 'var(--gray40)' }}>
+            질문 보내기
+          </SendQuestionBtn>
+        </StyledBtnContainer>
+      </StyledModal>
+    </div>
+  );
+}
+
+export default ModalComponent;
+
 const StyledModal = styled(Modal)`
   width: 612px;
   height: 420px;
@@ -109,53 +162,3 @@ const StyledBtnContainer = styled.div`
     height: 40px;
   }
 `;
-
-function ModalComponent({ profileImg, name }) {
-  Modal.setAppElement('#root');
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const showModal = () => {
-    setModalIsOpen(true);
-  };
-  const closeModal = () => {
-    setModalIsOpen(false);
-  };
-
-  return (
-    <div>
-      <button onClick={showModal}>모달 열기</button>
-
-      <StyledModal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <StyledModalHeader>
-          <StyledModalTitleWrapper>
-            <StyledModalIcon src={messageIcon} alt="말풍선" />
-            <StyledModalTitle>질문을 작성하세요!</StyledModalTitle>
-          </StyledModalTitleWrapper>
-          <StyledCloseBtn onClick={closeModal}>X</StyledCloseBtn>
-        </StyledModalHeader>
-
-        <StyledModalContent>
-          <StyledUserInfo>
-            To.
-            <StyledProfileImg src={profileImg} />
-            <StyledUserName>{name}</StyledUserName>
-          </StyledUserInfo>
-          <StyledTextArea placeholder="질문을 입력해주세요!"></StyledTextArea>
-        </StyledModalContent>
-        <StyledBtnContainer>
-          <SendQuestionBtn
-            type="submit"
-            pagePath="/post/123"
-            width="100%"
-            height="100%"
-            disabled={false}
-            style={{ backgroundColor: 'var(--brown20)', color: 'var(--gray40)' }}>
-            질문 보내기
-          </SendQuestionBtn>
-        </StyledBtnContainer>
-      </StyledModal>
-    </div>
-  );
-}
-
-export default ModalComponent;
