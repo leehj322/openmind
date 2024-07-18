@@ -21,7 +21,7 @@ const DISLIKE_ICON_FILTER =
 function Reaction({ likeCount, dislikeCount, questionId }) {
   const reactionObject = JSON.parse(localStorage.getItem('reactionObject'));
   const [reactedType, setReactedType] = useState((questionId && reactionObject[questionId]) || '');
-  const [like, setLike] = useState(likeCount);
+  const [currentCount, setCurrentCount] = useState({ like: likeCount, dislike: dislikeCount });
   const { mutate } = useSelectReactionMutation();
 
   const handleReactionButtonClick = event => {
@@ -29,16 +29,10 @@ function Reaction({ likeCount, dislikeCount, questionId }) {
 
     if (questionId && !reactedType) {
       localStorage.setItem('reactionObject', JSON.stringify({ [questionId]: type }));
-      setReactedType('like');
+      setReactedType(type);
+      setCurrentCount(prevState => ({ ...prevState, [type]: prevState[type] + 1 }));
 
-      mutate(
-        { questionId: questionId, type: type },
-        {
-          onSuccess: data => {
-            setLike(data.like);
-          },
-        }
-      );
+      mutate({ questionId: questionId, type: type });
     }
   };
 
@@ -51,7 +45,7 @@ function Reaction({ likeCount, dislikeCount, questionId }) {
         onClick={handleReactionButtonClick}>
         <img className={'like-icon'} src={likeIcon} alt={'좋아요 아이콘'} />
         <span>좋아요</span>
-        <span>{like}</span>
+        <span>{currentCount.like}</span>
       </StyledReactionButton>
       <StyledReactionButton className={'dislike-button'} data-type={'dislike'} onClick={handleReactionButtonClick}>
         <img className={'dislike-icon'} src={dislikeIcon} alt={'싫어요 아이콘'} />
