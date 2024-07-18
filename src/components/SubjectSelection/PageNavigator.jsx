@@ -38,6 +38,12 @@ function NavNumBtn({ children, isCurrentPage, onNavBtnClick }) {
   );
 }
 
+/**
+ * @param {number} currentPage 현재 페이지 상태
+ * @param {array} pageNumList 페이지 번호를 담은 리스트 값
+ * @param {function} onNavBtnClick 버튼 클릭시 동작을 담은 함수
+ * @param {string} arrowBtnVisible 왼쪽, 오른쪽 화살표 보이기 안보이기 옵션 (both: 둘 다 보임, left: 왼쪽 보임, right: 오른쪽 보임, none: 둘다 안보임)
+ */
 function PageNavigator({ currentPage, pageNumList, onNavBtnClick, arrowBtnVisible }) {
   const [isLeftArrowVisible, setIsLeftArrowVisible] = useState(true);
   const [isRightArrowVisible, setIsRightArrowVisible] = useState(true);
