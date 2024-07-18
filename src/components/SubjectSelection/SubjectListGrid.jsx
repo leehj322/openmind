@@ -29,7 +29,7 @@ function SubjectListGrid({ sortBy }) {
   const [pageNumList, setPageNumList] = useState([1, 2, 3, 4, 5]);
   // 화살표 버튼이 보일지 안보일지 설정
   // both: 둘 다 보임, left: 왼쪽만 보임, right: 오른쪽만 보임, none: 둘다 안보임
-  const [arrowBtnVisible, setArrowBtnVisible] = useState('both');
+  const [arrowBtnVisible, setArrowBtnVisible] = useState('right');
 
   // 현재 페이지의 grid 형태에 따라 limit값 수정 및
   // currentPage 값에 따라서 offset 계산 후 GET 요청 전송
@@ -46,6 +46,19 @@ function SubjectListGrid({ sortBy }) {
       setPageNumList(prevPageNumList => prevPageNumList.slice(0, totalPageCount));
     }
   }, [totalPageCount]);
+
+  // 화살표 버튼 visible 옵션 제어
+  const isFirstPageNumList = pageNumList[0] === 1;
+  const isLastPageNumList = totalPageCount === pageNumList[pageNumList.length - 1];
+  useEffect(() => {
+    if (currentPage === 1) {
+      setArrowBtnVisible('right');
+    } else if (currentPage === totalPageCount) {
+      setArrowBtnVisible('left');
+    } else {
+      setArrowBtnVisible('both');
+    }
+  }, [pageNumList, currentPage]);
 
   /**
    * 페이지 네이션 네비게이터의 버튼을 클릭했을때의 동작 핸들러
@@ -79,8 +92,8 @@ function SubjectListGrid({ sortBy }) {
         // 1,2 page인 경우 [1, 2, 3, 4, 5]
         // 끝, 끝-1 page인 경우 [..., 끝-1, 끝]
         // 이외의 경우 선택된 숫자를 중앙으로 하는 array
-        const startBoundaryPage = [1, 2];
-        const endBoundaryPage = [totalPageCount - 1, totalPageCount];
+        const startBoundaryPage = [1, 2, 3];
+        const endBoundaryPage = [totalPageCount - 2, totalPageCount - 1, totalPageCount];
         const isStartBoundaryPage = startBoundaryPage.includes(nextCurrentPage);
         const isEndBoundaryPage = endBoundaryPage.includes(nextCurrentPage);
 
@@ -106,7 +119,6 @@ function SubjectListGrid({ sortBy }) {
         // currentPage가 마지막 끝 3번째 페이지 이하
         // !isFirstPageNumList : 처음 3번째 페이지가 아닌 경우
         // 왼쪽 버튼 눌렀을때 pageNumList값이 1씩 감소해야 함
-        const isFirstPageNumList = pageNumList[0] === 1;
         if (!isFirstPageNumList && currentPage <= totalPageCount - 2) {
           setPageNumList(prevPageNumList => prevPageNumList.map(pageNum => pageNum - 1));
         }
@@ -119,7 +131,6 @@ function SubjectListGrid({ sortBy }) {
         // currentPage가 3페이지이상
         // !isLastPageNumList : 끝에서 3페이지가 아닌 경우
         // 오른쪽버튼 눌렀을때 pageNumList값이 1씩 증가해야 함
-        const isLastPageNumList = totalPageCount === pageNumList[pageNumList.length - 1];
         if (!isLastPageNumList && currentPage >= 3) {
           setPageNumList(prevPageNumList => prevPageNumList.map(pageNum => pageNum + 1));
         }

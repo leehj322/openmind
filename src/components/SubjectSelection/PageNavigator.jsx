@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const StyledPageNavigatorArea = styled.div`
@@ -25,13 +26,10 @@ const StyledNavBtn = styled.div`
   cursor: pointer;
 `;
 
-function NavArrowBtn({ children, onNavBtnClick }) {
-  return <StyledNavBtn onClick={onNavBtnClick}>{children}</StyledNavBtn>;
+function NavArrowBtn({ children, onNavBtnClick, isVisible }) {
+  return <StyledNavBtn onClick={onNavBtnClick}>{isVisible && children}</StyledNavBtn>;
 }
 
-/**
- * @param {boolean} isCurrentPage 현재 활성화된 페이지인지
- */
 function NavNumBtn({ children, isCurrentPage, onNavBtnClick }) {
   return (
     <StyledNavBtn $isCurrentPage={isCurrentPage} onClick={onNavBtnClick}>
@@ -41,22 +39,45 @@ function NavNumBtn({ children, isCurrentPage, onNavBtnClick }) {
 }
 
 function PageNavigator({ currentPage, pageNumList, onNavBtnClick, arrowBtnVisible }) {
-  // if (arrowBtnVisible === 'both') {
-  // } else if (arrowBtnVisible === 'left') {
-  // } else if (arrowBtnVisible === 'right') {
-  // } else if (arrowBtnVisible === 'none') {
-  // } else {
-  //   console.log('arrowBtnVisible 값에 올바른 값을 입력하세요');
-  // }
+  const [isLeftArrowVisible, setIsLeftArrowVisible] = useState(true);
+  const [isRightArrowVisible, setIsRightArrowVisible] = useState(true);
+
+  /**
+   * @param {boolean} isLeftArrowVisible 왼쪽 화살표 보이기
+   * @param {boolean} isRightArrowVisible 오른쪽 화살표 보이기
+   */
+  const setArrowVisibleOption = (isLeftArrowVisible, isRightArrowVisible) => {
+    setIsLeftArrowVisible(isLeftArrowVisible);
+    setIsRightArrowVisible(isRightArrowVisible);
+  };
+
+  useEffect(() => {
+    if (arrowBtnVisible === 'both') {
+      setArrowVisibleOption(true, true);
+    } else if (arrowBtnVisible === 'left') {
+      setArrowVisibleOption(true, false);
+    } else if (arrowBtnVisible === 'right') {
+      setArrowVisibleOption(false, true);
+    } else if (arrowBtnVisible === 'none') {
+      setArrowVisibleOption(false, false);
+    } else {
+      throw new Error('arrowBtnVisible에 올바른 값을 입력하세요.');
+    }
+  }, [arrowBtnVisible]);
+
   return (
     <StyledPageNavigatorArea>
-      <NavArrowBtn onNavBtnClick={onNavBtnClick}>&lt;</NavArrowBtn>
+      <NavArrowBtn onNavBtnClick={onNavBtnClick} isVisible={isLeftArrowVisible}>
+        &lt;
+      </NavArrowBtn>
       {pageNumList.map(pageNum => (
         <NavNumBtn key={pageNum} onNavBtnClick={onNavBtnClick} isCurrentPage={pageNum === currentPage}>
           {pageNum}
         </NavNumBtn>
       ))}
-      <NavArrowBtn onNavBtnClick={onNavBtnClick}>&gt;</NavArrowBtn>
+      <NavArrowBtn onNavBtnClick={onNavBtnClick} isVisible={isRightArrowVisible}>
+        &gt;
+      </NavArrowBtn>
     </StyledPageNavigatorArea>
   );
 }
