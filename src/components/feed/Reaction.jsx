@@ -5,7 +5,7 @@ import { jelloHorizontalAnimation, shakeLeftAnimation } from '../../styles/feed/
 import { useState, useEffect } from 'react';
 import useSelectReactionMutation from '../../queries/useReactionMutation';
 import ConfettiExplosion from 'react-confetti-explosion';
-import { EXPLODE_PROPS } from '../../constants/reaction';
+import { EXPLODE_PROPS } from '../../constants/feedCard';
 
 const LIKE_ICON_FILTER =
   'brightness(0) saturate(100%) invert(51%) sepia(61%) saturate(7062%) hue-rotate(203deg) brightness(97%) contrast(95%)';
