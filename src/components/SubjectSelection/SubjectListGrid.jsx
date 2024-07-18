@@ -24,7 +24,6 @@ const SubjectList = styled.ol`
 
 function SubjectListGrid({ sortBy }) {
   const windowSize = useWindowSize();
-
   const [currentPage, setCurrentPage] = useState(1);
   const [pageNumList, setPageNumList] = useState([1, 2, 3, 4, 5]);
 
@@ -41,40 +40,75 @@ function SubjectListGrid({ sortBy }) {
   // 필요한 전체 페이지 수 (totalPageCount)가 5페이지보다 적으면 [1,2,3,4,5] 에서 필요한만큼만 slice
   useEffect(() => {
     if (totalPageCount < 5) {
-      setPageNumList(prevPageNumList => prevPageNumList.slice(undefined, totalPageCount));
+      setPageNumList(prevPageNumList => prevPageNumList.slice(0, totalPageCount));
     }
   }, [totalPageCount]);
 
   const handleNavBtnClick = event => {
     const targetText = event.currentTarget.textContent;
-    const nextCurrentPage = Number(targetText);
+    const isNumBtn = !!Number(targetText);
 
-    const changePageNumList = () => {
-      const isFirstPageNumList = pageNumList[0] === 1;
-      const isLastPageNumList = totalPageCount >= pageNumList[pageNumList.length - 1];
-      if (isFirstPageNumList || isLastPageNumList) {
-        return;
-      } else {
-        // nextCurrentPage값이 3, 4번 index 값인 경우 3번이면 +1, 4번이면 +2
-        const targetPageIdx = pageNumList.indexOf(nextCurrentPage); // 근데 이거로 하면 >나 < 눌렀을때 동작안함
-        // nextCurrentPage값이 1, 2번 index 값인 경우 1번이면 -2, 2번이면 -1
-      }
-    };
+    const isFirstPageNumList = pageNumList[0] === 1;
+    const isLastPageNumList = totalPageCount === pageNumList[pageNumList.length - 1];
 
     // event target의 textContent가 <, > 인경우 NaN 이므로 falsy값
-    if (nextCurrentPage) {
+    if (isNumBtn) {
+      const nextCurrentPage = Number(targetText);
       setCurrentPage(nextCurrentPage);
-    } else {
-      if (targetText === '<') {
-        // 현재 페이지가 첫 페이지가 아니면 currentPage - 1
-        if (currentPage !== 1) {
-          setCurrentPage(prevCurrentPage => prevCurrentPage - 1);
+
+      if (totalPageCount <= 5) {
+        return;
+      } else {
+        // 1,2 page인 경우 [1,2,3,4,5] 반환
+        // 끝, 끝-1 page인 경우 [~,~,~,끝-1,끝] 반환
+        // 1,2 page와 가장 끝, 끝에서 2번째 페이지가 아닌 경우 setPageNumList
+        const startBoundaryPage = [1, 2];
+        const endBoundaryPage = [totalPageCount - 1, totalPageCount];
+        const isStartBoundaryPage = startBoundaryPage.includes(nextCurrentPage);
+        const isEndBoundaryPage = endBoundaryPage.includes(nextCurrentPage);
+        if (isStartBoundaryPage) {
+          setPageNumList([1, 2, 3, 4, 5]);
+        } else if (isEndBoundaryPage) {
+          setPageNumList([
+            totalPageCount - 4,
+            totalPageCount - 3,
+            totalPageCount - 2,
+            totalPageCount - 1,
+            totalPageCount,
+          ]);
+        } else {
+          setPageNumList([
+            nextCurrentPage - 2,
+            nextCurrentPage - 1,
+            nextCurrentPage,
+            nextCurrentPage + 1,
+            nextCurrentPage + 2,
+          ]);
         }
       }
-      if (targetText === '>') {
-        // 현재 페이지가 마지막 페이지가 아니면 currentPage + 1
-        if (currentPage !== totalPageCount) {
-          setCurrentPage(prevCurrentPage => prevCurrentPage + 1);
+    } else {
+      // 현재 페이지가 첫 페이지가 아니면 currentPage - 1
+      if (targetText === '<' && currentPage !== 1) {
+        const nextCurrentPage = currentPage - 1;
+        setCurrentPage(nextCurrentPage);
+
+        // currentPage가 마지막 끝 3번째 페이지 이하
+        // !isFirstPageNumList : 처음 3번째 페이지가 아닌 경우
+        // 왼쪽 버튼 눌렀을때 pageNumList값이 1씩 감소해야 함
+        if (!isFirstPageNumList && currentPage <= totalPageCount - 2) {
+          setPageNumList(prevPageNumList => prevPageNumList.map(pageNum => pageNum - 1));
+        }
+      }
+      // 현재 페이지가 마지막 페이지가 아니면 currentPage + 1
+      if (targetText === '>' && currentPage !== totalPageCount) {
+        const nextCurrentPage = currentPage + 1;
+        setCurrentPage(nextCurrentPage);
+
+        // currentPage가 3페이지이상
+        // !isLastPageNumList : 끝에서 3페이지가 아닌 경우
+        // 오른쪽버튼 눌렀을때 pageNumList값이 1씩 증가해야 함
+        if (!isLastPageNumList && currentPage >= 3) {
+          setPageNumList(prevPageNumList => prevPageNumList.map(pageNum => pageNum + 1));
         }
       }
     }
@@ -88,8 +122,8 @@ function SubjectListGrid({ sortBy }) {
         ))}
         {/* 아래 값은 실제로 QuestionCard가 완성되면 사용 */}
         {/* {results.map(result => (
-          <QuestionCard key={result.id} subject={result} />
-        ))} */}
+            <QuestionCard key={result.id} subject={result} />
+          ))} */}
       </SubjectList>
       <PageNavigator currentPage={currentPage} pageNumList={pageNumList} onNavBtnClick={handleNavBtnClick} />
     </>
