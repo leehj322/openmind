@@ -40,16 +40,13 @@ function NavNumBtn({ children, isCurrentPage, onNavBtnClick }) {
   );
 }
 
-function PageNavigator({ totalSubjectCount, currentPage, onNavBtnClick }) {
-  const numList = [1, 2, 3, 4, 5];
-  console.log(totalSubjectCount);
-
+function PageNavigator({ currentPage, pageNumList, onNavBtnClick }) {
   return (
     <StyledPageNavigatorArea>
       <NavArrowBtn onNavBtnClick={onNavBtnClick}>&lt;</NavArrowBtn>
-      {numList.map(num => (
-        <NavNumBtn key={num} onNavBtnClick={onNavBtnClick} isCurrentPage={num === currentPage}>
-          {num}
+      {pageNumList.map(pageNum => (
+        <NavNumBtn key={pageNum} onNavBtnClick={onNavBtnClick} isCurrentPage={pageNum === currentPage}>
+          {pageNum}
         </NavNumBtn>
       ))}
       <NavArrowBtn onNavBtnClick={onNavBtnClick}>&gt;</NavArrowBtn>
