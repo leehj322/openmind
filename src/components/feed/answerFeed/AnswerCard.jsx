@@ -34,9 +34,10 @@ function AnswerCard({
   const [currentAnswer, setCurrentAnswer] = useState(isHasAnswer ? answer.content : '');
   const [answerCreatedAt, setAnswerCreatedAt] = useState(isHasAnswer ? answer.createdAt : '');
   const [isEditing, setIsEditing] = useState(false);
-  // 답변 객체가 존재하고, LIMIT_DISLIKE_COUNT보다 싫어요가 많거나 isRejected가 명시적으로 true인 경우 외에는 false;
+  // LIMIT_DISLIKE_COUNT보다 싫어요가 많거나, 답변 객체가 존재하고 isRejected가 명시적으로 true인 경우 외에는 false
+  // 질문에 싫어요 개수가 많으면, 자동으로 답변을 달 수 없도록 조치
   const [isRejected, setIsRejected] = useState(
-    isHasAnswer && (answer.dislike >= LIMIT_DISLIKE_COUNT || answer.isRejected)
+    dislikeCount >= LIMIT_DISLIKE_COUNT || (isHasAnswer && answer.isRejected)
   );
 
   const { mutate: createAnswerMutate } = useCreateAnswerMutation();
@@ -70,8 +71,8 @@ function AnswerCard({
     event.preventDefault();
     if (!isRejected) {
       // isRejected가 false 인 경우에만 실행하면 됨
-      updateAnswerMutate({ answerId: answer.id, isRejected: true });
       setIsRejected(true);
+      updateAnswerMutate({ answerId: answer.id, isRejected: true });
     }
   };
 

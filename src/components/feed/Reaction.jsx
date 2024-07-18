@@ -5,7 +5,7 @@ import { jelloHorizontalAnimation, shakeLeftAnimation } from '../../styles/feed/
 import { useState, useEffect } from 'react';
 import useSelectReactionMutation from '../../queries/useReactionMutation';
 import ConfettiExplosion from 'react-confetti-explosion';
-import { EXPLODE_PROPS } from '../../constants/feedCard';
+import { EXPLODE_PROPS, LIMIT_DISLIKE_COUNT } from '../../constants/feedCard';
 
 const LIKE_ICON_FILTER =
   'brightness(0) saturate(100%) invert(51%) sepia(61%) saturate(7062%) hue-rotate(203deg) brightness(97%) contrast(95%)';
@@ -27,6 +27,7 @@ function Reaction({ likeCount, questionId = '123424' }) {
   const [isExplode, setIsExplode] = useState(false);
 
   const { mutate: reactionMutate } = useSelectReactionMutation();
+  const { mutate: updateAnswerMutate } = useSelectReactionMutation();
 
   const handleReactionButtonClick = event => {
     const { type } = event.currentTarget.dataset;
@@ -41,7 +42,20 @@ function Reaction({ likeCount, questionId = '123424' }) {
       localStorage.setItem('reactionList', JSON.stringify(reactionList));
 
       setCurrentLikeCount(prevState => prevState + 1);
-      reactionMutate({ questionId: questionId, type: type });
+      reactionMutate(
+        { questionId: questionId, type: type },
+        {
+          onSuccess: data => {
+            const answer = data.answer;
+            // 리액션 제출에 성공한다면,
+            // 답변 객체가 존재하고, 답변 거절이 되지 않았고, 응답 받은 싫어요 수가 기준치보다 많다면
+            // 답변 거절 상태로 변경 요청을 서버로 보냅니다.
+            if (answer && !answer.isRejected && data.dislike >= LIMIT_DISLIKE_COUNT) {
+              updateAnswerMutate({ answerId: answer.id, isRejected: true });
+            }
+          },
+        }
+      );
     }
   };
 
