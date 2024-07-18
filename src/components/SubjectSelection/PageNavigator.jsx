@@ -40,7 +40,14 @@ function NavNumBtn({ children, isCurrentPage, onNavBtnClick }) {
   );
 }
 
-function PageNavigator({ currentPage, pageNumList, onNavBtnClick }) {
+function PageNavigator({ currentPage, pageNumList, onNavBtnClick, arrowBtnVisible }) {
+  // if (arrowBtnVisible === 'both') {
+  // } else if (arrowBtnVisible === 'left') {
+  // } else if (arrowBtnVisible === 'right') {
+  // } else if (arrowBtnVisible === 'none') {
+  // } else {
+  //   console.log('arrowBtnVisible 값에 올바른 값을 입력하세요');
+  // }
   return (
     <StyledPageNavigatorArea>
       <NavArrowBtn onNavBtnClick={onNavBtnClick}>&lt;</NavArrowBtn>
