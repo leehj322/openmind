@@ -11,10 +11,20 @@ import theme from '../../../styles/@shared/theme';
  * @param {string} props.name - 사용자 이름
  * @param {boolean} props.isOpen - 모달 창 열림 상태
  * @param {function} props.onRequestClose - 모달 창 닫기 요청 함수
+ * @param {object} event - 이벤트 객체
  */
 
 function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
+  //모달이 열렸을 때 다른 컴포넌트의 content 보지 않도록 숨겨줄 엘리먼트 정의
   Modal.setAppElement('#root');
+
+  //useState를 사용해 상태 관리 : 초기값 빈 문자열
+  const [textAreaValue, setTextAreaValue] = useState('');
+
+  // 텍스트 영역의 값이 채워질 때 호출
+  const handleTextAreaChange = event => {
+    setTextAreaValue(event.target.value);
+  };
 
   return (
     <div>
@@ -36,7 +46,10 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
             <StyledProfileImg src={profileImg} />
             <StyledUserName>{name}</StyledUserName>
           </StyledUserInfo>
-          <StyledTextArea placeholder="질문을 입력해주세요!"></StyledTextArea>
+          <StyledTextArea
+            placeholder="질문을 입력해주세요!"
+            value={textAreaValue}
+            onChange={handleTextAreaChange}></StyledTextArea>
         </StyledModalContent>
 
         {/* 모달 창 버튼 */}
@@ -46,7 +59,7 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
             pagePath="/post/123"
             width="100%"
             height="100%"
-            disabled={false}
+            disabled={!textAreaValue.trim()}
             style={{ backgroundColor: 'var(--brown20)', color: 'var(--gray40)' }}>
             질문 보내기
           </SendQuestionBtn>
