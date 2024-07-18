@@ -7,6 +7,7 @@ import Reaction from '../Reaction';
 /**
  * 질문 피드 페이지에서의 질문 카드
  * @param props
+ * @param {string} props.questionId 질문 id
  * @param {string} props.questionContent 질문 내용
  * @param {integer} props.likeCount 좋아요 수
  * @param {integer} props.dislikeCount 싫어요 수
@@ -15,6 +16,7 @@ import Reaction from '../Reaction';
  */
 function QuestionCard({
   // TODO: 상위 컴포넌트에서 데이터를 넣어줄 수 있게 되면 테스트용 기본값 삭제 예정
+  questionId,
   questionContent = '좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?',
   likeCount = 0,
   dislikeCount = 0,
@@ -36,7 +38,7 @@ function QuestionCard({
           )}
         </AnswerTemplate>
       )}
-      <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
+      <Reaction likeCount={likeCount} dislikeCount={dislikeCount} questionId={questionId} />
     </StyledFeedCardContainer>
   );
 }

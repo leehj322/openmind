@@ -33,6 +33,8 @@ function AnswerCard({
   const [currentAnswer, setCurrentAnswer] = useState(isHasAnswer ? answer.content : '');
   const [answerCreatedAt, setAnswerCreatedAt] = useState(answer ? answer.createdAt : '');
   const [isEditing, setIsEditing] = useState(false);
+  const [isRejected, setIsRejected] = useState(answer ? answer.isRejected : false);
+
   const { mutate: createAnswerMutate } = useCreateAnswerMutation();
   const { mutate: updateAnswerMutate } = useUpdateAnswerMutation();
 
@@ -43,49 +45,61 @@ function AnswerCard({
   const handleCreateFormSubmit = (event, inputText) => {
     event.preventDefault();
 
+    setCurrentAnswer(inputText);
     createAnswerMutate(
       { questionId: questionId, content: inputText },
       {
         onSuccess: data => data && setAnswerCreatedAt(data.createdAt),
       }
     );
-
-    setCurrentAnswer(inputText);
   };
 
   const handleEditFormSubmit = (event, inputText) => {
     event.preventDefault();
 
-    updateAnswerMutate({ answerId: answer.id, content: inputText });
-    setIsEditing(false);
     setCurrentAnswer(inputText);
+    setIsEditing(false);
+    updateAnswerMutate({ answerId: answer.id, content: inputText });
+  };
+
+  const handleRejectButtonToggle = event => {
+    event.preventDefault();
+
+    setIsRejected(prevState => {
+      updateAnswerMutate({ answerId: answer.id, isRejected: !prevState });
+      return !prevState;
+    });
   };
 
   const renderAnswerContent = () => {
-    if (answer?.isRejected) {
+    if (isRejected) {
       // 답변 거절의 경우
       return <StyledAnswerText $isRejected>답변 거절</StyledAnswerText>;
-    } else if (isEditing) {
+    }
+
+    if (isEditing) {
       // 답변 거절은 아니지만, 수정 하기 버튼을 누른 경우
       return <AnswerForm currentAnswer={currentAnswer} buttonText="수정 완료" onSubmitForm={handleEditFormSubmit} />;
-    } else if (!currentAnswer) {
+    }
+
+    if (!currentAnswer) {
       // 답변 거절도 아니고, 수정중도 아니지만, 받아온 답변이 빈값인 경우
       return <AnswerForm currentAnswer={currentAnswer} buttonText="답변 완료" onSubmitForm={handleCreateFormSubmit} />;
-    } else {
-      // 답변 거절도 아니고, 수정중도 아니지만, 받아온 답변이 존재하는 경우
-      return <StyledAnswerText>{currentAnswer}</StyledAnswerText>;
     }
+
+    // 답변 거절도 아니고, 수정중도 아니고, 받아온 답변이 빈값도 아닌 경우
+    return <StyledAnswerText>{currentAnswer}</StyledAnswerText>;
   };
 
   return (
     <StyledFeedCardContainer>
       <StyledAnswerCardUpperArea>
-        <AnswerStatus isHasAnswer={isHasAnswer} />
-        <MoreButton handleEditButtonClick={handleEditButtonClick} />
+        <AnswerStatus isComplete={isHasAnswer || isRejected} />
+        <MoreButton onEditButtonClick={handleEditButtonClick} onRejectButtonToggle={handleRejectButtonToggle} />
       </StyledAnswerCardUpperArea>
       <QuestionTitle question={questionContent} questionCreateAt={questionCreateAt} />
       <AnswerTemplate answerCreatedAt={answerCreatedAt}>{renderAnswerContent()}</AnswerTemplate>
-      <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
+      <Reaction likeCount={likeCount} dislikeCount={dislikeCount} questionId={questionId} />
     </StyledFeedCardContainer>
   );
 }
