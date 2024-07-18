@@ -4,12 +4,21 @@ import dislikeIcon from '../../assets/images/dislike-icon.png';
 import { jelloHorizontalAnimation, shakeLeftAnimation } from '../../styles/feed/feedCardStyles';
 import { useState } from 'react';
 import useSelectReactionMutation from '../../queries/useReactionMutation';
+import ConfettiExplosion from 'react-confetti-explosion';
 
 const LIKE_ICON_FILTER =
   'brightness(0) saturate(100%) invert(51%) sepia(61%) saturate(7062%) hue-rotate(203deg) brightness(97%) contrast(95%)';
 
 const DISLIKE_ICON_FILTER =
   'brightness(0) saturate(100%) invert(27%) sepia(26%) saturate(3214%) hue-rotate(330deg) brightness(103%) contrast(101%)';
+
+const bigExplodeProps = {
+  force: 0.4,
+  duration: 3000,
+  particleCount: 200,
+  floorHeight: 1600,
+  floorWidth: 1600,
+};
 
 /**
  * 좋아요 싫어요를 보여주고 선택할 수 있다
@@ -23,9 +32,14 @@ function Reaction({ likeCount, dislikeCount, questionId }) {
   const [reactedType, setReactedType] = useState((questionId && reactionObject[questionId]) || '');
   const [currentCount, setCurrentCount] = useState({ like: likeCount, dislike: dislikeCount });
   const { mutate } = useSelectReactionMutation();
+  const [isLikeClick, setIsLikeClick] = useState(false);
 
   const handleReactionButtonClick = event => {
     const { type } = event.currentTarget.dataset;
+
+    if (type === 'like') {
+      setIsLikeClick(true);
+    }
 
     if (questionId && !reactedType) {
       localStorage.setItem('reactionObject', JSON.stringify({ [questionId]: type }));
@@ -43,7 +57,10 @@ function Reaction({ likeCount, dislikeCount, questionId }) {
         data-type={'like'}
         $reactedType={reactedType}
         onClick={handleReactionButtonClick}>
-        <img className={'like-icon'} src={likeIcon} alt={'좋아요 아이콘'} />
+        <div>
+          {isLikeClick && <ConfettiExplosion {...bigExplodeProps} onComplete={() => setIsLikeClick(false)} />}
+          <img className={'like-icon'} src={likeIcon} alt={'좋아요 아이콘'} />
+        </div>
         <span>좋아요</span>
         <span>{currentCount.like}</span>
       </StyledReactionButton>
