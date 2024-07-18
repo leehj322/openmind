@@ -3,6 +3,7 @@ import PageNavigator from './PageNavigator';
 import useSubjectsQuery from '../../queries/useSubjectsQuery';
 import useWindowSize from '../../hooks/useWindowSize';
 import { useState, useEffect } from 'react';
+import createCenteredArray from '../../utils/createCenteredArray';
 
 // 다른 반응형과 다른 px값에서 GRID가 바뀌어서 GRID_BREAKPOINT 상수 추가
 const GRID_BREAKPOINT = { tablet: 868, mobile: 767 };
@@ -34,7 +35,7 @@ function SubjectListGrid({ sortBy }) {
   const { data } = useSubjectsQuery(limit, offset, sortBy);
   const { count, results } = data;
 
-  // 페이지 번호 리스트 계산 및 변경 로직
+  // pageNumList 설정 로직 아래부터 handleNavBtnClick까지
   const totalPageCount = Math.ceil(count / limit);
 
   // 필요한 전체 페이지 수 (totalPageCount)가 5페이지보다 적으면 [1,2,3,4,5] 에서 필요한만큼만 slice
@@ -63,27 +64,21 @@ function SubjectListGrid({ sortBy }) {
         // 끝, 끝-1 page인 경우 [~,~,~,끝-1,끝] 반환
         // 1,2 page와 가장 끝, 끝에서 2번째 페이지가 아닌 경우 setPageNumList
         const startBoundaryPage = [1, 2];
-        const endBoundaryPage = [totalPageCount - 1, totalPageCount];
         const isStartBoundaryPage = startBoundaryPage.includes(nextCurrentPage);
+        const endBoundaryPage = [totalPageCount - 1, totalPageCount];
         const isEndBoundaryPage = endBoundaryPage.includes(nextCurrentPage);
+
+        const pageBtnListLength = 5;
+
         if (isStartBoundaryPage) {
-          setPageNumList([1, 2, 3, 4, 5]);
+          const nextBtnNumList = createCenteredArray(3, pageBtnListLength);
+          setPageNumList(nextBtnNumList);
         } else if (isEndBoundaryPage) {
-          setPageNumList([
-            totalPageCount - 4,
-            totalPageCount - 3,
-            totalPageCount - 2,
-            totalPageCount - 1,
-            totalPageCount,
-          ]);
+          const nextBtnNumList = createCenteredArray(totalPageCount - 2, pageBtnListLength);
+          setPageNumList(nextBtnNumList);
         } else {
-          setPageNumList([
-            nextCurrentPage - 2,
-            nextCurrentPage - 1,
-            nextCurrentPage,
-            nextCurrentPage + 1,
-            nextCurrentPage + 2,
-          ]);
+          const nextBtnNumList = createCenteredArray(nextCurrentPage, pageBtnListLength);
+          setPageNumList(nextBtnNumList);
         }
       }
     } else {
