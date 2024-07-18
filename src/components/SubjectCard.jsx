@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import dummyCat from '../assets/images/cute_cat_img.png';
 import receivedQuestionIcon from '../assets/images/messages_icon.png';
 import filter from '../styles/@shared/filter';
+import { useNavigate } from 'react-router-dom';
 
 const StyledQuestionCardContainer = styled.li`
   min-width: 186px;
@@ -10,6 +10,10 @@ const StyledQuestionCardContainer = styled.li`
   border-radius: 16px;
   border: 1px solid var(--gray40);
   padding: 20px;
+  background-color: var(--gray10);
+  &:hover {
+    cursor: pointer;
+  }
   @media (max-width: 767px) {
     height: 168px;
     padding: 16px;
@@ -73,46 +77,34 @@ const StyledReceivedQuestionText = styled.p`
 `;
 
 function SubjectCard({ subject }) {
-  if (subject) {
-    const profile = {
-      id: subject.id,
-      name: subject.name,
-      imageSource: subject.imageSource,
-      questionCount: subject.questionCount,
-      createdAt: subject.createdAt,
-    };
+  const navigate = useNavigate();
 
-    // JSON 문자열로 변환하여 세션 스토리지에 저장
-    sessionStorage.setItem('profile', JSON.stringify(profile));
-  }
+  const handleClick = () => {
+    if (subject) {
+      const profile = {
+        id: subject.id,
+        name: subject.name,
+        imageSource: subject.imageSource,
+        questionCount: subject.questionCount,
+        createdAt: subject.createdAt,
+      };
+
+      sessionStorage.setItem('profile', JSON.stringify(profile));
+      navigate(`/post/${subject.id}`);
+    }
+  };
 
   return (
-    <StyledQuestionCardContainer>
-      {subject ? (
-        <>
-          <StyledProfileImg src={subject.imageSource} alt="답변자 프로필 사진" />
-          <StyledUserName>{subject.name}</StyledUserName>
-          <StyledReceivedQuestionArea>
-            <div>
-              <StyledReceivedQuestionIcon src={receivedQuestionIcon} alt="받은 질문 아이콘" />
-              <StyledReceivedQuestionText>받은 질문</StyledReceivedQuestionText>
-            </div>
-            <StyledReceivedQuestionText>{subject.questionCount}개</StyledReceivedQuestionText>
-          </StyledReceivedQuestionArea>
-        </>
-      ) : (
-        <>
-          <StyledProfileImg src={dummyCat} alt="답변자 프로필 사진" />
-          <StyledUserName>이름</StyledUserName>
-          <StyledReceivedQuestionArea>
-            <div>
-              <StyledReceivedQuestionIcon src={receivedQuestionIcon} alt="받은 질문 아이콘" />
-              <StyledReceivedQuestionText>받은 질문</StyledReceivedQuestionText>
-            </div>
-            <StyledReceivedQuestionText>n개</StyledReceivedQuestionText>
-          </StyledReceivedQuestionArea>
-        </>
-      )}
+    <StyledQuestionCardContainer onClick={handleClick}>
+      <StyledProfileImg src={subject.imageSource} alt="답변자 프로필 사진" />
+      <StyledUserName>{subject.name}</StyledUserName>
+      <StyledReceivedQuestionArea>
+        <div>
+          <StyledReceivedQuestionIcon src={receivedQuestionIcon} alt="받은 질문 아이콘" />
+          <StyledReceivedQuestionText>받은 질문</StyledReceivedQuestionText>
+        </div>
+        <StyledReceivedQuestionText>{subject.questionCount}개</StyledReceivedQuestionText>
+      </StyledReceivedQuestionArea>
     </StyledQuestionCardContainer>
   );
 }
