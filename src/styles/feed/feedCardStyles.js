@@ -72,6 +72,7 @@ export const jelloHorizontal = keyframes`
 
 export const jelloHorizontalAnimation = css`
   animation: ${jelloHorizontal} 1.1s cubic-bezier(0.165, 0.84, 0.44, 1) both;
+  animation-iteration-count: 2;
 `;
 export const shakeLeftAnimation = css`
   animation: ${shakeLeft} 0.7s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
