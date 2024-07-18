@@ -1,11 +1,11 @@
-import { lightButtonStyle, darkButtonStyle } from './ButtonStyles';
+import { SoftButtonStyle, DeepButtonStyle } from './ButtonStyles';
 import { useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-const StyledButton = styled.button`
+const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
   background-color: ${({ btnColor }) =>
-    btnColor === 'light' ? lightButtonStyle.background : darkButtonStyle.background};
-  color: ${({ btnColor }) => (btnColor === 'light' ? lightButtonStyle.text : darkButtonStyle.text)};
+    btnColor === 'soft' ? SoftButtonStyle.background : DeepButtonStyle.background};
+  color: ${({ btnColor }) => (btnColor === 'soft' ? SoftButtonStyle.text : DeepButtonStyle.text)};
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -16,24 +16,39 @@ const StyledButton = styled.button`
   justify-content: center;
   padding: 12px 24px;
 
-  width: ${({ style }) => (style && style.width ? style.width : '161px')};
-  height: ${({ style }) => (style && style.height ? style.height : '46px')};
+  ${({ style }) =>
+    style &&
+    css`
+      width: ${style.width || '161px'};
+      height: ${style.height || '46px'};
+    `}
+
   border-radius: ${({ shape }) => (shape === 'square' ? '8px' : '200px')};
 
   &:hover {
     border: 1.5px solid;
-    border-color: ${({ btnColor }) => (btnColor === 'light' ? lightButtonStyle.border : darkButtonStyle.border)};
+    border-color: ${({ btnColor }) => (btnColor === 'soft' ? SoftButtonStyle.border : DeepButtonStyle.border)};
     opacity: ${props => (props.disabled ? '0.5' : '1.0')};
   }
 
   &:active {
     border: 1px solid;
-    border-color: ${({ btnColor }) => (btnColor === 'light' ? lightButtonStyle.border : darkButtonStyle.border)};
-    background-color: ${({ btnColor }) => (btnColor === 'light' ? lightButtonStyle.pressed : darkButtonStyle.pressed)};
+    border-color: ${({ btnColor }) => (btnColor === 'soft' ? SoftButtonStyle.border : DeepButtonStyle.border)};
+    background-color: ${({ btnColor }) => (btnColor === 'soft' ? SoftButtonStyle.pressed : DeepButtonStyle.pressed)};
   }
 `;
 
-function Button({ children, imgSrc, onClick, pagePath, disabled, shape, btnColor, style }) {
+function Button({
+  children,
+  imgSrc,
+  onClick,
+  pagePath,
+  disabled,
+  shape = 'square',
+  btnColor,
+  style = {},
+  type = 'button',
+}) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -45,8 +60,16 @@ function Button({ children, imgSrc, onClick, pagePath, disabled, shape, btnColor
     }
   };
 
+  const btnColorDefault = btnColor || 'soft';
+
   return (
-    <StyledButton onClick={handleClick} disabled={disabled} shape={shape} btnColor={btnColor} style={style}>
+    <StyledButton
+      btnColor={btnColorDefault}
+      onClick={handleClick}
+      disabled={disabled}
+      shape={shape}
+      style={style}
+      type={type}>
       {children}
       {imgSrc && <img src={imgSrc} alt="화살표" />}
     </StyledButton>

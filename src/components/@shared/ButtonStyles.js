@@ -1,13 +1,15 @@
 import styled, { css } from 'styled-components';
 
-export const lightButtonStyle = {
+//연한 갈색 버튼
+export const SoftButtonStyle = {
   background: 'var(--brown10)',
   text: 'var(--brown40)',
   border: 'var(--brown40)',
   pressed: 'var(--brown20)',
 };
 
-export const darkButtonStyle = {
+//진한 갈색 버튼
+export const DeepButtonStyle = {
   background: 'var(--brown40)',
   text: 'var(--gray10)',
   border: 'var(--brown50)',
@@ -15,12 +17,12 @@ export const darkButtonStyle = {
 };
 
 //화살표 이미지
-export const LightArrowImg = styled.img`
+export const SoftArrowImg = styled.img`
   width: 18px;
   height: 18px;
 `;
 
-export const DarkArrowImg = styled.img`
+export const deepArrowImg = styled.img`
   width: 18px;
   height: 18px;
 `;
