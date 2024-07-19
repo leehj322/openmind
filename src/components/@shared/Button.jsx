@@ -43,7 +43,7 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
   ${({ disabled }) =>
     disabled &&
     css`
-      filter: blur(1px);
+      opacity: 0.5;
       cursor: not-allowed;
     `};
 
