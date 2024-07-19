@@ -20,6 +20,7 @@ const DISLIKE_ICON_FILTER =
  * @param {string} props.questionId 질문 id
  */
 function Reaction({ likeCount, questionId = '123424' }) {
+  // TODO: '123424'는 테스트값이므로 향후 삭제 예정
   const reactionList = JSON.parse(localStorage.getItem('reactionList'));
 
   const [reactedType, setReactedType] = useState('');
@@ -41,7 +42,9 @@ function Reaction({ likeCount, questionId = '123424' }) {
       reactionList.push({ questionId: questionId, type: type });
       localStorage.setItem('reactionList', JSON.stringify(reactionList));
 
-      setCurrentLikeCount(prevState => prevState + 1);
+      // 클릭한 리액션이 좋아요일 경우에만 좋아요 개수 증가
+      type === 'like' && setCurrentLikeCount(prevState => prevState + 1);
+
       reactionMutate(
         { questionId: questionId, type: type },
         {
@@ -79,6 +82,7 @@ function Reaction({ likeCount, questionId = '123424' }) {
         className={'like-button'}
         data-type={'like'}
         $reactedType={reactedType}
+        $isExplode={isExplode}
         onClick={handleReactionButtonClick}>
         <img className={'like-icon'} src={likeIcon} alt={'좋아요 아이콘'} />
         <span>
@@ -124,6 +128,7 @@ const StyledReactionButton = styled.button`
     color: ${({ $reactedType }) => $reactedType === 'like' && 'var(--blue)'};
 
     & .like-icon {
+      ${({ $isExplode }) => $isExplode && jelloHorizontalAnimation}
       filter: ${({ $reactedType }) => $reactedType === 'like' && LIKE_ICON_FILTER};
     }
   }
@@ -143,7 +148,9 @@ const StyledReactionButton = styled.button`
       color: var(--blue);
 
       & .like-icon {
-        ${({ $reactedType }) => ($reactedType === 'like' ? jelloHorizontalAnimation : shakeLeftAnimation)}
+        // 폭죽이 터지는 중이 아니거나, $reactedType가 falsy값일 경우에만 흔들림 애니메이션 적용
+        // !$isExplode이 없으면 스타일 충돌이 일어날 수 있음, 동적인 변수를 사용하는데 위치에 따른 덮어쓰기는 좋지 않다고 판단
+        ${({ $isExplode, $reactedType }) => !$isExplode && !$reactedType && shakeLeftAnimation}
         filter: ${LIKE_ICON_FILTER};
       }
     }
