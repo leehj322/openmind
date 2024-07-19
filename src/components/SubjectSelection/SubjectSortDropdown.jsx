@@ -1,35 +1,8 @@
-import styled, { keyframes, css } from 'styled-components';
+import styled from 'styled-components';
 import DropdownBox from '../@shared/DropdownBox';
 import useToggle from '../../hooks/useToggle';
 import arrowDownImgUrl from '../../assets/images/Arrow-down.svg';
 import filter from '../../styles/@shared/filter';
-
-const rotateUpAnimation = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(180deg);
-  }
-`;
-
-const rotateDownAnimation = keyframes`
-  0% {
-    transform: rotate(180deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
-`;
-
-/**
- * 파라미터 값이 true 인 경우 180도 회전하고 회전한 상태를 유지함 false인 경우 원래상태로 다시 돌아옴
- * @param {boolean} shouldRotate180Deg
- * @returns styled components의 css를 리턴함
- */
-const rotate180DegAnimation = shouldRotate180Deg => css`
-  animation: ${shouldRotate180Deg ? rotateUpAnimation : rotateDownAnimation} 0.4s linear forwards;
-`;
 
 const DropdownToggler = styled.div`
   display: flex;
@@ -51,7 +24,7 @@ const DropdownToggler = styled.div`
     width: 14px;
     height: 14px;
     filter: ${({ $isDropdownVisible }) => ($isDropdownVisible ? filter.gray60 : '')};
-    ${({ $isDropdownVisible }) => rotate180DegAnimation($isDropdownVisible)}
+    transform: ${({ $isDropdownVisible }) => ($isDropdownVisible ? 'rotate(180deg)' : '')};
   }
 
   cursor: pointer;

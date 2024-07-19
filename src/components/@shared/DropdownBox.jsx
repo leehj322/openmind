@@ -55,6 +55,13 @@ const StyledItemArea = styled.div`
     }
   }
 
+  &:active {
+    color: var(--blue);
+    & img {
+      filter: ${filter.blue};
+    }
+  }
+
   // img color값 gray50, 현재 활성화된 값일시 blue
   & img {
     filter: ${({ $isCurrent }) => ($isCurrent ? filter.blue : filter.gray50)};
