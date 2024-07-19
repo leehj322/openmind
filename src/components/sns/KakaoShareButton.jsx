@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
-import kakaoIcon from "../../images/kakao_icon.png";
-import styled from "styled-components";
-import Tooltip from "./Tooltip";
+import React, { useEffect } from 'react';
+import kakaoIcon from '../../images/kakao_icon.png';
+import styled from 'styled-components';
+import Tooltip from './Tooltip';
 
 const StyledShareIcon = styled.img`
   width: 40px;
@@ -14,45 +14,41 @@ const KakaoShareButton = ({ subject }) => {
   useEffect(() => {
     // 카카오 SDK 초기화
     if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init("135b2ce1d43f8ad70ae429b48a8bdc18"); // 발급받은 앱 키로 초기화합니다.
+      window.Kakao.init('135b2ce1d43f8ad70ae429b48a8bdc18'); // 발급받은 앱 키로 초기화합니다.
     }
   }, []);
 
   const shareToKakao = () => {
     if (window.Kakao && window.Kakao.Link) {
       window.Kakao.Link.sendDefault({
-        objectType: "feed",
+        objectType: 'feed',
         content: {
           title: `${subject.name}님의 피드`,
           description: `${subject.name}님에게 궁금한 점을 물어보러 가요!`,
           imageUrl: `${subject.imageSource}`,
           link: {
-            mobileWebUrl: "http://localhost:3000/test",
-            webUrl: "http://localhost:3000/test",
+            mobileWebUrl: 'http://localhost:3000/test',
+            webUrl: 'http://localhost:3000/test',
           },
         },
         buttons: [
           {
-            title: "웹으로 보기", //버튼에 표시될 내용
+            title: '웹으로 보기', //버튼에 표시될 내용
             link: {
-              mobileWebUrl: "http://localhost:3000/test",
-              webUrl: "http://localhost:3000/test",
+              mobileWebUrl: 'http://localhost:3000/test',
+              webUrl: 'http://localhost:3000/test',
             },
           },
         ],
       });
     } else {
-      console.error("Kakao SDK가 초기화되지 않았습니다.");
+      console.error('Kakao SDK가 초기화되지 않았습니다.');
     }
   };
 
   return (
     <Tooltip content="카카오톡으로 공유하기">
-      <StyledShareIcon
-        src={kakaoIcon}
-        alt="클립보드 복사 아이콘"
-        onClick={shareToKakao}
-      />
+      <StyledShareIcon src={kakaoIcon} alt="클립보드 복사 아이콘" onClick={shareToKakao} />
     </Tooltip>
   );
 };

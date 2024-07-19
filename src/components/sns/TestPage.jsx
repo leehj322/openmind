@@ -1,7 +1,7 @@
-import styled from "styled-components";
-import TwitterShareButton from "./TwitterShareButton";
-import KakaoShareButton from "./KakaoShareButton";
-import ClipboardCopyButton from "./ClipboardCopyButton";
+import styled from 'styled-components';
+import TwitterShareButton from './TwitterShareButton';
+import KakaoShareButton from './KakaoShareButton';
+import ClipboardCopyButton from './ClipboardCopyButton';
 
 const StyledProfileContainer = styled.div`
   display: flex;
@@ -43,11 +43,10 @@ const StyledIconArea = styled.div`
 
 const subject = {
   id: 2,
-  name: "강영훈",
-  imageSource:
-    "https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8",
+  name: '강영훈',
+  imageSource: 'https://fastly.picsum.photos/id/311/200/200.jpg?hmac=CHiYGYQ3Xpesshw5eYWH7U0Kyl9zMTZLQuRDU4OtyH8',
   questionCount: 5,
-  createdAt: "2023-10-23T05:08:05.825279Z",
+  createdAt: '2023-10-23T05:08:05.825279Z',
 };
 
 function TestPage() {

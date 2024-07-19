@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 const StyledTooltipContainer = styled.div`
   position: relative;
@@ -19,7 +19,7 @@ const StyledTooltipContent = styled.div`
   text-align: center;
   border-radius: 6px;
   padding: 4px 6px;
-  visibility: ${(props) => (props.visible ? "visible" : "hidden")};
+  visibility: ${props => (props.visible ? 'visible' : 'hidden')};
   z-index: 1;
   width: max-content;
   font-size: 9px;

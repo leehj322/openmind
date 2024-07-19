@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import TwitterIcon from "../../images/twitter_icon.png";
-import { Helmet } from "react-helmet";
-import { useState } from "react";
-import Tooltip from "./Tooltip";
+import styled from 'styled-components';
+import TwitterIcon from '../../images/twitter_icon.png';
+import { Helmet } from 'react-helmet';
+import { useState } from 'react';
+import Tooltip from './Tooltip';
 
 const StyledShareIcon = styled.img`
   width: 40px;
@@ -12,27 +12,23 @@ const StyledShareIcon = styled.img`
 
 function TwitterShareButton({ subject }) {
   const [helmetData, setHelmetData] = useState({
-    title: "",
-    description: "",
-    image: "",
+    title: '',
+    description: '',
+    image: '',
   });
 
   const shareTwitter = () => {
     const sendText = `${subject.name}님에게 궁금한 점을 물어보러 가요!`; // 전달할 텍스트
-    const sendUrl = "http://localhost:3000/test"; // 전달할 URL
+    const sendUrl = 'http://localhost:3000/test'; // 전달할 URL
 
     //오류가 생겨도 undefined가 표출되지 않도록 처리
     setHelmetData({
-      title: subject.name ? `${subject.name}님의 피드` : "피드",
-      description: subject.name
-        ? `${subject.name}님에게 궁금한 점을 물어보러 가요!`
-        : "궁금한 점을 물어보러 가요!",
-      image: subject.imageSource || "",
+      title: subject.name ? `${subject.name}님의 피드` : '피드',
+      description: subject.name ? `${subject.name}님에게 궁금한 점을 물어보러 가요!` : '궁금한 점을 물어보러 가요!',
+      image: subject.imageSource || '',
     });
 
-    window.open(
-      "https://twitter.com/intent/tweet?text=" + sendText + "&url=" + sendUrl
-    );
+    window.open('https://twitter.com/intent/tweet?text=' + sendText + '&url=' + sendUrl);
   };
 
   return (
@@ -47,11 +43,7 @@ function TwitterShareButton({ subject }) {
       )}
 
       <Tooltip content="트위터로 공유하기">
-        <StyledShareIcon
-          src={TwitterIcon}
-          alt="클립보드 복사 아이콘"
-          onClick={shareTwitter}
-        />
+        <StyledShareIcon src={TwitterIcon} alt="클립보드 복사 아이콘" onClick={shareTwitter} />
       </Tooltip>
     </>
   );
