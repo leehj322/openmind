@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 import HeroImgUrl from '../assets/images/HeroImage.png';
@@ -42,26 +41,7 @@ const StyledHeroImg = styled.img`
 
 function QuestionFeed() {
   const [questionCount, setQuestionCount] = useState();
-  const [questions, setQuestions] = useState([]);
   const { imageSource, name } = sessionStorage.getItem('profile') || { imageSource: profileImg, name: '아초는고양이' };
-
-  useEffect(() => {
-    // URL에서 subjectId 추출
-    const pathname = window.location.pathname; // 현재 페이지의 URL 경로
-    const parts = pathname.split('/'); // 경로를 '/' 기준으로 분리
-    const idFromUrl = parts[2]; // subjectId가 위치한 인덱스에 따라 설정
-
-    if (idFromUrl) {
-      const subjectId = idFromUrl;
-      // subjectId에 따라 엔드포인트 설정
-      const apiUrl = `https://openmind-api.vercel.app/8-4/subjects/${subjectId}/questions/`;
-
-      axios.get(apiUrl).then(response => {
-        setQuestionCount(response.data.count); // count 값을 상태에 설정
-        setQuestions(response.data.results); // results 배열을 상태에 설정
-      });
-    }
-  }, []);
 
   return (
     <StyledQuestionFeedPageContainer>
@@ -70,7 +50,7 @@ function QuestionFeed() {
       </StyledHeroImgWrapper>
       {/* Header, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
       <Header imageSource={imageSource} name={name} />
-      <QuestionCardList questionCount={questionCount} questions={questions} />
+      <QuestionCardList questionCount={questionCount} />
     </StyledQuestionFeedPageContainer>
   );
 }
