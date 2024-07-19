@@ -22,8 +22,22 @@ const rotateDownAnimation = keyframes`
   }
 `;
 
+/**
+ * 파라미터 값이 true 인 경우 180도 회전하고 회전한 상태를 유지함 false인 경우 원래상태로 다시 돌아옴
+ * @param {boolean} shouldRotate180Deg
+ * @returns styled components의 css를 리턴함
+ */
 const rotate180DegAnimation = shouldRotate180Deg => css`
   animation: ${shouldRotate180Deg ? rotateUpAnimation : rotateDownAnimation} 0.2s linear forwards;
+`;
+
+const dropdownPopupAnimation = keyframes`
+  0% {
+    transform: translateY(-100%); 
+  }
+  100% {
+    transform: translateY(0);
+  }
 `;
 
 const DropdownToggler = styled.div`

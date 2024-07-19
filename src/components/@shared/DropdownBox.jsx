@@ -1,6 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import filter from '../../styles/@shared/filter';
 import { useState } from 'react';
+
+const slideDown = keyframes`
+  0% {
+    transform: translateY(-30%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+`;
 
 const StyledDropdownListContainer = styled.div`
   display: ${({ $isVisible }) => ($isVisible ? `inline-flex` : `none`)};
@@ -17,6 +28,8 @@ const StyledDropdownListContainer = styled.div`
   padding: 4px 0;
 
   box-shadow: var(--shadow1pt);
+
+  animation: ${slideDown} 0.8s ease;
 `;
 
 const StyledItemArea = styled.div`
