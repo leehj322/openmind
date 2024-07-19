@@ -40,6 +40,13 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
 
   border-radius: ${({ shape }) => (shape === 'square' ? '8px' : '200px')};
 
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      filter: blur(1px);
+      cursor: not-allowed;
+    `};
+
   &:hover {
     border: 1.5px solid;
     border-color: ${({ btnColor }) => (btnColor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
@@ -52,7 +59,11 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
     background-color: ${({ btnColor }) => (btnColor === 'soft' ? softButtonStyle.pressed : deepButtonStyle.pressed)};
   }
 
-  ${({ style }) => style}
+  ${({ style }) =>
+    style &&
+    css`
+      ${style}
+    `}
 `;
 
 function Button({
@@ -66,7 +77,7 @@ function Button({
   width,
   height,
   type = 'button',
-  style,
+  style = {},
 }) {
   const navigate = useNavigate();
 
