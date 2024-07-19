@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import receivedQuestionIcon from '../assets/images/messages_icon.png';
-import filter from '../styles/@shared/filter';
+import receivedQuestionIcon from '../../assets/images/messages_icon.png';
+import filter from '../../styles/@shared/filter';
 import { useNavigate } from 'react-router-dom';
 
 const StyledQuestionCardContainer = styled.li`
