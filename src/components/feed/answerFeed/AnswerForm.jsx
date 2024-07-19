@@ -11,7 +11,7 @@ import Button from '../../@shared/Button';
  */
 function AnswerForm({ currentAnswer, onSubmitForm, buttonText }) {
   const [inputText, setInputText] = useState(currentAnswer);
-  const [disabled, setDisabled] = useState(false);
+  const [disabled, setDisabled] = useState(true);
 
   const handleInputChange = event => {
     const { value } = event.target;
