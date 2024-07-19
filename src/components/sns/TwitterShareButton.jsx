@@ -18,8 +18,8 @@ function TwitterShareButton({ subject }) {
   });
 
   const shareTwitter = () => {
-    const sendText = `${subject.name}님에게 궁금한 점을 물어보러 가요!`; // 전달할 텍스트
-    const sendUrl = 'http://localhost:5173/post/123'; // 전달할 URL
+    const sendText = `${subject.name}님에게 궁금한 점을 물어보러 가요!`;
+    const sendUrl = 'http://localhost:5173/post/123'; //props로 뒷부분 아이디 받아와서 쓸 수 있도록 제작 예정
 
     //오류가 생겨도 undefined가 표출되지 않도록 처리
     setHelmetData({

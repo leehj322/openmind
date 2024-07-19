@@ -27,6 +27,7 @@ const KakaoShareButton = ({ subject }) => {
           description: `${subject.name}님에게 궁금한 점을 물어보러 가요!`,
           imageUrl: `${subject.imageSource}`,
           link: {
+            //props로 뒷부분 아이디 받아와서 쓸 수 있도록 제작 예정
             mobileWebUrl: 'http://localhost:5173/post/123',
             webUrl: 'http://localhost:5173/post/123',
           },

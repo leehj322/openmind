@@ -8,7 +8,7 @@ const StyledShareIcon = styled.img`
   border-radius: 50%;
 `;
 
-//props로 뒷부분 쿼리 받아와서 쓸 수 있도록 제작 예장
+//props로 뒷부분 아이디 받아와서 쓸 수 있도록 제작 예정
 function ClipboardCopyButton() {
   const handleCopy = () => {
     const urlToCopy = 'http://localhost:5173/post/123'; // 복사할 URL
