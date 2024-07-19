@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import PageNavigator from './PageNavigator';
 import useSubjectsQuery from '../../queries/useSubjectsQuery';
 import useWindowSize from '../../hooks/useWindowSize';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import createCenteredArray from '../../utils/createCenteredArray';
 
 // 다른 반응형과 다른 px값에서 GRID가 바뀌어서 GRID_BREAKPOINT 상수 추가
