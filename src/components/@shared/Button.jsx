@@ -70,7 +70,7 @@ function Button({
   width,
   height,
   type = 'button',
-  style = { style },
+  style = {},
 }) {
   const navigate = useNavigate();
 
