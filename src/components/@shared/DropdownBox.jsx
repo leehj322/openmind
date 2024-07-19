@@ -92,7 +92,7 @@ function DropdownBox({
         const { title, value, url } = item;
         return (
           <StyledItemArea data-value={value} key={value} $isCurrent={currentItem === value} onClick={handleItemClick}>
-            {url && <ItemImg src={url} alt="드롭다운 버튼 이미지" />}
+            {url && <ItemImg src={url} alt={value} />}
             {title}
           </StyledItemArea>
         );
