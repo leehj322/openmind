@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import PageNavigator from './PageNavigator';
+import SubjectCard from './SubjectCard';
 import useSubjectsQuery from '../../queries/useSubjectsQuery';
 import useWindowSize from '../../hooks/useWindowSize';
 import { useState, useEffect } from 'react';
@@ -152,12 +153,8 @@ function SubjectListGrid({ sortBy }) {
     <>
       <SubjectList>
         {results.map(result => (
-          <div key={result.id}>{result.name}</div>
+          <SubjectCard key={result.id} subject={result} />
         ))}
-        {/* 아래 값은 실제로 QuestionCard가 완성되면 사용 */}
-        {/* {results.map(result => (
-            <QuestionCard key={result.id} subject={result} />
-          ))} */}
       </SubjectList>
       <PageNavigator
         currentPage={currentPage}
