@@ -28,16 +28,7 @@ const rotateDownAnimation = keyframes`
  * @returns styled components의 css를 리턴함
  */
 const rotate180DegAnimation = shouldRotate180Deg => css`
-  animation: ${shouldRotate180Deg ? rotateUpAnimation : rotateDownAnimation} 0.2s linear forwards;
-`;
-
-const dropdownPopupAnimation = keyframes`
-  0% {
-    transform: translateY(-100%); 
-  }
-  100% {
-    transform: translateY(0);
-  }
+  animation: ${shouldRotate180Deg ? rotateUpAnimation : rotateDownAnimation} 0.4s linear forwards;
 `;
 
 const DropdownToggler = styled.div`
