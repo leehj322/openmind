@@ -11,7 +11,7 @@ const StyledShareIcon = styled.img`
 //props로 뒷부분 쿼리 받아와서 쓸 수 있도록 제작 예장
 function ClipboardCopyButton() {
   const handleCopy = () => {
-    const urlToCopy = 'http://localhost:3000/test'; // 복사할 URL
+    const urlToCopy = 'http://localhost:5173/post/123'; // 복사할 URL
 
     // 임시로 textarea 엘리먼트를 생성하여 클립보드에 복사할 URL을 설정
     const dummy = document.createElement('textarea');

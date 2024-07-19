@@ -27,16 +27,16 @@ const KakaoShareButton = ({ subject }) => {
           description: `${subject.name}님에게 궁금한 점을 물어보러 가요!`,
           imageUrl: `${subject.imageSource}`,
           link: {
-            mobileWebUrl: 'http://localhost:3000/test',
-            webUrl: 'http://localhost:3000/test',
+            mobileWebUrl: 'http://localhost:5173/post/123',
+            webUrl: 'http://localhost:5173/post/123',
           },
         },
         buttons: [
           {
             title: '웹으로 보기', //버튼에 표시될 내용
             link: {
-              mobileWebUrl: 'http://localhost:3000/test',
-              webUrl: 'http://localhost:3000/test',
+              mobileWebUrl: 'http://localhost:5173/post/123',
+              webUrl: 'http://localhost:5173/post/123',
             },
           },
         ],

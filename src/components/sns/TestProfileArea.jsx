@@ -49,7 +49,7 @@ const subject = {
   createdAt: '2023-10-23T05:08:05.825279Z',
 };
 
-function TestPage() {
+function TestProfileArea() {
   return (
     <div>
       <>
@@ -68,4 +68,4 @@ function TestPage() {
   );
 }
 
-export default TestPage;
+export default TestProfileArea;
