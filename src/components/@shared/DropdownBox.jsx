@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components';
+import styled, { keyframes, css } from 'styled-components';
 import filter from '../../styles/@shared/filter';
 import { useState } from 'react';
 
@@ -11,6 +11,10 @@ const slideDown = keyframes`
     transform: translateY(0);
     opacity: 1;
   }
+`;
+
+const dropdownSlideDownAnimation = css`
+  animation: ${slideDown} 0.8s ease;
 `;
 
 const StyledDropdownListContainer = styled.div`
@@ -29,7 +33,7 @@ const StyledDropdownListContainer = styled.div`
 
   box-shadow: var(--shadow1pt);
 
-  animation: ${slideDown} 0.8s ease;
+  ${({ $isAnimationEnabled }) => ($isAnimationEnabled ? dropdownSlideDownAnimation : '')};
 `;
 
 const StyledItemArea = styled.div`
@@ -78,6 +82,7 @@ const ItemImg = styled.img`
  * dropdown trigger를 통해서 isDropdownVisible을 toggle시에 꺼졌다 켜졌다 하는 dropdown list box
  * @param {boolean} isDropdownVisible dropdown box 끄기(false), 켜기(true)
  * @param {boolean} isCurrentStateHighlight 현재 값 파란색으로 하이라이트 / 기본값 true
+ * @param {boolean} isAnimationEnabled 애니메이션 활성화 할지(true) 안할지(false) 결정 / 기본값 true
  * @param {number} minWidth min-width px값 (ex. 80)
  * @param {number} topPosition top position px값 (ex. 5) / 기본값 100%
  * @param {number} leftPosition left position px값 (ex. 5) / 기본값 0px
@@ -87,6 +92,7 @@ const ItemImg = styled.img`
 function DropdownBox({
   isDropdownVisible,
   isCurrentStateHighlight = true,
+  isAnimationEnabled = true,
   minWidth,
   topPosition = 0,
   leftPosition = 0,
@@ -106,6 +112,7 @@ function DropdownBox({
   return (
     <StyledDropdownListContainer
       $isVisible={isDropdownVisible}
+      $isAnimationEnabled={isAnimationEnabled}
       $minWidth={minWidth}
       $top={topPosition}
       $left={leftPosition}>
