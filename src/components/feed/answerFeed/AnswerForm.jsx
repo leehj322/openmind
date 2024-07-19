@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+import Button from '../../@shared/Button';
 
 /**
  * 답변 생성, 수정 시 사용할 입력 폼
@@ -22,18 +23,9 @@ function AnswerForm({ currentAnswer, onSubmitForm, buttonText }) {
   return (
     <StyledAnswerForm onSubmit={e => onSubmitForm(e, inputText)}>
       <textarea placeholder={'답변을 입력해주세요'} value={inputText} onChange={handleInputChange} />
-      {/* TODO: 리나님 공통 버튼 컴포넌트 만들어지면 갈아끼우기 */}
-      <button
-        disabled={disabled}
-        style={{
-          height: '46px',
-          width: '100%',
-          backgroundColor: 'var(--brown40)',
-          color: 'white',
-          borderRadius: '8px',
-        }}>
+      <Button width={'100%'} height={'46px'} btnColor={'var(--brown40)'} disabled={disabled} shape={'square'}>
         {buttonText}
-      </button>
+      </Button>
     </StyledAnswerForm>
   );
 }
@@ -56,6 +48,12 @@ const StyledAnswerForm = styled.form`
 
     &::placeholder {
       color: var(--gray40);
+    }
+
+    &:focus {
+      outline: 1px solid var(--brown40);
+      background-color: var(--brown10);
+      color: var(--gray60);
     }
   }
 `;
