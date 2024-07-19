@@ -22,8 +22,8 @@ const rotateDownAnimation = keyframes`
   }
 `;
 
-const rotateAnimation = $isDropdownVisible => css`
-  animation: ${$isDropdownVisible ? rotateUpAnimation : rotateDownAnimation} 0.2s linear forwards;
+const rotate180DegAnimation = shouldRotate180Deg => css`
+  animation: ${shouldRotate180Deg ? rotateUpAnimation : rotateDownAnimation} 0.2s linear forwards;
 `;
 
 const DropdownToggler = styled.div`
@@ -46,7 +46,7 @@ const DropdownToggler = styled.div`
     width: 14px;
     height: 14px;
     filter: ${({ $isDropdownVisible }) => ($isDropdownVisible ? filter.gray60 : '')};
-    ${({ $isDropdownVisible }) => rotateAnimation($isDropdownVisible)}
+    ${({ $isDropdownVisible }) => rotate180DegAnimation($isDropdownVisible)}
   }
 
   cursor: pointer;
@@ -64,9 +64,11 @@ function SubjectSortDropdown({ sortBy, onSortChoice }) {
     toggleIsVisible();
   };
 
+  const currentItemTitle = ITEM_LIST.find(item => item.value === sortBy).title;
+
   return (
     <DropdownToggler onClick={handleTogglerClick} $isDropdownVisible={isVisible}>
-      {ITEM_LIST.find(item => item.value === sortBy).title}
+      {currentItemTitle}
       <img src={arrowDownImgUrl} alt="드롭다운화살표" />
       <DropdownBox
         isDropdownVisible={isVisible}
