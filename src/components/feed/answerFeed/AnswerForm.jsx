@@ -11,6 +11,8 @@ import Button from '../../@shared/Button';
  */
 function AnswerForm({ currentAnswer, onSubmitForm, buttonText }) {
   const [inputText, setInputText] = useState(currentAnswer);
+  // 기본적으로 disabled는 true 상태기 때문에 수정 시 별도의 추가 입력이 없다면
+  // 이전에 작성한 내용이 있다 하더라도 여전히 disabled가 유지된다.
   const [disabled, setDisabled] = useState(true);
 
   const handleInputChange = event => {
@@ -23,7 +25,13 @@ function AnswerForm({ currentAnswer, onSubmitForm, buttonText }) {
   return (
     <StyledAnswerForm onSubmit={e => onSubmitForm(e, inputText)}>
       <textarea placeholder={'답변을 입력해주세요'} value={inputText} onChange={handleInputChange} />
-      <Button width={'100%'} height={'46px'} btnColor={'var(--brown40)'} disabled={disabled} shape={'square'}>
+      <Button
+        type={'submit'}
+        width={'100%'}
+        height={'46px'}
+        btnColor={'var(--brown40)'}
+        disabled={disabled}
+        shape={'square'}>
         {buttonText}
       </Button>
     </StyledAnswerForm>

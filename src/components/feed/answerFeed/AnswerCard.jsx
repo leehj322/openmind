@@ -44,7 +44,13 @@ function AnswerCard({
   const { mutate: updateAnswerMutate } = useUpdateAnswerMutation();
 
   const handleEditButtonClick = () => {
-    setIsEditing(true);
+    if (isRejected) {
+      alert('이미 거절한 답변입니다.');
+    } else if (!currentAnswer) {
+      alert('아직 생성된 답변이 없습니다.');
+    } else {
+      setIsEditing(true);
+    }
   };
 
   const handleRejectButtonClick = () => {
@@ -62,7 +68,6 @@ function AnswerCard({
 
   const handleCreateFormSubmit = (event, inputText) => {
     event.preventDefault();
-
     setCurrentAnswer(inputText);
     createAnswerMutate(
       { questionId: questionId, content: inputText },

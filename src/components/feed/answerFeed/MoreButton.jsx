@@ -38,6 +38,7 @@ function MoreButton({ onEditButtonClick, onRejectButtonClick }) {
         topPosition={2.5}
         leftPosition={-4}
         itemList={DROPDOWN_ITEM_LIST}
+        isCurrentStateHighlight={false}
         onItemClick={handleDropdownItemClick}
       />
     </StyledMoreButton>
