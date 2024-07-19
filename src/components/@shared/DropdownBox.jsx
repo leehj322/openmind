@@ -69,12 +69,13 @@ const ItemImg = styled.img`
 
 /**
  * dropdown trigger를 통해서 isDropdownVisible을 toggle시에 꺼졌다 켜졌다 하는 dropdown list box
- * @param {boolean} isDropdownVisible : dropdown box 끄기(false), 켜기(true)
- * @param {number} minWidth : min-width px값 (ex. 80)
- * @param {number} topPosition : top position px값 (ex. 5) / 기본값 100%
- * @param {number} leftPosition : left position px값 (ex. 5) / 기본값 0px
- * @param {object} itemList : [{title: '이름순', value: 'name' url: imgUrl}, {title: '최신순', value: 'recent', img: imgUrl} ...]
- * @param {function} onItemClick : 해당 item을 click 했을때 value값을 파라미터로 하는 onItemClick함수 실행
+ * @param {boolean} isDropdownVisible dropdown box 끄기(false), 켜기(true)
+ * @param {boolean} isCurrentStateHighlight 현재 값 파란색으로 하이라이트 / 기본값 true
+ * @param {number} minWidth min-width px값 (ex. 80)
+ * @param {number} topPosition top position px값 (ex. 5) / 기본값 100%
+ * @param {number} leftPosition left position px값 (ex. 5) / 기본값 0px
+ * @param {object} itemList map 돌릴 값 / ex. [{title: '이름순', value: 'name' url: imgUrl}, {title: '최신순', value: 'recent', img: imgUrl} ...]
+ * @param {function} onItemClick 해당 item을 click 했을때 실행할 value값을 파라미터로 하는 함수
  */
 function DropdownBox({
   isDropdownVisible,
