@@ -13,7 +13,7 @@ import styled, { css } from 'styled-components';
  * false : 활성화 / true : 비활성화
  * @param {'square' | 'pill'} [props.shape='square'] - 버튼 모양
  * @param {'soft' | 'deep'} [props.btnColor='soft'] - 버튼 색상 테마
- * @param {object} [props.style={}] - 추가적인 스타일 객체
+ * @param {object} [props.styles={}] - 추가적인 스타일 객체
  * 반응형 디자인 시 font-size나 다른 값 변경 시 이 부분에 추가해주시면 변경돼요
  * @param {string} [props.width='161px'] - 버튼 너비
  * @param {string} [props.height='46px'] - 버튼 높이
@@ -52,7 +52,11 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
     background-color: ${({ btnColor }) => (btnColor === 'soft' ? softButtonStyle.pressed : deepButtonStyle.pressed)};
   }
 
-  ${({ style }) => style}
+  ${({ styles }) =>
+    styles &&
+    css`
+      ${styles}
+    `}
 `;
 
 function Button({
@@ -66,7 +70,7 @@ function Button({
   width,
   height,
   type = 'button',
-  style,
+  styles = {},
 }) {
   const navigate = useNavigate();
 
@@ -90,7 +94,7 @@ function Button({
       disabled={disabled}
       shape={shape}
       type={type}
-      style={style}>
+      styles={styles}>
       {children}
       {imgSrc && <ArrowImg src={imgSrc} alt="화살표" />}
     </StyledButton>
