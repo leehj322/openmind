@@ -1,9 +1,9 @@
 export const EXPLODE_PROPS = {
-  force: 0.4,
-  duration: 3000,
+  force: 0.6,
+  duration: 3500,
   particleCount: 200,
   height: 1600,
-  width: 1600,
+  width: 2000,
 };
 
 export const LIMIT_DISLIKE_COUNT = 1;
