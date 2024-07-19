@@ -45,32 +45,7 @@ function NavNumBtn({ children, isCurrentPage, onNavBtnClick }) {
  * @param {string} arrowBtnVisible 왼쪽, 오른쪽 화살표 보이기 안보이기 옵션 (both: 둘 다 보임, left: 왼쪽 보임, right: 오른쪽 보임, none: 둘다 안보임)
  */
 function PageNavigator({ currentPage, pageNumList, onNavBtnClick, arrowBtnVisible }) {
-  const [isLeftArrowVisible, setIsLeftArrowVisible] = useState(true);
-  const [isRightArrowVisible, setIsRightArrowVisible] = useState(true);
-
-  /**
-   * @param {boolean} isLeftArrowVisible 왼쪽 화살표 보이기
-   * @param {boolean} isRightArrowVisible 오른쪽 화살표 보이기
-   */
-  const setArrowVisibleOption = (isLeftArrowVisible, isRightArrowVisible) => {
-    setIsLeftArrowVisible(isLeftArrowVisible);
-    setIsRightArrowVisible(isRightArrowVisible);
-  };
-
-  useEffect(() => {
-    if (arrowBtnVisible === 'both') {
-      setArrowVisibleOption(true, true);
-    } else if (arrowBtnVisible === 'left') {
-      setArrowVisibleOption(true, false);
-    } else if (arrowBtnVisible === 'right') {
-      setArrowVisibleOption(false, true);
-    } else if (arrowBtnVisible === 'none') {
-      setArrowVisibleOption(false, false);
-    } else {
-      throw new Error('arrowBtnVisible에 올바른 값을 입력하세요.');
-    }
-  }, [arrowBtnVisible]);
-
+  const { isLeftArrowVisible, isRightArrowVisible } = arrowBtnVisible;
   return (
     <StyledPageNavigatorArea>
       <NavArrowBtn onNavBtnClick={onNavBtnClick} isVisible={isLeftArrowVisible}>

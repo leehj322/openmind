@@ -26,9 +26,6 @@ const SubjectList = styled.ol`
 function SubjectListGrid({ sortBy }) {
   const windowSize = useWindowSize();
   const [currentPage, setCurrentPage] = useState(1);
-  const [pageNumList, setPageNumList] = useState([1, 2, 3, 4, 5]);
-  // 어떤 화살표 버튼이 보일지 설정 (both, left, right, none);
-  const [arrowBtnVisible, setArrowBtnVisible] = useState('right');
 
   // 현재 페이지의 grid 형태에 따라 limit, offset값 수정 후 GET요청 전송
   const limit = windowSize.width > GRID_BREAKPOINT.tablet ? NUM_OF_SUBJECTS.pc : NUM_OF_SUBJECTS.other;
@@ -38,28 +35,28 @@ function SubjectListGrid({ sortBy }) {
 
   // 필요한 전체 페이지 수 (totalPageCount) 값 계산
   const totalPageCount = Math.ceil(count / limit);
-  useEffect(() => {
-    // totalPageCount값이 5페이지 미만이면 기존 pageNumList 값인 [1, 2, 3, 4, 5]에서 필요한 만큼만 slice
-    if (totalPageCount < 5) {
-      setPageNumList(prevPageNumList => prevPageNumList.slice(0, totalPageCount));
-    }
-  }, [totalPageCount]);
 
-  // 화살표 보이기 상태 제어
-  useEffect(() => {
+  const defaultPageNumList = [1, 2, 3, 4, 5];
+  const initialPageNumList = totalPageCount < 5 ? defaultPageNumList.slice(0, totalPageCount) : defaultPageNumList;
+
+  const [pageNumList, setPageNumList] = useState(initialPageNumList);
+
+  // 화살표 버튼 보이기 설정
+  const controlArrowVisibleOption = () => {
     if (totalPageCount <= 1) {
       // 전체 페이지가 1페이지만 있거나 없는 경우 화살표가 양쪽 다 안보임
-      setArrowBtnVisible('none');
+      return { isLeftArrowVisible: false, isRightArrowVisible: false };
     } else if (currentPage === 1) {
       // 현재 페이지가 첫 페이지인 경우 왼쪽 화살표 안보임
-      setArrowBtnVisible('right');
+      return { isLeftArrowVisible: false, isRightArrowVisible: true };
     } else if (currentPage === totalPageCount) {
       // 현재 페이지가 마지막 페이지인 경우 오른쪽 화살표 안보임
-      setArrowBtnVisible('left');
+      return { isLeftArrowVisible: true, isRightArrowVisible: false };
     } else {
-      setArrowBtnVisible('both');
+      // 이외는 둘 다 보임
+      return { isLeftArrowVisible: true, isRightArrowVisible: true };
     }
-  }, [totalPageCount, pageNumList, currentPage]);
+  };
 
   /**
    * 페이지 네이션 네비게이터의 버튼을 클릭했을때의 동작 핸들러
@@ -93,8 +90,8 @@ function SubjectListGrid({ sortBy }) {
         // 1,2 page인 경우 [1, 2, 3, 4, 5]
         // 끝, 끝-1 page인 경우 [..., 끝-1, 끝]
         // 이외의 경우 선택된 숫자를 중앙으로 하는 array
-        const startBoundaryPage = [1, 2, 3];
-        const endBoundaryPage = [totalPageCount - 2, totalPageCount - 1, totalPageCount];
+        const startBoundaryPage = [1, 2];
+        const endBoundaryPage = [totalPageCount - 1, totalPageCount];
         const isStartBoundaryPage = startBoundaryPage.includes(nextCurrentPage);
         const isEndBoundaryPage = endBoundaryPage.includes(nextCurrentPage);
 
@@ -163,7 +160,7 @@ function SubjectListGrid({ sortBy }) {
         currentPage={currentPage}
         pageNumList={pageNumList}
         onNavBtnClick={handleNavBtnClick}
-        arrowBtnVisible={arrowBtnVisible}
+        arrowBtnVisible={controlArrowVisibleOption()}
       />
     </>
   );
