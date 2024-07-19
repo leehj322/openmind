@@ -6,8 +6,8 @@ const StyledDropdownListContainer = styled.div`
   display: ${({ $isVisible }) => ($isVisible ? `inline-flex` : `none`)};
   flex-direction: column;
   position: absolute;
-  top: ${({ $top }) => $top}em;
-  left: ${({ $left }) => $left}em;
+  top: calc(100% + ${({ $top }) => $top}px);
+  left: ${({ $left }) => $left}px;
 
   min-width: ${({ $minWidth }) => $minWidth}px;
 
@@ -15,6 +15,8 @@ const StyledDropdownListContainer = styled.div`
   border: 1px solid var(--gray30);
   border-radius: 8px;
   padding: 4px 0;
+
+  box-shadow: var(--shadow1pt);
 `;
 
 const StyledItemArea = styled.div`
@@ -56,17 +58,27 @@ const ItemImg = styled.img`
  * dropdown trigger를 통해서 isDropdownVisible을 toggle시에 꺼졌다 켜졌다 하는 dropdown list box
  * @param {boolean} isDropdownVisible : dropdown box 끄기(false), 켜기(true)
  * @param {number} minWidth : min-width px값 (ex. 80)
- * @param {number} topPosition : top position em값 (ex. 5) / 기본값 0em
- * @param {number} leftPosition : left position em값 (ex. 5) / 기본값 0em
+ * @param {number} topPosition : top position px값 (ex. 5) / 기본값 100%
+ * @param {number} leftPosition : left position px값 (ex. 5) / 기본값 0px
  * @param {object} itemList : [{title: '이름순', value: 'name' url: imgUrl}, {title: '최신순', value: 'recent', img: imgUrl} ...]
  * @param {function} onItemClick : 해당 item을 click 했을때 value값을 파라미터로 하는 onItemClick함수 실행
  */
-function DropdownBox({ isDropdownVisible, minWidth, topPosition = 0, leftPosition = 0, itemList, onItemClick }) {
+function DropdownBox({
+  isDropdownVisible,
+  isCurrentStateHighlight = true,
+  minWidth,
+  topPosition = 0,
+  leftPosition = 0,
+  itemList,
+  onItemClick,
+}) {
   const [currentItem, setCurrentItem] = useState(null);
 
   const handleItemClick = event => {
     const { value } = event.currentTarget.dataset;
-    setCurrentItem(value);
+    if (isCurrentStateHighlight) {
+      setCurrentItem(value);
+    }
     onItemClick(value);
   };
 
@@ -80,7 +92,7 @@ function DropdownBox({ isDropdownVisible, minWidth, topPosition = 0, leftPositio
         const { title, value, url } = item;
         return (
           <StyledItemArea data-value={value} key={value} $isCurrent={currentItem === value} onClick={handleItemClick}>
-            {url && <ItemImg src={url} />}
+            {url && <ItemImg src={url} alt="드롭다운 버튼 이미지" />}
             {title}
           </StyledItemArea>
         );

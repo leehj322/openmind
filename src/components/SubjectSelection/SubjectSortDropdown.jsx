@@ -46,8 +46,8 @@ function SubjectSortDropdown({ sortBy, onSortChoice }) {
       <DropdownBox
         isDropdownVisible={isVisible}
         minWidth={80}
-        topPosition={2.7}
-        leftPosition={-0.1}
+        topPosition={4}
+        leftPosition={-2}
         itemList={ITEM_LIST}
         onItemClick={onSortChoice}
       />
