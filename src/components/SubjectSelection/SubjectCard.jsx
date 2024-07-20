@@ -17,6 +17,7 @@ const waveAnimation = keyframes`
 
 const StyledQuestionCardContainer = styled.li`
   width: 100%;
+  min-width: 112px;
   height: 187px;
   border-radius: 16px;
   border: 1px solid var(--gray40);
