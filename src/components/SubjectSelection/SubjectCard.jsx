@@ -7,18 +7,15 @@ const waveAnimation = keyframes`
   0% {
     transform: translateY(0%);
   }
-
   50% {
     transform: translateY(-5%);
   }
-
   100% {
     transform: translateY(0%);
   }
 `;
 
 const StyledQuestionCardContainer = styled.li`
-  min-width: 186px;
   width: 100%;
   height: 187px;
   border-radius: 16px;
@@ -53,6 +50,9 @@ const StyledUserName = styled.h1`
   font-weight: 400;
   line-height: 25px;
   margin: 12px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @media (max-width: 767px) {
     font-size: 18px;
   }
