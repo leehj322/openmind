@@ -3,7 +3,8 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import messageIcon from '../../../assets/images/message-icon.png';
 import SendQuestionBtn from '../../@shared/Button';
-import theme from '../../../styles/@shared/theme';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 /**
  * @param {object} props
@@ -24,6 +25,27 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
   // 텍스트 영역의 값이 채워질 때 호출
   const handleTextAreaChange = event => {
     setTextAreaValue(event.target.value);
+  };
+
+  const navigate = useNavigate();
+
+  const handleAxiosRequest = () => {
+    const request = {
+      subject_id: '7519', //페이지에서 받아야할 사용자의 고유 키 값
+      content: textAreaValue,
+      team: '8-4',
+    };
+    //7519 : 페이지에서 받아야 할 사용자 고유 키 값
+    axios
+      .post('https://openmind-api.vercel.app/8-4/subjects/7519/questions/', request)
+      .then(response => {
+        console.log('handleAxiosRequest', response);
+        onRequestClose();
+        //모달 창 꺼진 후 개별 피드 페이지 불러오기
+        navigate('/post/7519'); //7519 : 페이지에서 받아야 할 사용자 고유 키 값
+      })
+      .catch(error => console.log('request error', error));
+    console.log('handleAxiosRequest : ', request);
   };
 
   return (
@@ -56,7 +78,7 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
         <StyledBtnContainer>
           <SendQuestionBtn
             type="submit"
-            pagePath="/post/123"
+            pagePath={handleAxiosRequest}
             width="100%"
             height="100%"
             disabled={!textAreaValue.trim()}

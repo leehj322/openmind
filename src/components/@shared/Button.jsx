@@ -86,7 +86,7 @@ function Button({
       if (onClick) {
         onClick();
       }
-      navigate(pagePath);
+      navigate();
     }
   };
 
@@ -97,7 +97,7 @@ function Button({
       width={width}
       height={height}
       btnColor={btnColorDefault}
-      onClick={handleClick}
+      onClick={pagePath}
       disabled={disabled}
       shape={shape}
       type={type}
