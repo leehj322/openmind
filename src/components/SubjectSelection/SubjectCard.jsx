@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 import receivedQuestionIcon from '../../assets/images/messages_icon.png';
-import filter from '../../styles/@shared/filter';
 import { useNavigate } from 'react-router-dom';
 
 const waveAnimation = keyframes`
@@ -20,9 +19,9 @@ const StyledQuestionCardContainer = styled.li`
   min-width: 112px;
   height: 187px;
   border-radius: 16px;
-  border: 1px solid var(--gray40);
+  border: 1px solid ${props => props.theme.gray40};
   padding: 20px;
-  background-color: var(--gray10);
+  background-color: ${props => props.theme.gray10};
   transition: transform 1s ease-in-out;
 
   &:hover {
@@ -78,7 +77,7 @@ const StyledReceivedQuestionIcon = styled.img`
   width: 18px;
   height: 18px;
   margin-right: 4px;
-  filter: ${filter.gray50};
+  filter: ${props => props.theme.gray50Filter};
   @media (max-width: 767px) {
     width: 16px;
     height: 16px;
@@ -89,7 +88,7 @@ const StyledReceivedQuestionText = styled.p`
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  color: var(--gray40);
+  color: ${props => props.theme.gray40};
   @media (max-width: 767px) {
     font-size: 14px;
   }
