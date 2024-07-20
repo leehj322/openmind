@@ -3,6 +3,7 @@ import Button from '../components/@shared/Button';
 import SoftArrow from '../assets/images/softarrow.png';
 import DeepArrow from '../assets/images/deeparrow.png';
 import React, { useState } from 'react';
+import ThemeToggler from '../components/@shared/ThemeToggler';
 
 const ButtonContainer = styled.div`
   padding: 20px;
@@ -15,6 +16,7 @@ const ButtonContainer = styled.div`
 function Home() {
   return (
     <ButtonContainer>
+      <ThemeToggler />
       <Button pagePath="/post/123" width="504px" height="100px" imgSrc={SoftArrow}>
         질문하러 가기
       </Button>
