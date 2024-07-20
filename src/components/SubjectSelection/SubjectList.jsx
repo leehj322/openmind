@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import SubjectListGrid from './SubjectListGrid';
-import { Suspense } from 'react';
+import SubjectListGridSkeleton from './SubjectListGridSkeleton';
+import { Suspense, lazy } from 'react';
 
 const SubjectListArea = styled.section`
   margin: 0 auto 40px;
@@ -17,10 +17,12 @@ const SubjectListArea = styled.section`
   }
 `;
 
+const SubjectListGrid = lazy(() => import('./SubjectListGrid'));
+
 function SubjectList({ sortBy }) {
   return (
     <SubjectListArea>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<SubjectListGridSkeleton />}>
         <SubjectListGrid sortBy={sortBy} />
       </Suspense>
     </SubjectListArea>
