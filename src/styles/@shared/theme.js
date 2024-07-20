@@ -1,5 +1,5 @@
 const light = {
-  bgColor: '#ffffff',
+  bgColor: 'var(--gray20)',
 
   gray10: 'var(--gray10)', //흰색 '#ffffff'
   gray20: 'var(--gray20)',

@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 import { reset } from 'styled-reset';
+import { getThemeColor } from '../../utils/getThemeColor';
 
 const GlobalStyle = createGlobalStyle`
   ${reset}
@@ -17,8 +18,8 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    background-color: ${getThemeColor('bgColor')};
   }
 
   button {
