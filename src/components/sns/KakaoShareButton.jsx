@@ -49,7 +49,7 @@ const KakaoShareButton = ({ subject }) => {
 
   return (
     <Tooltip content="카카오톡으로 공유하기">
-      <StyledShareIcon src={kakaoIcon} alt="클립보드 복사 아이콘" onClick={shareToKakao} />
+      <StyledShareIcon src={kakaoIcon} alt="카카오톡 아이콘" onClick={shareToKakao} />
     </Tooltip>
   );
 };
