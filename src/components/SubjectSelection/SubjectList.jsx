@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import SubjectListGrid from './SubjectListGrid';
-import { Suspense } from 'react';
+import SubjectListGridSkeleton from './SubjectListGridSkeleton';
+import { Suspense, lazy, useState, useEffect } from 'react';
 
 const SubjectListArea = styled.section`
   margin: 0 auto 40px;
@@ -17,10 +17,34 @@ const SubjectListArea = styled.section`
   }
 `;
 
+const SubjectListGrid = lazy(() => import('./SubjectListGrid'));
+
+/**
+ * 로딩 시간이 WAIT_TIME(단위: ms) 이상인 경우 skeleton UI를 보여주고 아닌 경우에 보여주지 않는 컴포넌트
+ * @returns null 또는 Skeleton UI를 반환합니다.
+ */
+function DeferredComponent() {
+  const [isDeferred, setIsDeferred] = useState(false);
+  const WAIT_TIME = 200;
+
+  useEffect(() => {
+    const timeOut = setTimeout(() => {
+      setIsDeferred(true);
+    }, WAIT_TIME);
+    return () => clearInterval(timeOut);
+  }, []);
+
+  if (!isDeferred) {
+    return null;
+  }
+
+  return <SubjectListGridSkeleton />;
+}
+
 function SubjectList({ sortBy }) {
   return (
     <SubjectListArea>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<DeferredComponent />}>
         <SubjectListGrid sortBy={sortBy} />
       </Suspense>
     </SubjectListArea>
