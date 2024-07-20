@@ -1,5 +1,6 @@
 import { styled } from 'styled-components';
 import getElapsedPeriod from '../../utils/getElapsedPeriod';
+import { getThemeColor } from '../../utils/getThemeColor';
 
 /**
  * 질문 내용과 생성 시간으로부터 지난 기간을 보여준다
@@ -25,7 +26,7 @@ const StyledQuestionTitleArea = styled.section`
     font-size: 14px;
     font-weight: 500;
     line-height: 18px;
-    color: var(--gray40);
+    color: ${getThemeColor('gray40')};
   }
 
   & h3 {
@@ -33,6 +34,6 @@ const StyledQuestionTitleArea = styled.section`
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;
-    color: var(--gray60);
+    color: ${getThemeColor('gray60')};
   }
 `;

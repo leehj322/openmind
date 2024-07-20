@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import profileImg from '../../assets/images/samples/profile-sample.png';
 import getElapsedPeriod from '../../utils/getElapsedPeriod';
 import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
+import { getThemeColor } from '../../utils/getThemeColor';
 
 /**
  * 답변자의 프로필과 질문 시점으로부터 지난 기간을 보여주고, 답변 내용을 담을 템플릿
@@ -64,7 +65,7 @@ const StyledAnswerArea = styled.section`
       font-size: 14px;
       font-weight: 500;
       line-height: 18px;
-      color: var(--gray40);
+      color: ${getThemeColor('gray40')};
     }
   }
 `;

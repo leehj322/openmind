@@ -1,6 +1,8 @@
 const light = {
   bgColor: 'var(--gray20)',
 
+  defaultFont: 'var(--gray60)',
+
   gray10: 'var(--gray10)', //흰색 '#ffffff'
   gray20: 'var(--gray20)',
   gray30: 'var(--gray30)',
@@ -27,8 +29,9 @@ const light = {
 };
 
 const dark = {
-  // bgColor: '#343737', //기존 다크 컬러
-  bgColor: '#0d1116', // 깃허브 다크모드 컬러
+  bgColor: '#343737',
+
+  defaultFont: 'var(--gray10)',
 
   gray10: '#333333',
   gray20: '#999999',

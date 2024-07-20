@@ -9,7 +9,7 @@ import theme from './styles/@shared/theme';
 function App() {
   const queryClient = new QueryClient();
 
-  const mode = 'light';
+  const mode = 'dark';
 
   return (
     <QueryClientProvider client={queryClient}>

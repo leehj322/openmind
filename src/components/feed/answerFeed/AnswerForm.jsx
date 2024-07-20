@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../@shared/Button';
+import { getThemeColor } from '../../../utils/getThemeColor';
 
 /**
  * 답변 생성, 수정 시 사용할 입력 폼
@@ -25,13 +26,7 @@ function AnswerForm({ currentAnswer, onSubmitForm, buttonText }) {
   return (
     <StyledAnswerForm onSubmit={e => onSubmitForm(e, inputText)}>
       <textarea placeholder={'답변을 입력해주세요'} value={inputText} onChange={handleInputChange} />
-      <Button
-        type={'submit'}
-        width={'100%'}
-        height={'46px'}
-        btnColor={'var(--brown40)'}
-        disabled={disabled}
-        shape={'square'}>
+      <Button type={'submit'} width={'100%'} height={'46px'} btnColor={'deep'} disabled={disabled} shape={'square'}>
         {buttonText}
       </Button>
     </StyledAnswerForm>
@@ -45,8 +40,9 @@ const StyledAnswerForm = styled.form`
     height: 186px;
     max-height: 186px;
     border-radius: 8px;
+
     padding: 16px;
-    background-color: var(--gray20);
+    background-color: ${getThemeColor('gray20')};
 
     font-size: 16px;
     font-weight: 400;
@@ -55,12 +51,12 @@ const StyledAnswerForm = styled.form`
     margin-bottom: 8px;
 
     &::placeholder {
-      color: var(--gray40);
+      color: ${getThemeColor('gray40')};
     }
 
     &:focus {
-      outline: 1px solid var(--brown40);
-      background-color: var(--brown10);
+      outline: 1px solid ${getThemeColor('brown40')};
+      background-color: ${getThemeColor('brown10')};
       color: var(--gray60);
     }
   }
