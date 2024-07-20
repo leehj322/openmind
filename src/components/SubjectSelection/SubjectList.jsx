@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import PageNavigator from './PageNavigator';
 import SubjectListGrid from './SubjectListGrid';
 import { Suspense } from 'react';
 
@@ -24,7 +23,6 @@ function SubjectList({ sortBy }) {
       <Suspense fallback={<div>Loading...</div>}>
         <SubjectListGrid sortBy={sortBy} />
       </Suspense>
-      <PageNavigator />
     </SubjectListArea>
   );
 }

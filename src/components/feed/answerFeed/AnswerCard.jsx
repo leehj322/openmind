@@ -1,78 +1,117 @@
 import styled from 'styled-components';
-import { StyledFeedCardContainer } from '../../../styles/feed/feedCardStyles';
+import { StyledAnswerText, StyledFeedCardContainer } from '../../../styles/feed/feedCardStyles';
 import AnswerStatus from '../AnswerStatus';
 import MoreButton from './MoreButton';
 import QuestionTitle from '../QuestionTitle';
-import Answer from '../Answer';
+import AnswerTemplate from '../AnswerTemplate';
 import Reaction from '../Reaction';
 import { useState } from 'react';
+import AnswerForm from './AnswerForm';
+import useCreateAnswerMutation from '../../../queries/useCreateAnswerMutation';
+import useUpdateAnswerMutation from '../../../queries/useUpdateAnswerMutation';
+import { LIMIT_DISLIKE_COUNT } from '../../../constants/feedCard';
 
 /**
- * 질문 피드 페이지에서의 질문 카드
+ * 답변 피드 페이지에서의 답변 카드
  * @param props
- * @param {string} props.qustionId 질문 아이디
- * @param {string} props.qustion 질문 내용
+ * @param {string} props.questionId 질문 id
+ * @param {string} props.questionContent 질문 내용
  * @param {integer} props.likeCount 좋아요 수
  * @param {integer} props.dislikeCount 싫어요 수
- * @param {string} props.questionCreateAt 질문 생성 시간
- * @param {string} props.answer 답변 내용
- * @param {string} props.answerId 답변 아이디
- * @param {string} props.isRejected 답변 거절 유무
- * @param {string} props.answerCreatedAt 답변 생성 시간
+ * @param {string} props.questionCreatedAt 질문 생성 시간
+ * @param {object || null} props.answer 답변 객체
  */
 function AnswerCard({
   // TODO: 상위 컴포넌트에서 데이터를 넣어줄 수 있게 되면 테스트용 기본값 삭제 예정
-  qustionId = '1234',
-  qustion = '좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?',
+  questionId,
+  questionContent = '좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?',
   likeCount = 0,
   dislikeCount = 0,
-  questionCreateAt = '2024-07-05',
-  answerId = '1111',
-  answer = `그들을 불러 귀는 이상의 오직 피고, 가슴이 이상, 못할 봄바람이다. 찾아다녀도, 전인 방황하였으며, 대한 바이며,
-            이것이야말로 가치를 청춘의 따뜻한 그리하였는가? 몸이 열락의 청춘의 때문이다. 천고에 피어나는 간에 밝은 이상,
-            인생의 만물은 피다. 대중을 이성은 방황하여도, 그리하였는가? 크고 평화스러운 품에 방황하였으며, 말이다.
-            이상은 들어 예수는 크고 긴지라 역사를 피다. 얼음에 있음으로써 꽃 보배를 곧 가는 교향악이다. 우는 새 예가
-            우리의 것은 피다. 피가 그것을 어디 앞이 기쁘며, 이상의 열락의 위하여서 끝까지 것이다. 있는 봄바람을
-            방황하여도, 우리의 것은 작고 아니한 영원히 듣기만 운다.`,
-  isRejected = false,
-  answerCreatedAt = '2024-07-05',
+  questionCreateAt = '',
+  answer,
 }) {
+  const isHasAnswer = !!answer;
+  const [currentAnswer, setCurrentAnswer] = useState(isHasAnswer ? answer.content : '');
+  const [answerCreatedAt, setAnswerCreatedAt] = useState(isHasAnswer ? answer.createdAt : '');
   const [isEditing, setIsEditing] = useState(false);
+  // LIMIT_DISLIKE_COUNT보다 싫어요가 많거나, 답변 객체가 존재하고 isRejected가 명시적으로 true인 경우 외에는 false
+  // 질문에 싫어요 개수가 많으면, 자동으로 답변을 달 수 없도록 조치
+  const [isRejected, setIsRejected] = useState(
+    dislikeCount >= LIMIT_DISLIKE_COUNT || (isHasAnswer && answer.isRejected)
+  );
 
-  /*
-  TODO:
-    - 케밥 메뉴 버튼 구현
-    - 받아온 qustionId, answerId 사용해서 질문 수정, 삭제, 답변 수정 삭제 구현
-    - 답변이 있으면 답변을 표출하고, 없으면 입력창과 등록 버튼이 보이도록
+  const { mutate: createAnswerMutate } = useCreateAnswerMutation();
+  const { mutate: updateAnswerMutate } = useUpdateAnswerMutation();
 
-    - Answer내부의 상태
-      1. 답변 생성 이전 입력창과 답변 완료 버튼 -> 생성하기 API 호출
-      2. 답변 수정 상태에서의 입력창과 수정 완료 버튼 -> 수정하기 API 호출
-      차이점: 생성인가 수정인가에 따른 API 호출
-  */
+  const handleEditButtonClick = () => {
+    setIsEditing(true);
+  };
+
+  const handleCreateFormSubmit = (event, inputText) => {
+    event.preventDefault();
+
+    setCurrentAnswer(inputText);
+    createAnswerMutate(
+      { questionId: questionId, content: inputText },
+      {
+        onSuccess: data => data && setAnswerCreatedAt(data.createdAt),
+      }
+    );
+  };
+
+  const handleEditFormSubmit = (event, inputText) => {
+    event.preventDefault();
+
+    setCurrentAnswer(inputText);
+    setIsEditing(false);
+    updateAnswerMutate({ answerId: answer.id, content: inputText });
+  };
+
+  const handleRejectButtonClick = event => {
+    event.preventDefault();
+    if (!isRejected) {
+      // isRejected가 false 인 경우에만 실행하면 됨
+      setIsRejected(true);
+      updateAnswerMutate({ answerId: answer.id, isRejected: true });
+    }
+  };
+
+  const renderAnswerContent = () => {
+    if (isRejected) {
+      // 답변 거절의 경우
+      return <StyledAnswerText $isRejected>답변 거절</StyledAnswerText>;
+    }
+
+    if (isEditing) {
+      // 답변 거절은 아니지만, 수정 하기 버튼을 누른 경우
+      return <AnswerForm currentAnswer={currentAnswer} buttonText="수정 완료" onSubmitForm={handleEditFormSubmit} />;
+    }
+
+    if (!currentAnswer) {
+      // 답변 거절도 아니고, 수정중도 아니지만, 받아온 답변이 빈값인 경우
+      return <AnswerForm currentAnswer={currentAnswer} buttonText="답변 완료" onSubmitForm={handleCreateFormSubmit} />;
+    }
+
+    // 답변 거절도 아니고, 수정중도 아니고, 받아온 답변이 빈값도 아닌 경우
+    return <StyledAnswerText>{currentAnswer}</StyledAnswerText>;
+  };
 
   return (
     <StyledFeedCardContainer>
-      <StyledCardUpperArea>
-        <AnswerStatus answer={answer} />
-        <MoreButton />
-      </StyledCardUpperArea>
-      <QuestionTitle qustion={qustion} questionCreateAt={questionCreateAt} />
-      <Answer
-        answerId={answerId}
-        answer={answer}
-        isEditing={isEditing}
-        answerCreatedAt={answerCreatedAt}
-        isRejected={isRejected}
-      />
-      <Reaction likeCount={likeCount} dislikeCount={dislikeCount} />
+      <StyledAnswerCardUpperArea>
+        <AnswerStatus isComplete={isHasAnswer || isRejected} />
+        <MoreButton onEditButtonClick={handleEditButtonClick} onRejectButtonClick={handleRejectButtonClick} />
+      </StyledAnswerCardUpperArea>
+      <QuestionTitle question={questionContent} questionCreateAt={questionCreateAt} />
+      <AnswerTemplate answerCreatedAt={answerCreatedAt}>{renderAnswerContent()}</AnswerTemplate>
+      <Reaction likeCount={likeCount} dislikeCount={dislikeCount} questionId={questionId} />
     </StyledFeedCardContainer>
   );
 }
 
 export default AnswerCard;
 
-const StyledCardUpperArea = styled.section`
+const StyledAnswerCardUpperArea = styled.section`
   display: flex;
   justify-content: space-between;
 `;
