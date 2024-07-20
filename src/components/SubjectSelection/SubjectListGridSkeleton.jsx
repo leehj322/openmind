@@ -1,5 +1,6 @@
 import SkeletonCard from './SubjectCardSkeleton';
-import StyledSubjectGrid, { GRID_BREAKPOINT, NUM_OF_SUBJECTS } from './StyledSubjectGrid';
+import StyledSubjectGrid from './StyledSubjectGrid';
+import { GRID_BREAKPOINT, NUM_OF_SUBJECTS } from '../../constants/subjectGrid';
 import useWindowSize from '../../hooks/useWindowSize';
 
 function SubjectListGridSkeleton() {

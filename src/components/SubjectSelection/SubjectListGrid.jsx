@@ -1,6 +1,7 @@
 import PageNavigator from './PageNavigator';
 import SubjectCard from './SubjectCard';
-import StyledSubjectGrid, { GRID_BREAKPOINT, NUM_OF_SUBJECTS } from './StyledSubjectGrid';
+import StyledSubjectGrid from './StyledSubjectGrid';
+import { GRID_BREAKPOINT, NUM_OF_SUBJECTS } from '../../constants/subjectGrid';
 import useSubjectsQuery from '../../queries/useSubjectsQuery';
 import useWindowSize from '../../hooks/useWindowSize';
 import { useState } from 'react';
