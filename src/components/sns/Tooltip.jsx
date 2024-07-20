@@ -14,8 +14,8 @@ const StyledTooltipContent = styled.div`
   position: absolute;
   top: 90%;
   left: 90%;
-  background-color: #4d4b4b;
-  color: #ffffff;
+  background-color: #f2efe1;
+  color: #000000;
   text-align: center;
   border-radius: 6px;
   padding: 4px 6px;
