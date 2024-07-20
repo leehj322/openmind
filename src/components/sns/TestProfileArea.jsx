@@ -15,6 +15,7 @@ const StyledProfileContainer = styled.div`
 const StyledProfileImg = styled.img`
   width: 136px;
   height: 136px;
+  margin-bottom: 12px;
   border-radius: 50%;
   @media (max-width: 767px) {
     width: 104px;
@@ -40,7 +41,7 @@ const StyledIconArea = styled.div`
   gap: 12px;
 `;
 
-/* 테스트용으로 남겨둡니다
+// 테스트용으로 남겨둡니다
 const subject = {
   id: 2,
   name: '강영훈',
@@ -48,9 +49,8 @@ const subject = {
   questionCount: 5,
   createdAt: '2023-10-23T05:08:05.825279Z',
 };
-*/
 
-function TestProfileArea({ subject }) {
+function TestProfileArea() {
   return (
     <div>
       <>
@@ -58,7 +58,7 @@ function TestProfileArea({ subject }) {
           <StyledProfileImg src={subject.imageSource} alt="프로필 이미지" />
           <StyledUserNameWrapper>{subject.name}</StyledUserNameWrapper>
           <StyledIconArea>
-            <ClipboardCopyButton />
+            <ClipboardCopyButton subject={subject} />
             <KakaoShareButton subject={subject} />
             <TwitterShareButton subject={subject} />
           </StyledIconArea>

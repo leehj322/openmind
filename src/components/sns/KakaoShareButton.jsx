@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import kakaoIcon from '../../images/kakao_icon.png';
+import kakaoIcon from '../../assets/images/kakao_icon.png';
 import styled from 'styled-components';
 import Tooltip from './Tooltip';
 
@@ -12,9 +12,10 @@ const StyledShareIcon = styled.img`
 
 const KakaoShareButton = ({ subject }) => {
   useEffect(() => {
+    console.log(import.meta.env.VITE_KAKAO_APP_KEY);
     // 카카오 SDK 초기화
     if (window.Kakao && !window.Kakao.isInitialized()) {
-      window.Kakao.init('135b2ce1d43f8ad70ae429b48a8bdc18'); // 발급받은 앱 키로 초기화합니다.
+      window.Kakao.init(import.meta.env.VITE_KAKAO_APP_KEY); // 발급받은 앱 키로 초기화합니다.
     }
   }, []);
 
@@ -28,16 +29,16 @@ const KakaoShareButton = ({ subject }) => {
           imageUrl: `${subject.imageSource}`,
           link: {
             //props로 뒷부분 아이디 받아와서 쓸 수 있도록 제작 예정
-            mobileWebUrl: 'http://localhost:5173/post/123',
-            webUrl: 'http://localhost:5173/post/123',
+            mobileWebUrl: 'http://localhost:5173/post/${subject.id}',
+            webUrl: 'http://localhost:5173/post//${subject.id}',
           },
         },
         buttons: [
           {
             title: '웹으로 보기', //버튼에 표시될 내용
             link: {
-              mobileWebUrl: 'http://localhost:5173/post/123',
-              webUrl: 'http://localhost:5173/post/123',
+              mobileWebUrl: 'http://localhost:5173/post//${subject.id}',
+              webUrl: 'http://localhost:5173/post//${subject.id}',
             },
           },
         ],

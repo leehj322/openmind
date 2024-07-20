@@ -1,5 +1,7 @@
+import TestProfileArea from '../components/sns/TestProfileArea';
+
 function SubjectSelection() {
-  return <div>SubjectSelection page</div>;
+  return <TestProfileArea />;
 }
 
 export default SubjectSelection;
