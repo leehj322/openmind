@@ -1,7 +1,21 @@
-import styled from 'styled-components';
-import receivedQuestionIcon from '../assets/images/messages_icon.png';
+import styled, { keyframes } from 'styled-components';
+import receivedQuestionIcon from '../../assets/images/messages_icon.png';
 import filter from '../../styles/@shared/filter';
 import { useNavigate } from 'react-router-dom';
+
+const waveAnimation = keyframes`
+  0% {
+    transform: translateY(0%);
+  }
+
+  50% {
+    transform: translateY(-5%);
+  }
+
+  100% {
+    transform: translateY(0%);
+  }
+`;
 
 const StyledQuestionCardContainer = styled.li`
   min-width: 186px;
@@ -11,8 +25,12 @@ const StyledQuestionCardContainer = styled.li`
   border: 1px solid var(--gray40);
   padding: 20px;
   background-color: var(--gray10);
+  transition: transform 1s ease-in-out;
+
   &:hover {
     cursor: pointer;
+    position: relative;
+    animation: ${waveAnimation} 1s infinite;
   }
   @media (max-width: 767px) {
     height: 168px;
