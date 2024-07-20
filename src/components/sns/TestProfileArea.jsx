@@ -40,6 +40,7 @@ const StyledIconArea = styled.div`
   gap: 12px;
 `;
 
+/* 테스트용으로 남겨둡니다
 const subject = {
   id: 2,
   name: '강영훈',
@@ -47,8 +48,9 @@ const subject = {
   questionCount: 5,
   createdAt: '2023-10-23T05:08:05.825279Z',
 };
+*/
 
-function TestProfileArea() {
+function TestProfileArea({ subject }) {
   return (
     <div>
       <>
