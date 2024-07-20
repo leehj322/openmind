@@ -1,11 +1,13 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
+import { getThemeColor } from '../../utils/getThemeColor';
 
+//TODO: softButtonStyle 처럼 바꿔주시면됩니다.
 //연한 갈색 버튼
 export const softButtonStyle = {
-  background: 'var(--brown10)',
-  text: 'var(--brown40)',
-  border: 'var(--brown40)',
-  pressed: 'var(--brown20)',
+  background: getThemeColor('brown10'),
+  text: getThemeColor('brown40'),
+  border: getThemeColor('brown40'),
+  pressed: getThemeColor('brown20'),
 };
 
 //진한 갈색 버튼

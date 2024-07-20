@@ -40,6 +40,13 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
 
   border-radius: ${({ shape }) => (shape === 'square' ? '8px' : '200px')};
 
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      opacity: 0.5;
+      cursor: not-allowed;
+    `};
+
   &:hover {
     border: 1.5px solid;
     border-color: ${({ btnColor }) => (btnColor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
