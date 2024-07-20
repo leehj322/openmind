@@ -16,7 +16,6 @@ const StyledProfileImg = styled.img`
   width: 136px;
   height: 136px;
   border-radius: 50%;
-  margin: 12px 15px;
   @media (max-width: 767px) {
     width: 104px;
     height: 104px;
@@ -53,7 +52,6 @@ function TestProfileArea() {
   return (
     <div>
       <>
-        <p>테스트용 페이지</p>
         <StyledProfileContainer>
           <StyledProfileImg src={subject.imageSource} alt="프로필 이미지" />
           <StyledUserNameWrapper>{subject.name}</StyledUserNameWrapper>
