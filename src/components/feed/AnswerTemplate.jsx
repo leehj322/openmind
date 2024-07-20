@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 import profileImg from '../../assets/images/samples/profile-sample.png';
 import getElapsedPeriod from '../../utils/getElapsedPeriod';
+import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
 
 /**
  * 답변자의 프로필과 질문 시점으로부터 지난 기간을 보여주고, 답변 내용을 담을 템플릿
@@ -37,7 +38,7 @@ const StyledAnswerContainer = styled.div`
 const StyledProfileImage = styled.img`
   width: 48px;
   height: 48px;
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media ${MEDIA_QUERY_SIZES.mobile} {
     width: 32px;
     height: 32px;
   }
