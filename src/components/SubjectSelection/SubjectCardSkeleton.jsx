@@ -3,7 +3,6 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import styled from 'styled-components';
 
 const SkeletonCardContainer = styled.li`
-  min-width: 186px;
   width: 100%;
   height: 187px;
   border-radius: 16px;
