@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import LogoImgUrl from '../../../assets/images/logo.svg';
-import ProfileImgUrl from '../../../assets/images/profile.png';
 import LinkIconUrl from '../../../assets/images/ic_Link.png';
 import KakaoIconUrl from '../../../assets/images/ic_Kakao.png';
 import FacebookIconUrl from '../../../assets/images/ic_Facebook.png';
@@ -40,6 +39,7 @@ const StyledProfileImg = styled.img`
   display: block;
   width: 136px;
   height: 136px;
+  border-radius: 50%;
 
   @media screen and (min-width: 375px) and (max-width: 767px) {
     width: 104px;
@@ -67,13 +67,14 @@ const StyledSharingImg = styled.img`
   width: 40px;
   height: 40px;
 `;
+
 // 질문 페이지에서 profileImg prop 받아오면 적용시켜주기
-function Header({ name }) {
+function Header({ name, imageSource }) {
   return (
     <StyledHeader>
       <StyledHeaderContainer>
         <StyledLogoImg src={LogoImgUrl} />
-        <StyledProfileImg src={ProfileImgUrl} />
+        <StyledProfileImg src={imageSource} />
         <StyledNameSection>{name}</StyledNameSection>
         <StyledSharingArea>
           <StyledSharingImg src={LinkIconUrl} alt="링크 복사" />

@@ -3,10 +3,10 @@ import styled from 'styled-components';
 /**
  * 답변 상태를 보여준다
  * @param props
- * @param {string} props.answer 답변 내용
+ * @param {string} props.isHasAnswer 답변 유무
  */
-function AnswerStatus({ answer }) {
-  const answerStatus = answer ? '답변 완료' : '미답변';
+function AnswerStatus({ isComplete }) {
+  const answerStatus = isComplete ? '답변 완료' : '미답변';
   return <StyledAnswerStatus>{answerStatus}</StyledAnswerStatus>;
 }
 
@@ -16,8 +16,8 @@ const StyledAnswerStatus = styled.article`
   height: fit-content;
   width: fit-content;
   padding: 4px 12px;
-  border: ${({ theme }) => `1px solid ${theme.borderBrown}`};
-  color: ${({ theme }) => theme.borderBrown};
+  border: ${({ theme }) => `1px solid ${theme.brown40}`};
+  color: ${({ theme }) => theme.brown40};
 
   font-size: 14px;
   font-weight: 500;
