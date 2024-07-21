@@ -40,15 +40,18 @@ const StyledSpinner = styled.div`
 `;
 
 function QuestionCardList({ questionCount, subjectId }) {
-  // 변수 초기화
+  // 관찰하는 객체를 ref로 설정
   const [observerRef, inView] = useInView();
   // useInfiniteQuery 훅을 사용하여 무한 스크롤 데이터를 관리
   const { data, fetchNextPage, hasNextPage, isLoading, isError } = useInfiniteQuery({
     queryKey: ['questions', subjectId],
     queryFn: async ({ pageParam = 1 }) => {
       try {
-        // if (!subjectId) return { pages: [] }; // subjectId가 없으면 빈 데이터를 반환하여 오류 방지
-        const { data: responseData } = await axiosInstance.get(`/subjects/7478/questions/`, {
+        // subjectId가 없으면 빈 데이터를 반환하여 오류 방지
+        if (!subjectId) {
+          return { pages: [] };
+        }
+        const { data: responseData } = await axiosInstance.get(`/subjects/${subjectId}/questions/`, {
           params: {
             limit: 5,
             offset: pageParam * 5, // 페이지 번호에 따라 오프셋 계산
@@ -60,14 +63,17 @@ function QuestionCardList({ questionCount, subjectId }) {
         throw new Error('Failed to fetch data');
       }
     },
+    // 마지막 페이지의 실제 데이터 수를 기반으로 계산
+    // lastPage.results.length: 현재 페이지의 데이터 수
     getNextPageParam: (lastPage, allPages) => {
       return lastPage.results.length === 0 ? undefined : allPages.length + 1;
     },
   });
 
+  // 스크롤 시에 observerRef가 노출되면 다음 페이지를 불러오는 함수 실행
   useEffect(() => {
     if (inView) {
-      console.log('데이터 페치');
+      console.log('data fetch');
       fetchNextPage();
     }
   }, [inView]);
