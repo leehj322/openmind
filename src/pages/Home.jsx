@@ -36,7 +36,7 @@ function Home() {
       .then(response => {
         console.log('handleAxiosRequest', response);
 
-        sessionStorage.setItem('responseData', JSON.stringify(response.data));
+        sessionStorage.setItem('userKey', response.data.id);
         navigate(`/post/${response.data.id}`);
       })
       .catch(error => console.log('request error', error));
