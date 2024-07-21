@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { GRID_BREAKPOINT } from '../../constants/subjectGrid';
+import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
 
 const StyledSubjectGrid = styled.ol`
   display: grid;
@@ -7,11 +7,11 @@ const StyledSubjectGrid = styled.ol`
   grid-template-rows: repeat(2, 187px);
   gap: 20px;
 
-  @media screen and (max-width: ${GRID_BREAKPOINT.tablet}px) {
+  @media ${MEDIA_QUERY_SIZES.subjectGridBreakpoint} {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  @media screen and (min-width: 375px) and (max-width: ${GRID_BREAKPOINT.mobile}px) {
+  @media ${MEDIA_QUERY_SIZES.mobile} {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(3, 187px);
   }

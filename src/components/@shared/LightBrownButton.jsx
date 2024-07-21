@@ -1,14 +1,15 @@
 import styled from 'styled-components';
 import rightArrowImgUrl from '../../assets/images/arrow-right.svg';
+import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
 
 const Button = styled.button`
-  background-color: var(--brown10);
-  border: 1px solid var(--brown40);
+  background-color: ${({ theme }) => theme.brown10};
+  border: 1px solid ${({ theme }) => theme.brown40};
   border-radius: 8px;
 
-  color: var(--brown40);
-  font-size: 16px; // fontSize(small)
-  font-weight: 400; // fontWeight(regular)
+  color: ${({ theme }) => theme.brown40};
+  font-size: 16px;
+  font-weight: 400;
 
   display: flex;
   justify-content: center;
@@ -16,8 +17,8 @@ const Button = styled.button`
   gap: 8px;
   padding: 12px 24px;
 
-  @media screen and (min-width: 375px) and (max-width: 767px) {
-    font-size: 14px; // fontSize(xsmall)
+  @media ${MEDIA_QUERY_SIZES.mobile} {
+    font-size: 14px;
     gap: 4px;
     padding: 8px 12px;
   }
