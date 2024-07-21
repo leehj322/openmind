@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 import SubjectListGridSkeleton from './SubjectListGridSkeleton';
 import { Suspense, lazy, useState, useEffect } from 'react';
+import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
 
-const SubjectListArea = styled.section`
+const StyledSubjectListArea = styled.section`
   margin: 0 auto 40px;
   width: 940px;
 
-  @media screen and (min-width: 768px) and (max-width: 1199px) {
+  @media ${MEDIA_QUERY_SIZES.tablet} {
     margin: 0 32px 40px;
     width: auto;
   }
 
-  @media screen and (min-width: 375px) and (max-width: 767px) {
+  @media ${MEDIA_QUERY_SIZES.mobile} {
     margin: 0 24px 60px;
     width: auto;
   }
@@ -43,11 +44,11 @@ function DeferredComponent() {
 
 function SubjectList({ sortBy }) {
   return (
-    <SubjectListArea>
+    <StyledSubjectListArea>
       <Suspense fallback={<DeferredComponent />}>
         <SubjectListGrid sortBy={sortBy} />
       </Suspense>
-    </SubjectListArea>
+    </StyledSubjectListArea>
   );
 }
 

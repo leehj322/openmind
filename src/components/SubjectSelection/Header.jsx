@@ -1,23 +1,24 @@
 import styled from 'styled-components';
 import LightBrownButton from '../@shared/LightBrownButton';
 import LogoImgUrl from '../../assets/images/logo.svg';
+import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
 
 const StyledHeaderArea = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  @media screen and (min-width: 768px) and (max-width: 1199px) {
+  @media ${MEDIA_QUERY_SIZES.tablet} {
     padding: 0 50px;
   }
 
-  @media screen and (min-width: 375px) and (max-width: 767px) {
+  @media ${MEDIA_QUERY_SIZES.mobile} {
     flex-direction: column;
     gap: 20px;
   }
 `;
 
-const LogoImg = styled.img`
+const StyledLogoImg = styled.img`
   display: block;
   width: 146px;
   height: 57px;
@@ -26,7 +27,7 @@ const LogoImg = styled.img`
 function Header() {
   return (
     <StyledHeaderArea>
-      <LogoImg src={LogoImgUrl} />
+      <StyledLogoImg src={LogoImgUrl} />
       <LightBrownButton>답변하러 가기</LightBrownButton>
     </StyledHeaderArea>
   );
