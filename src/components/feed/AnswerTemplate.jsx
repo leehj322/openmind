@@ -20,7 +20,7 @@ function AnswerTemplate({ children, answerCreatedAt }) {
       <StyledProfileImage src={imageSource} alt={'프로필 이미지'} />
       <StyledAnswerArea>
         <div>
-          <span>{name}</span>
+          <span className={'actor-font'}>{name}</span>
           <span>{elapsedPeriod}</span>
         </div>
         {children}
@@ -56,7 +56,6 @@ const StyledAnswerArea = styled.section`
     margin-bottom: 4px;
 
     & span:first-child {
-      font-family: Actor;
       font-size: 18px;
       font-weight: 400;
       line-height: 24px;

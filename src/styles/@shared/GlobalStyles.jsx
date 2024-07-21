@@ -43,6 +43,10 @@ const GlobalStyle = createGlobalStyle`
   textarea{
     resize: none;
   }
+
+  .actor-font{
+    font-family: Actor;
+  }
 `;
 
 export default GlobalStyle;
