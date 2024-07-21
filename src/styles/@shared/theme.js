@@ -34,10 +34,10 @@ const dark = {
   defaultFont: 'var(--gray10)',
 
   gray10: '#333333',
-  gray20: '#999999',
+  gray20: '#515151',
   gray30: '#777777',
   gray40: '#818181',
-  gray50: '#515151',
+  gray50: '#999999',
   gray60: '#f9f9f9',
 
   brown10: '#e4d5c9',
