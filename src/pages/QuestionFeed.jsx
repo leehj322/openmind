@@ -12,6 +12,9 @@ import { StyledQuestionCountArea } from '../styles/feed/questionCountStyles';
 import { StyledHeroImg } from '../styles/feed/heroImgStyles';
 import { StyledMessagesImg } from '../styles/feed/messagesImgStyles';
 import { StyledNoQuestionImg } from '../styles/feed/noQuestionImgStyles';
+import Button from '../components/@shared/Button';
+import ResponsiveText from '../components/feed/questionFeed/ResponsiveText';
+import ModalComponent from '../components/feed/questionFeed/ModalComponent';
 
 const StyledQuestionFeedPageContainer = styled.div`
   margin: 0px auto;
@@ -36,6 +39,19 @@ const StyledHeroImgWrapper = styled.div`
   align-items: center;
 `;
 
+const questionButtonStyle = {
+  fontSize: '20px',
+  boxShadow: 'var(--shadow2pt)',
+  position: 'fixed',
+  right: '24px',
+  bottom: '24px',
+
+  '@media screen and (min-width: 375px) and (max-width: 767px)': {
+    width: '123px',
+    height: '54px',
+  },
+};
+
 function QuestionFeed() {
   // 세션 스토리지에서 반환된 값 역직렬화
   const profileDataString = sessionStorage.getItem('profile');
@@ -59,6 +75,10 @@ function QuestionFeed() {
         {/* Header, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
         <Header name={name} imageSource={imageSource} />
         <QuestionCardList subjectId={id} questionCount={questionCount} />
+        <Button onClick shape={'pill'} btnColor={'deep'} style={questionButtonStyle} width={'208px'} height={'54px'}>
+          <ResponsiveText />
+          <ModalComponent name={name} imageSource={imageSource} />
+        </Button>
       </StyledQuestionFeedPageContainer>
     );
   } else {
@@ -76,6 +96,10 @@ function QuestionFeed() {
             아직 질문이 없습니다
           </StyledQuestionCountArea>
           <StyledNoQuestionImg src={noQuestionImg} alt="빈 박스 이미지" />
+          <Button onClick shape={'pill'} btnColor={'deep'} style={questionButtonStyle} width={'208px'} height={'54px'}>
+            <ResponsiveText />
+            <ModalComponent name={name} imageSource={imageSource} />
+          </Button>
         </StyledFeedCardListContainer>
       </StyledQuestionFeedPageContainer>
     );
