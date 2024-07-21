@@ -14,7 +14,7 @@ function QuestionTitle({ questionCreateAt, question }) {
   return (
     <StyledQuestionTitleArea>
       <p>{`질문${elapsedPeriod ? ' · ' + elapsedPeriod : ''}`}</p>
-      <h3>{question}</h3>
+      <h3 className={'actor-font'}>{question}</h3>
     </StyledQuestionTitleArea>
   );
 }
@@ -30,7 +30,6 @@ const StyledQuestionTitleArea = styled.section`
   }
 
   & h3 {
-    font-family: Actor;
     font-size: 18px;
     font-weight: 400;
     line-height: 24px;
