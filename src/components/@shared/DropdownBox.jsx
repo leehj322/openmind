@@ -47,8 +47,8 @@ const StyledDropdownListContainer = styled.div`
 
   box-shadow: var(--shadow1pt);
 
-  ${({ $triggerCloseAnimation, $isAnimationEnabled }) =>
-    $isAnimationEnabled ? ($triggerCloseAnimation ? dropdownSlideDownAnimation : dropdownSlideUpAnimation) : ''};
+  ${({ $isOpenAnimation, $isAnimationEnabled }) =>
+    $isAnimationEnabled ? ($isOpenAnimation ? dropdownSlideDownAnimation : dropdownSlideUpAnimation) : ''};
 `;
 
 const StyledItemArea = styled.div`
@@ -146,7 +146,7 @@ function DropdownBox({
   return (
     <StyledDropdownListContainer
       $isVisible={isVisible}
-      $triggerCloseAnimation={isDropdownVisible}
+      $isOpenAnimation={isDropdownVisible}
       $isAnimationEnabled={isAnimationEnabled}
       $minWidth={minWidth}
       $top={topPosition}
