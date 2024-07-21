@@ -95,6 +95,15 @@ const StyledBtnContainer = styled.div`
   width: 100%;
   z-index: 100;
   box-sizing: border-box;
+
+  @media ${({ theme }) => theme.windowSize.mobile} {
+    top: calc(120px + 100px); /* 로고와 폼 컨테이너 사이의 위치 */
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const StyledBgContainer = styled.div`
@@ -123,6 +132,12 @@ const StyledLogo = styled.img`
   transform: translate(-50%, -50%);
   width: 400px;
   z-index: 10;
+
+  @media ${({ theme }) => theme.windowSize.mobile} {
+    width: 310px;
+    height: 130px;
+    top: 160px;
+  }
 `;
 
 const StyledForm = styled.div`

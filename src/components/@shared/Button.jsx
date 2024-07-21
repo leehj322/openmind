@@ -40,6 +40,10 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
 
   border-radius: ${({ shape }) => (shape === 'square' ? '8px' : '200px')};
 
+  @media ${({ theme }) => theme.windowSize.mobile} {
+    font-size: 0.75rem; // 텍스트 크기 조정
+  }
+
   ${({ disabled }) =>
     disabled &&
     css`
