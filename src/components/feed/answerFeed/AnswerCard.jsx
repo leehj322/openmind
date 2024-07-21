@@ -19,7 +19,7 @@ import { LIMIT_DISLIKE_COUNT } from '../../../constants/feedCard';
  * @param {integer} props.likeCount 좋아요 수
  * @param {integer} props.dislikeCount 싫어요 수
  * @param {string} props.questionCreatedAt 질문 생성 시간
- * @param {object || null} props.answer 답변 객체
+ * @param {object | null} props.answer 답변 객체
  */
 function AnswerCard({
   // TODO: 상위 컴포넌트에서 데이터를 넣어줄 수 있게 되면 테스트용 기본값 삭제 예정

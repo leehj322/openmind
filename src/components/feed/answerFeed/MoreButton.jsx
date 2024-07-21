@@ -12,7 +12,6 @@ const DROPDOWN_ITEM_LIST = [
  * 답변하기 피드 카드에서 더보기 메뉴 버튼을 누르면 드롭다운이 나오는데, 드롭다운에서 답변 수정, 답변 거절 기능이 가능
  * @param {Function} onEditButtonClick
  * @param {Function} onRejectButtonClick
- * @returns
  */
 function MoreButton({ onEditButtonClick, onRejectButtonClick }) {
   const [isOpen, toggleIsOpen] = useToggle(false);
