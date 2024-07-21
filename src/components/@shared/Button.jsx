@@ -86,7 +86,7 @@ function Button({
       if (onClick) {
         onClick();
       }
-      navigate();
+      navigate(pagePath);
     }
   };
 
