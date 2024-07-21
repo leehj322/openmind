@@ -6,21 +6,12 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { StyledFeedCardListContainer } from '../../../styles/feed/feedCardListStyles';
 import { StyledQuestionCountArea } from '../../../styles/feed/questionCountStyles';
+import { StyledMessagesImg } from '../../../styles/feed/messagesImgStyles';
 
 import MessagesIconUrl from '../../../assets/images/ic_Messages.svg';
 import SpinnerImg from '../../../assets/images/spinner.png';
 import QuestionCard from './QuestionCard';
 import { axiosInstance } from '../../../apis/axiosSetup';
-
-const StyledMessagesImg = styled.img`
-  width: 24px;
-  height: 24px;
-
-  @media screen and (min-width: 375px) and (max-width: 767px) {
-    width: 22px;
-    height: 22px;
-  }
-`;
 
 const rotate = keyframes`
   100% {
@@ -101,7 +92,7 @@ function QuestionCardList({ questionCount, subjectId }) {
           <QuestionCard
             key={question.id}
             questionId={question.id}
-            question={question.content}
+            questionContent={question.content}
             likeCount={question.like}
             dislikeCount={question.dislike}
             questionCreateAt={question.createdAt}
