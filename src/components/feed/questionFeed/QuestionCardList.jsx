@@ -1,15 +1,16 @@
 /* eslint-disable no-console */
-import React, { useRef, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
+import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { StyledFeedCardListContainer } from '../../../styles/feed/feedCardListStyles';
 import { StyledQuestionCountArea } from '../../../styles/feed/questionCountStyles';
 
 import MessagesIconUrl from '../../../assets/images/ic_Messages.svg';
+import SpinnerImg from '../../../assets/images/spinner.png';
 import QuestionCard from './QuestionCard';
 import { axiosInstance } from '../../../apis/axiosSetup';
-import { useInView } from 'react-intersection-observer';
 
 const StyledMessagesImg = styled.img`
   width: 24px;
@@ -19,6 +20,23 @@ const StyledMessagesImg = styled.img`
     width: 22px;
     height: 22px;
   }
+`;
+
+const rotate = keyframes`
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const StyledSpinner = styled.div`
+  width: 48px;
+  height: 48px;
+  margin: 20px auto;
+  background-image: url('${SpinnerImg}');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  animation: ${rotate} 1.5s linear infinite;
 `;
 
 function QuestionCardList({ questionCount, subjectId }) {
@@ -88,8 +106,8 @@ function QuestionCardList({ questionCount, subjectId }) {
         ))
       )}
       {hasNextPage && (
-        <div ref={observerRef} style={{ textAlign: 'center', margin: '10px 0' }}>
-          <p>Load More...</p>
+        <div ref={observerRef}>
+          <StyledSpinner />
         </div>
       )}
     </StyledFeedCardListContainer>

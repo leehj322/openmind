@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 import HeroImgUrl from '../assets/images/HeroImage.png';
@@ -40,7 +39,6 @@ const StyledHeroImg = styled.img`
 `;
 
 function QuestionFeed() {
-  const [questionCount, setQuestionCount] = useState();
   const { imageSource, name } = sessionStorage.getItem('profile') || { imageSource: profileImg, name: '아초는고양이' };
 
   return (
@@ -50,7 +48,7 @@ function QuestionFeed() {
       </StyledHeroImgWrapper>
       {/* Header, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
       <Header imageSource={imageSource} name={name} />
-      <QuestionCardList questionCount={questionCount} />
+      <QuestionCardList />
     </StyledQuestionFeedPageContainer>
   );
 }
