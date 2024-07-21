@@ -1,4 +1,3 @@
-import ReactModal from 'react-modal';
 import ModalComponent from '../components/feed/questionFeed/ModalComponent';
 import profile from '../assets/images/samples/profile-sample.png';
 import { ThemeProvider } from 'styled-components';

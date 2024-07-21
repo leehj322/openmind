@@ -80,12 +80,12 @@ function Button({
   style = {},
 }) {
   const navigate = useNavigate();
-
   const handleClick = () => {
     if (!disabled && pagePath) {
       if (onClick) {
         onClick();
       }
+      navigate(pagePath);
       navigate();
     }
   };

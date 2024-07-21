@@ -3,6 +3,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import messageIcon from '../../../assets/images/message-icon.png';
 import SendQuestionBtn from '../../@shared/Button';
+import theme from '../../../styles/@shared/theme';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
@@ -12,16 +13,12 @@ import { useNavigate } from 'react-router-dom';
  * @param {string} props.name - 사용자 이름
  * @param {boolean} props.isOpen - 모달 창 열림 상태
  * @param {function} props.onRequestClose - 모달 창 닫기 요청 함수
- * @param {object} event - 이벤트 객체
  */
-
 function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
   //모달이 열렸을 때 다른 컴포넌트의 content 보지 않도록 숨겨줄 엘리먼트 정의
   Modal.setAppElement('#root');
-
   //useState를 사용해 상태 관리 : 초기값 빈 문자열
   const [textAreaValue, setTextAreaValue] = useState('');
-
   // 텍스트 영역의 값이 채워질 때 호출
   const handleTextAreaChange = event => {
     setTextAreaValue(event.target.value);
@@ -60,7 +57,6 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
           </StyledModalTitleWrapper>
           <StyledCloseBtn onClick={onRequestClose}>X</StyledCloseBtn>
         </StyledModalHeader>
-
         {/* 모달 창 - main */}
         <StyledModalContent>
           <StyledUserInfo>
@@ -73,11 +69,11 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
             value={textAreaValue}
             onChange={handleTextAreaChange}></StyledTextArea>
         </StyledModalContent>
-
         {/* 모달 창 버튼 */}
         <StyledBtnContainer>
           <SendQuestionBtn
             type="submit"
+            pagePath="/post/123"
             pagePath={handleAxiosRequest}
             width="100%"
             height="100%"
@@ -90,9 +86,7 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
     </div>
   );
 }
-
 export default ModalComponent;
-
 const StyledModal = styled(Modal)`
   width: 612px;
   height: 420px;
@@ -106,7 +100,6 @@ const StyledModal = styled(Modal)`
   display: flex;
   flex-direction: column;
   align-items: center;
-
   @media ${({ theme }) => theme.windowSize.mobile} {
     width: 90%;
     height: 80%;
@@ -114,7 +107,6 @@ const StyledModal = styled(Modal)`
     max-height: 600px;
   }
 `;
-
 const StyledModalHeader = styled.header`
   width: 100%;
   display: flex;
@@ -124,23 +116,19 @@ const StyledModalHeader = styled.header`
   border-bottom: 0.5px solid var(--gray30);
   height: 50px;
 `;
-
 const StyledModalTitleWrapper = styled.div`
   margin: 15px;
   display: flex;
   align-items: center;
   gap: 5px;
 `;
-
 const StyledModalTitle = styled.h2`
   font-size: 18px;
 `;
-
 const StyledModalIcon = styled.img`
   width: 25px;
   height: 25px;
 `;
-
 const StyledCloseBtn = styled.button`
   font-size: 28px;
   cursor: pointer;
@@ -148,14 +136,12 @@ const StyledCloseBtn = styled.button`
   font-weight: 400;
   margin-right: 15px;
 `;
-
 const StyledModalContent = styled.main`
   margin: 15px 15px;
   @media ${({ theme }) => theme.windowSize.mobile} {
     margin: 10px 15px;
   }
 `;
-
 const StyledUserInfo = styled.div`
   padding-left: 5px;
   display: flex;
@@ -163,18 +149,15 @@ const StyledUserInfo = styled.div`
   gap: 7px;
   font-size: 23px;
 `;
-
 const StyledProfileImg = styled.img`
   width: 35px;
   height: 35px;
   border-radius: 50%;
 `;
-
 const StyledUserName = styled.h2`
   margin-left: 5px;
   font-size: 20px;
 `;
-
 const StyledTextArea = styled.textarea`
   margin-top: 15px;
   width: 558px;
@@ -187,7 +170,6 @@ const StyledTextArea = styled.textarea`
     height: 338px;
   }
 `;
-
 const StyledBtnContainer = styled.div`
   width: 558px;
   height: 50px;
