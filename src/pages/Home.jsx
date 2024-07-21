@@ -37,10 +37,9 @@ function Home() {
         console.log('handleAxiosRequest', response);
 
         sessionStorage.setItem('responseData', JSON.stringify(response.data));
-        navigate('/post/7480/answer');
+        navigate(`/post/${response.data.id}`);
       })
       .catch(error => console.log('request error', error));
-    console.log('handleAxiosRequest : ', request);
   };
 
   return (
