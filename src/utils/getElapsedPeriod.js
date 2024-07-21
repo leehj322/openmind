@@ -1,7 +1,7 @@
 /**
  * 생성된 시간을 인자로 받아, 현재 시간과 비교하여 지난 기간을 알려주는 함수
  * @param {string} createdAt 생성 시간
- * @returns {string}
+ * @returns {string} 지나간 시간을 문자열로 반환합니다(예: 방금 전, 1시간 전)
  */
 const getElapsedPeriod = createdAt => {
   const createdDate = new Date(createdAt);

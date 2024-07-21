@@ -25,7 +25,6 @@ const getTheme = () => {
 /**
  * ThemeProvider를 포함하는 ContextProvider를 반환하는 컴포넌트
  * @param {ReactNode} children
- * @returns
  */
 export default function ThemeContextProvider({ children }) {
   const [themeSetting, setThemeSetting] = useState(getTheme());
@@ -47,7 +46,7 @@ export default function ThemeContextProvider({ children }) {
 
 /**
  * ThemeContext 에서 theme를 꺼내는 훅
- * @returns {'dark' | 'light'} 사용자의 이전 테마 설정 또는 시스템 테마 설정
+ * @returns {'dark' | 'light'} themeSetting 사용자의 이전 테마 설정 또는 시스템 테마 설정
  */
 export const useThemeSetting = () => {
   const context = useContext(ThemeContext);
@@ -61,7 +60,7 @@ export const useThemeSetting = () => {
 
 /**
  * ThemeContext 에서 useThemeToggle 함수를 꺼내는 훅
- * @returns {Function} 테마 설정을 바꾸는 함수
+ * @returns {Function} toggleTheme 테마 설정을 바꾸는 함수
  */
 export const useThemeToggle = () => {
   const context = useContext(ThemeContext);

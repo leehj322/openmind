@@ -12,7 +12,7 @@ import Reaction from '../Reaction';
  * @param {integer} props.likeCount 좋아요 수
  * @param {integer} props.dislikeCount 싫어요 수
  * @param {string} props.questionCreateAt 질문 생성 시간
- * @param {object || null} props.answer 답변 객체
+ * @param {object | null} props.answer 답변 객체
  */
 function QuestionCard({
   // TODO: 상위 컴포넌트에서 데이터를 넣어줄 수 있게 되면 테스트용 기본값 삭제 예정

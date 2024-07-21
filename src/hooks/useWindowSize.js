@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 /**
  * 현재 windowSize 값을 가진 객체 state를 반환하는 커스텀 훅
- * @returns windowSize = {width, height}
+ * @returns windowSize = {width | height}
  */
 function useWindowSize() {
   const [windowSize, setWindowSize] = useState({
