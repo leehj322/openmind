@@ -1,5 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const slideDown = keyframes`
   0% {
@@ -12,8 +12,23 @@ const slideDown = keyframes`
   }
 `;
 
+const slideUp = keyframes`
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30%);
+    opacity: 0;
+  }
+`;
+
 const dropdownSlideDownAnimation = css`
-  animation: ${slideDown} 0.8s ease;
+  animation: ${slideDown} 0.2s ease;
+`;
+
+const dropdownSlideUpAnimation = css`
+  animation: ${slideUp} 0.2s ease;
 `;
 
 const StyledDropdownListContainer = styled.div`
@@ -32,7 +47,8 @@ const StyledDropdownListContainer = styled.div`
 
   box-shadow: var(--shadow1pt);
 
-  ${({ $isAnimationEnabled }) => ($isAnimationEnabled ? dropdownSlideDownAnimation : '')};
+  ${({ $isCloseToggle, $isAnimationEnabled }) =>
+    $isAnimationEnabled ? ($isCloseToggle ? dropdownSlideDownAnimation : dropdownSlideUpAnimation) : ''};
 `;
 
 const StyledItemArea = styled.div`
@@ -100,6 +116,7 @@ function DropdownBox({
   onItemClick,
 }) {
   const [currentItem, setCurrentItem] = useState(null);
+  const [isVisible, setIsVisible] = useState(null);
 
   const handleItemClick = event => {
     const { value } = event.currentTarget.dataset;
@@ -109,9 +126,31 @@ function DropdownBox({
     onItemClick(value);
   };
 
+  // close 입력 들어왔을 경우 animation 200ms 기다렸다가 닫음
+  useEffect(() => {
+    const prevIsVisibleState = isVisible;
+    if (prevIsVisibleState === true) {
+      // 드롭다운 박스 껏을 때, 200ms 기다리고 안보이게 함
+      setTimeout(() => {
+        setIsVisible(isDropdownVisible);
+      }, 200);
+    } else {
+      // 해당 코드는 타이머에 설정된 시간 내에 사용자가 켜기->끄기->켜기를 실행하는 경우
+      // 켜기 상태가 되었음에도 타이머가 뒤늦게 끝나면서 드롭다운이 보이지 않는 경우를 방지하는 코드임
+      // clearTimeout 하는 경우 콜백을 실행하지 않기 때문에 해당 버그가 발생함
+      if (isVisible === true) {
+        setIsVisible(false);
+      }
+      // 드롭다운 박스 켰을 때는 기다리지 않아도 괜찮음
+      setIsVisible(isDropdownVisible);
+    }
+    return () => clearTimeout();
+  }, [isDropdownVisible]);
+
   return (
     <StyledDropdownListContainer
-      $isVisible={isDropdownVisible}
+      $isVisible={isVisible}
+      $isCloseToggle={isDropdownVisible}
       $isAnimationEnabled={isAnimationEnabled}
       $minWidth={minWidth}
       $top={topPosition}
