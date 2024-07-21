@@ -3,7 +3,7 @@ import DropdownBox from '../@shared/DropdownBox';
 import useToggle from '../../hooks/useToggle';
 import arrowDownImgUrl from '../../assets/images/Arrow-down.svg';
 
-const DropdownToggler = styled.div`
+const StyledDropdownToggler = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -45,7 +45,7 @@ function SubjectSortDropdown({ sortBy, onSortChoice }) {
   const currentItemTitle = ITEM_LIST.find(item => item.value === sortBy).title;
 
   return (
-    <DropdownToggler onClick={handleTogglerClick} $isDropdownVisible={isVisible}>
+    <StyledDropdownToggler onClick={handleTogglerClick} $isDropdownVisible={isVisible}>
       {currentItemTitle}
       <img src={arrowDownImgUrl} alt="드롭다운화살표" />
       <DropdownBox
@@ -56,7 +56,7 @@ function SubjectSortDropdown({ sortBy, onSortChoice }) {
         itemList={ITEM_LIST}
         onItemClick={onSortChoice}
       />
-    </DropdownToggler>
+    </StyledDropdownToggler>
   );
 }
 

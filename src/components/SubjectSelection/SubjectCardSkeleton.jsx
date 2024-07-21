@@ -3,7 +3,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import styled from 'styled-components';
 import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
 
-const SkeletonCardContainer = styled.li`
+const StyledSkeletonCardContainer = styled.li`
   width: 100%;
   height: 187px;
   border-radius: 16px;
@@ -39,11 +39,11 @@ function SkeletonCard({ isMobile }) {
   };
 
   return (
-    <SkeletonCardContainer>
+    <StyledSkeletonCardContainer>
       <Skeleton circle style={pfpStyle} />
       <Skeleton style={userNameStyle} />
       <Skeleton style={questionAreaStyle} />
-    </SkeletonCardContainer>
+    </StyledSkeletonCardContainer>
   );
 }
 

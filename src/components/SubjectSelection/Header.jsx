@@ -18,7 +18,7 @@ const StyledHeaderArea = styled.header`
   }
 `;
 
-const LogoImg = styled.img`
+const StyledLogoImg = styled.img`
   display: block;
   width: 146px;
   height: 57px;
@@ -27,7 +27,7 @@ const LogoImg = styled.img`
 function Header() {
   return (
     <StyledHeaderArea>
-      <LogoImg src={LogoImgUrl} />
+      <StyledLogoImg src={LogoImgUrl} />
       <LightBrownButton>답변하러 가기</LightBrownButton>
     </StyledHeaderArea>
   );

@@ -3,7 +3,7 @@ import SubjectListGridSkeleton from './SubjectListGridSkeleton';
 import { Suspense, lazy, useState, useEffect } from 'react';
 import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
 
-const SubjectListArea = styled.section`
+const StyledSubjectListArea = styled.section`
   margin: 0 auto 40px;
   width: 940px;
 
@@ -44,11 +44,11 @@ function DeferredComponent() {
 
 function SubjectList({ sortBy }) {
   return (
-    <SubjectListArea>
+    <StyledSubjectListArea>
       <Suspense fallback={<DeferredComponent />}>
         <SubjectListGrid sortBy={sortBy} />
       </Suspense>
-    </SubjectListArea>
+    </StyledSubjectListArea>
   );
 }
 

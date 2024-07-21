@@ -71,7 +71,7 @@ const StyledItemArea = styled.div`
   }
 `;
 
-const ItemImg = styled.img`
+const StyledItemImg = styled.img`
   display: block;
   width: 16px;
   height: 16px;
@@ -79,6 +79,7 @@ const ItemImg = styled.img`
 
 /**
  * dropdown trigger를 통해서 isDropdownVisible을 toggle시에 꺼졌다 켜졌다 하는 dropdown list box
+ * 사용시에 dropdown toggler 안에 배치시키고 사용해야 합니다 (position: absolute)
  * @param {boolean} isDropdownVisible dropdown box 끄기(false), 켜기(true)
  * @param {boolean} isCurrentStateHighlight 현재 값 파란색으로 하이라이트 / 기본값 true
  * @param {boolean} isAnimationEnabled 애니메이션 활성화 할지(true) 안할지(false) 결정 / 기본값 true
@@ -119,7 +120,7 @@ function DropdownBox({
         const { title, value, url } = item;
         return (
           <StyledItemArea data-value={value} key={value} $isCurrent={currentItem === value} onClick={handleItemClick}>
-            {url && <ItemImg src={url} alt={value} />}
+            {url && <StyledItemImg src={url} alt={value} />}
             {title}
           </StyledItemArea>
         );

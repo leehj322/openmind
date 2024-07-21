@@ -16,7 +16,7 @@ const StyledTitledDropdownArea = styled.div`
   }
 `;
 
-const Title = styled.h1`
+const StyledTitle = styled.h1`
   color: ${({ theme }) => theme.gray60};
   font-size: 40px;
   font-weight: 400;
@@ -32,7 +32,7 @@ const Title = styled.h1`
 function TitledDropdown({ sortBy, onSortChoice }) {
   return (
     <StyledTitledDropdownArea>
-      <Title>누구에게 질문할까요?</Title>
+      <StyledTitle>누구에게 질문할까요?</StyledTitle>
       <SubjectSortDropdown sortBy={sortBy} onSortChoice={onSortChoice} />
     </StyledTitledDropdownArea>
   );
