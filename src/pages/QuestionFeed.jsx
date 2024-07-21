@@ -9,6 +9,7 @@ import Header from '../components/feed/questionFeed/Header';
 import QuestionCardList from '../components/feed/questionFeed/QuestionCardList';
 import { StyledFeedCardListContainer } from '../styles/feed/feedCardListStyles';
 import { StyledQuestionCountArea } from '../styles/feed/questionCountStyles';
+import { StyledHeroImg } from '../styles/feed/heroImgStyles';
 import { StyledMessagesImg } from '../styles/feed/messagesImgStyles';
 import { StyledNoQuestionImg } from '../styles/feed/noQuestionImgStyles';
 
@@ -16,7 +17,7 @@ const StyledQuestionFeedPageContainer = styled.div`
   margin: 0px auto;
   width: 1200px;
 
-  background-color: var(--gray20);
+  background-color: ${({ theme }) => theme.gray20};
 
   position: relative;
 
@@ -33,15 +34,6 @@ const StyledHeroImgWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
-
-const StyledHeroImg = styled.img`
-  width: 1200px;
-  height: 234px;
-
-  @media screen and (min-width: 375px) and (max-width: 767px) {
-    height: 177px;
-  }
 `;
 
 function QuestionFeed() {

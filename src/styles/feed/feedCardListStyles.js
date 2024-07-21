@@ -5,13 +5,13 @@ export const StyledFeedCardListContainer = styled.div`
   flex-direction: column;
   gap: 20px;
 
-  background-color: var(--brown10);
+  background-color: ${({ theme }) => theme.brown10};
 
   max-width: 716px;
   margin: 189px auto 136px;
   padding: 16px;
 
-  border: 1px solid var(--brown30);
+  border: 1px solid ${({ theme }) => theme.brown30};
   border-radius: 16px;
 
   @media screen and (min-width: 768px) and (max-width: 1199px) {

@@ -9,7 +9,7 @@ export const StyledQuestionCountArea = styled.div`
   font-size: 20px;
   font-weight: 400;
   text-align: center;
-  color: var(--brown40);
+  color: ${({ theme }) => theme.brown40};
 
   @media screen and (min-width: 375px) and (max-width: 767px) {
     font-size: 18px;
