@@ -1,31 +1,78 @@
 import background from '../assets/images/background-img.png';
 import theme from '../styles/@shared/theme';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import SendQuestionBtn from '../components/@shared/Button';
+import Button from '../components/@shared/Button';
 import soft from '../assets/images/softarrow.png';
 import logo from '../assets/images/logo.svg';
 import icon from '../assets/images/input-img.png';
+import axios from 'axios';
 
 function Home() {
+  //인풋창 아이콘
+  const [isIconVisible, setIsIconVisible] = useState(true);
+
+  const handleFocus = () => {
+    setIsIconVisible(false);
+  };
+
+  const [name, setName] = useState('');
+
+  const handleInputChange = event => {
+    setName(event.target.value);
+  };
+
+  const navigate = useNavigate();
+
+  const handleAxiosRequest = () => {
+    const request = {
+      name: name,
+      team: '8-4',
+    };
+
+    axios
+      .post('https://openmind-api.vercel.app/8-4/subjects/', request)
+      .then(response => {
+        console.log('handleAxiosRequest', response);
+
+        sessionStorage.setItem('responseData', JSON.stringify(response.data));
+        navigate('/post/7480/answer');
+      })
+      .catch(error => console.log('request error', error));
+    console.log('handleAxiosRequest : ', request);
+  };
+
   return (
     <StyledContainer>
       <StyledLogo src={logo} alt="로고" />
       <StyledForm>
         <StyledInputContainer>
-          <StyledIcon src={icon} alt="아이콘" />
-          <StyledInput type="text" placeholder="이름을 입력하세요"></StyledInput>
+          {isIconVisible && <StyledIcon src={icon} alt="아이콘" />}
+          <StyledInput
+            type="text"
+            placeholder="이름을 입력하세요"
+            onChange={handleInputChange}
+            onFocus={handleFocus}></StyledInput>
+          <StyledSubmitBtnContainer>
+            <Button pagePath={handleAxiosRequest} type="submit" width="100%" btnColor="deep" disabled={!name.trim()}>
+              질문 받기
+            </Button>
+          </StyledSubmitBtnContainer>
         </StyledInputContainer>
       </StyledForm>
       <StyledBtnContainer>
-        <SendQuestionBtn
+        <Button
           type="submit"
           width="180px"
           height="43px"
           imgSrc={soft}
+          onClick={() => {
+            console.log('Question button clicked');
+          }}
           style={{ border: '1.5px solid', borderColor: 'var(--brown40)' }}>
           질문하러 가기
-        </SendQuestionBtn>
+        </Button>
       </StyledBtnContainer>
       <StyledBgContainer />
     </StyledContainer>
@@ -44,7 +91,7 @@ const StyledBtnContainer = styled.div`
   align-items: center;
   position: absolute;
   top: 10px;
-  right: 50px;
+  right: 40px;
   padding: 1rem;
   width: 100%;
   z-index: 100;
@@ -106,7 +153,6 @@ const StyledInputContainer = styled.div`
 const StyledInput = styled.input`
   width: 100%;
   padding: 12px 16px 12px 16px;
-  margin-bottom: 20px;
   border: 1px solid var(--gray40);
   border-radius: 5px;
   box-sizing: border-box;
@@ -126,6 +172,8 @@ const StyledIcon = styled.img`
 `;
 
 const StyledSubmitBtnContainer = styled.div`
-  width: 100%;
+  position: relative;
+  width: 336px;
   padding: 10px;
+  left: -9px;
 `;
