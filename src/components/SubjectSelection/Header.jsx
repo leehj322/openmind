@@ -41,8 +41,7 @@ const StyledButtonWrapper = styled.div`
 `;
 
 function Header() {
-  const userSubjectId = 0; // 로컬스토리지 접근 값 사용
-  // const userSubjectId = window.localStorage.getItem(key);
+  const userSubjectId = window.localStorage.getItem('userKey');
   const buttonNextPath = userSubjectId ? `/post/${userSubjectId}/answer` : '/';
 
   return (
