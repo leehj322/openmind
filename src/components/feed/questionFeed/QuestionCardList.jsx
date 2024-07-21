@@ -61,7 +61,7 @@ function QuestionCardList({ questionCount, subjectId }) {
       }
     },
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.count < allPages.length * 5 ? undefined : allPages.length + 1;
+      return lastPage.results.length === 0 ? undefined : allPages.length + 1;
     },
   });
 
