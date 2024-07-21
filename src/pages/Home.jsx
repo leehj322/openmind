@@ -17,7 +17,13 @@ function Home() {
   return (
     <ThemeProvider theme={theme}>
       <button onClick={showModal}>열기</button>
-      <ModalComponent isOpen={modalIsOpen} onRequestClose={closeModal} profileImg={profile} name="go5rae" />
+      <ModalComponent
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        profileImg={profile}
+        name="go5rae"
+        subjectId="5179"
+      />
     </ThemeProvider>
   );
 }

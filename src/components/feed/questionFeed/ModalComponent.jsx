@@ -14,7 +14,7 @@ import { useNavigate } from 'react-router-dom';
  * @param {boolean} props.isOpen - 모달 창 열림 상태
  * @param {function} props.onRequestClose - 모달 창 닫기 요청 함수
  */
-function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
+function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId }) {
   //모달이 열렸을 때 다른 컴포넌트의 content 보지 않도록 숨겨줄 엘리먼트 정의
   Modal.setAppElement('#root');
   //useState를 사용해 상태 관리 : 초기값 빈 문자열
@@ -28,7 +28,7 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
 
   const handleAxiosRequest = () => {
     const request = {
-      subject_id: '7519', //페이지에서 받아야할 사용자의 고유 키 값
+      subject_id: subjectId, //페이지에서 받아야할 사용자의 고유 키 값
       content: textAreaValue,
       team: '8-4',
     };
@@ -39,7 +39,7 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
         console.log('handleAxiosRequest', response);
         onRequestClose();
         //모달 창 꺼진 후 개별 피드 페이지 불러오기
-        navigate('/post/7519'); //7519 : 페이지에서 받아야 할 사용자 고유 키 값
+        navigate(`/post/${response.data.subjectId}`); //7519 : 페이지에서 받아야 할 사용자 고유 키 값
       })
       .catch(error => console.log('request error', error));
     console.log('handleAxiosRequest : ', request);
@@ -73,7 +73,6 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
         <StyledBtnContainer>
           <SendQuestionBtn
             type="submit"
-            pagePath="/post/123"
             pagePath={handleAxiosRequest}
             width="100%"
             height="100%"
