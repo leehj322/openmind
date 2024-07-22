@@ -4,53 +4,29 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/@shared/Button';
-<<<<<<< HEAD
 import soft from '../assets/images/softarrow.png';
 import logo from '../assets/images/logo.svg';
 import icon from '../assets/images/input-img.png';
 import axios from 'axios';
-=======
-import SoftArrow from '../assets/images/softarrow.png';
-import DeepArrow from '../assets/images/deeparrow.png';
-import React, { useState } from 'react';
-import ThemeToggler from '../components/@shared/ThemeToggler';
-
-const ButtonContainer = styled.div`
-  padding: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
->>>>>>> dev
+import { getThemeColor } from '../utils/getThemeColor';
 
 function Home() {
-  //인풋창 아이콘
+  // State variables
   const [isIconVisible, setIsIconVisible] = useState(true);
-
-  const handleFocus = () => {
-    setIsIconVisible(false);
-  };
-
   const [name, setName] = useState('');
 
-  const handleInputChange = event => {
-    setName(event.target.value);
-  };
+  // Handlers
+  const handleFocus = () => setIsIconVisible(false);
+  const handleInputChange = event => setName(event.target.value);
 
   const navigate = useNavigate();
 
   const handleAxiosRequest = () => {
-    const request = {
-      name: name,
-      team: '8-4',
-    };
-
+    const request = { name, team: '8-4' };
     axios
       .post('https://openmind-api.vercel.app/8-4/subjects/', request)
       .then(response => {
         console.log('handleAxiosRequest', response);
-
         sessionStorage.setItem('userKey', response.data.id);
         navigate(`/post/${response.data.id}`);
       })
@@ -58,17 +34,19 @@ function Home() {
   };
 
   return (
-<<<<<<< HEAD
     <StyledContainer>
       <StyledLogo src={logo} alt="로고" />
       <StyledForm>
         <StyledInputContainer>
           {isIconVisible && <StyledIcon src={icon} alt="아이콘" />}
           <StyledInput
+            id="userName"
+            name="userName"
             type="text"
             placeholder="이름을 입력하세요"
             onChange={handleInputChange}
-            onFocus={handleFocus}></StyledInput>
+            onFocus={handleFocus}
+          />
           <StyledSubmitBtnContainer>
             <Button pagePath={handleAxiosRequest} type="submit" width="100%" btnColor="deep" disabled={!name.trim()}>
               질문 받기
@@ -82,23 +60,13 @@ function Home() {
           width="180px"
           height="43px"
           imgSrc={soft}
-          onClick={() => {
-            console.log('Question button clicked');
-          }}
-          style={{ border: '1.5px solid', borderColor: 'var(--brown40)' }}>
+          pagePath={() => navigate('list')}
+          style={{ border: '1.5px solid', borderColor: getThemeColor('brown40') }}>
           질문하러 가기
         </Button>
       </StyledBtnContainer>
       <StyledBgContainer />
     </StyledContainer>
-=======
-    <ButtonContainer>
-      <ThemeToggler />
-      <Button pagePath="/post/123" width="504px" height="100px" imgSrc={SoftArrow}>
-        질문하러 가기
-      </Button>
-    </ButtonContainer>
->>>>>>> dev
   );
 }
 
@@ -119,9 +87,8 @@ const StyledBtnContainer = styled.div`
   width: 100%;
   z-index: 100;
   box-sizing: border-box;
-
-  @media ${({ theme }) => theme.windowSize.mobile} {
-    top: calc(120px + 100px); /* 로고와 폼 컨테이너 사이의 위치 */
+  @media (min-width: 375px) and (max-width: 767px) {
+    top: calc(120px + 100px);
     left: 50%;
     transform: translateX(-50%);
     position: absolute;
@@ -140,7 +107,6 @@ const StyledBgContainer = styled.div`
   margin: 0;
   position: fixed;
   overflow: hidden;
-
   background-color: var(--gray20);
   background-image: url(${background});
   background-size: contain;
@@ -156,8 +122,7 @@ const StyledLogo = styled.img`
   transform: translate(-50%, -50%);
   width: 400px;
   z-index: 10;
-
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media (min-width: 375px) and (max-width: 767px) {
     width: 310px;
     height: 130px;
     top: 160px;
@@ -179,7 +144,6 @@ const StyledForm = styled.div`
   gap: 10px;
   padding: 32px;
   z-index: 20;
-
   background-color: var(--gray10);
 `;
 
@@ -194,7 +158,6 @@ const StyledInput = styled.input`
   border: 1px solid var(--gray40);
   border-radius: 5px;
   box-sizing: border-box;
-
   &::placeholder {
     padding-left: 12px;
   }

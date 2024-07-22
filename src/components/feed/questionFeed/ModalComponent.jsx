@@ -5,6 +5,7 @@ import messageIcon from '../../../assets/images/message-icon.png';
 import SendQuestionBtn from '../../@shared/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { getThemeColor } from '../../../utils/getThemeColor';
 
 /**
  * @param {object} props
@@ -82,7 +83,7 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
             width="100%"
             height="100%"
             disabled={!textAreaValue.trim()}
-            style={{ backgroundColor: 'var(--brown20)', color: 'var(--gray40)' }}>
+            style={{ backgroundColor: getThemeColor('--brown20'), color: getThemeColor('--gray40') }}>
             질문 보내기
           </SendQuestionBtn>
         </StyledBtnContainer>
@@ -107,7 +108,7 @@ const StyledModal = Modal.styled`
   flex-direction: column;
   align-items: center;
 
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media (min-width: 375px) and (max-width: 767px) {
     width: 90%;
     height: 80%;
     max-width: 300px;
@@ -151,7 +152,7 @@ const StyledCloseBtn = styled.button`
 
 const StyledModalContent = styled.main`
   margin: 15px 15px;
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media (min-width: 375px) and (max-width: 767px) {
     margin: 10px 15px;
   }
 `;
@@ -182,7 +183,7 @@ const StyledTextArea = styled.textarea`
   background-color: var(--brown10);
   border-radius: 8px;
   padding: 16px;
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media (min-width: 375px) and (max-width: 767px) {
     width: 279px;
     height: 338px;
   }
@@ -191,7 +192,7 @@ const StyledTextArea = styled.textarea`
 const StyledBtnContainer = styled.div`
   width: 558px;
   height: 50px;
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media (min-width: 375px) and (max-width: 767px) {
     margin-top: 0;
     width: 279px;
     height: 40px;
