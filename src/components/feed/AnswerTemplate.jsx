@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import profileImg from '../../assets/images/samples/profile-sample.png';
 import getElapsedPeriod from '../../utils/getElapsedPeriod';
 import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
+import { getThemeColor } from '../../utils/getThemeColor';
 
 /**
  * 답변자의 프로필과 질문 시점으로부터 지난 기간을 보여주고, 답변 내용을 담을 템플릿
@@ -19,7 +20,7 @@ function AnswerTemplate({ children, answerCreatedAt }) {
       <StyledProfileImage src={imageSource} alt={'프로필 이미지'} />
       <StyledAnswerArea>
         <div>
-          <span>{name}</span>
+          <span className={'actor-font'}>{name}</span>
           <span>{elapsedPeriod}</span>
         </div>
         {children}
@@ -55,7 +56,6 @@ const StyledAnswerArea = styled.section`
     margin-bottom: 4px;
 
     & span:first-child {
-      font-family: Actor;
       font-size: 18px;
       font-weight: 400;
       line-height: 24px;
@@ -64,7 +64,7 @@ const StyledAnswerArea = styled.section`
       font-size: 14px;
       font-weight: 500;
       line-height: 18px;
-      color: var(--gray40);
+      color: ${getThemeColor('gray40')};
     }
   }
 `;
