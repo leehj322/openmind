@@ -4,40 +4,32 @@ import styled, { css } from 'styled-components';
 import messageIcon from '../../../assets/images/message-icon.png';
 import Button from '../../@shared/Button';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { getThemeColor } from '../../../utils/getThemeColor';
 
 Modal.setAppElement('#root');
 
-function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId }) {
+function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
   const [textAreaValue, setTextAreaValue] = useState('');
   const navigate = useNavigate();
-
-  //console.log(themeSet, 'test');
+  const { subjectId } = useParams(); // useParams 훅을 사용하여 subjectId를 가져옵니다.
 
   const handleTextAreaChange = event => {
     setTextAreaValue(event.target.value);
   };
 
-  // const buttonStyle = css`
-  //   background-color: ${getThemeColor('brown20')};
-  //   color: ${getThemeColor('gray40')};
-  // `;
-
   const handleAxiosRequest = () => {
     const request = {
-      //페이지에서 받아야할 사용자의 고유 키 값
-      subject_id: subjectId, //페이지에서 받아야할 사용자의 고유 키 값
+      subject_id: subjectId,
       content: textAreaValue,
     };
-    //7519 : 페이지에서 받아야 할 사용자 고유 키 값
+
     axios
-      .post('https://openmind-api.vercel.app/8-4/subjects/${subjectId}/questions/', request)
+      .post(`https://openmind-api.vercel.app/8-4/subjects/${subjectId}/questions/`, request)
       .then(response => {
         console.log('handleAxiosRequest', response);
         onRequestClose();
-        //모달 창 꺼진 후 개별 피드 페이지 불러오기
-        navigate(`/post/${response.data.subjectId}`); //7519 : 페이지에서 받아야 할 사용자 고유 키 값
+        navigate(`/post/${response.data.subjectId}`);
       })
       .catch(error => console.log('request error', error));
     console.log('handleAxiosRequest : ', request);
