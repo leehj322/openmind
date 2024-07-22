@@ -68,7 +68,7 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId })
             width="100%"
             height="100%"
             disabled={!textAreaValue.trim()}
-            btncolor="deep">
+            $btnColor="deep">
             질문 보내기
           </Button>
         </StyledBtnContainer>

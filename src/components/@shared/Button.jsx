@@ -18,13 +18,13 @@ import styled, { css } from 'styled-components';
  * @returns {JSX.Element} 스타일된 버튼 JSX 엘리먼트
  */
 
-const StyledButton = styled.button.attrs(({ btncolor, ...rest }) => ({
+const StyledButton = styled.button.attrs(({ $btnColor, ...rest }) => ({
   // `btncolor`를 제외한 나머지 속성만 전달
   ...rest,
 }))`
-  background-color: ${({ btncolor }) =>
-    btncolor === 'soft' ? softButtonStyle.background : deepButtonStyle.background};
-  color: ${({ btncolor }) => (btncolor === 'soft' ? softButtonStyle.text : deepButtonStyle.text)};
+  background-color: ${({ $btnColor }) =>
+    $btnColor === 'soft' ? softButtonStyle.background : deepButtonStyle.background};
+  color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.text : deepButtonStyle.text)};
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -48,14 +48,14 @@ const StyledButton = styled.button.attrs(({ btncolor, ...rest }) => ({
 
   &:hover {
     border: 1.5px solid;
-    border-color: ${({ btncolor }) => (btncolor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
+    border-color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
     opacity: ${({ disabled }) => (disabled ? '0.5' : '1.0')};
   }
 
   &:active {
     border: 1px solid;
-    border-color: ${({ btncolor }) => (btncolor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
-    background-color: ${({ btncolor }) => (btncolor === 'soft' ? softButtonStyle.pressed : deepButtonStyle.pressed)};
+    border-color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
+    background-color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.pressed : deepButtonStyle.pressed)};
   }
 
   ${({ $style }) => $style}
@@ -68,7 +68,7 @@ function Button({
   pagePath,
   disabled,
   shape = 'square',
-  btncolor,
+  $btnColor,
   width,
   height,
   type = 'button',
@@ -86,13 +86,13 @@ function Button({
     }
   };
 
-  const btncolorDefault = btncolor || 'soft';
+  const btnColorDefault = $btnColor || 'soft';
 
   return (
     <StyledButton
       width={width}
       height={height}
-      btncolor={btncolorDefault}
+      $btnColor={btnColorDefault}
       onClick={handleClick}
       disabled={disabled}
       shape={shape}
