@@ -13,27 +13,26 @@ jobs:
     runs-on: ubuntu-latest # 최신 Ubuntu 환경에서 실행
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v4
         with:
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deploy-openmind
         uses: actions/deploy-pages@v4
 
-
   deploy-jsdoc: # jsdoc 배포 (/docs/jsdoc)
     runs-on: ubuntu-latest # 최신 Ubuntu 환경에서 실행
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v4
         with:
           path: './docs/jsdoc'
       - name: Deploy to GitHub Pages
