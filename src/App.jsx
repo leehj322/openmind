@@ -10,8 +10,8 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <GlobalStyle />
       <ThemeContextProvider>
-        <GlobalStyle />
         <PageRouter />
       </ThemeContextProvider>
     </QueryClientProvider>

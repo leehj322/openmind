@@ -49,6 +49,7 @@ const dark = {
   blue: 'var(--blue)',
   yellow: 'var(--yellow)',
   red: 'var(--red)',
+  pink: 'var(--pink)',
 
   blueFilter: 'invert(47%) sepia(95%) saturate(4530%) hue-rotate(202deg) brightness(97%) contrast(95%)',
   redFilter:
