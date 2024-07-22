@@ -1,0 +1,41 @@
+name: Deploy static content to Pages
+
+on:
+  push:
+    branches:
+      - main # main 브랜치에 푸시될 때 실행
+    paths:
+      - 'dist/**' # dist 폴더에 변화가 있을 때 감지
+      - 'docs/jsdoc/**' # jsdoc 폴더에 변화가 있을 떄 감지
+
+jobs:
+  deploy-openmind: # openmind 배포 (/dist)
+    runs-on: ubuntu-latest # 최신 Ubuntu 환경에서 실행
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deploy-openmind
+        uses: actions/deploy-pages@v4
+
+
+  deploy-jsdoc: # jsdoc 배포 (/docs/jsdoc)
+    runs-on: ubuntu-latest # 최신 Ubuntu 환경에서 실행
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './docs/jsdoc'
+      - name: Deploy to GitHub Pages
+        id: deploy-jsdoc
+        uses: actions/deploy-pages@v4
