@@ -40,6 +40,10 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
 
   border-radius: ${({ shape }) => (shape === 'square' ? '8px' : '200px')};
 
+  @media (min-width: 375px) and (max-width: 767px) {
+    font-size: 0.75rem; // 텍스트 크기 조정
+  }
+
   ${({ disabled }) =>
     disabled &&
     css`
@@ -85,7 +89,6 @@ function Button({
       if (onClick) {
         onClick();
       }
-      navigate(pagePath);
       navigate();
     }
   };

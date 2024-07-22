@@ -3,53 +3,55 @@ import { useState } from 'react';
 import styled from 'styled-components';
 import messageIcon from '../../../assets/images/message-icon.png';
 import SendQuestionBtn from '../../@shared/Button';
-import theme from '../../../styles/@shared/theme';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { getThemeColor } from '../../../utils/getThemeColor';
 
-/**
- * @param {object} props
- * @param {string} props.profileImg - 사용자 프로필 이미지
- * @param {string} props.name - 사용자 이름
- * @param {boolean} props.isOpen - 모달 창 열림 상태
- * @param {function} props.onRequestClose - 모달 창 닫기 요청 함수
- */
-function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId }) {
-  //모달이 열렸을 때 다른 컴포넌트의 content 보지 않도록 숨겨줄 엘리먼트 정의
-  Modal.setAppElement('#root');
-  //useState를 사용해 상태 관리 : 초기값 빈 문자열
+Modal.setAppElement('#root');
+
+function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [textAreaValue, setTextAreaValue] = useState('');
-  // 텍스트 영역의 값이 채워질 때 호출
+  const navigate = useNavigate();
+
+  const showModal = () => {
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    onRequestClose();
+  };
+
   const handleTextAreaChange = event => {
     setTextAreaValue(event.target.value);
   };
 
-  const navigate = useNavigate();
-
   const handleAxiosRequest = () => {
     const request = {
-      subject_id: subjectId, //페이지에서 받아야할 사용자의 고유 키 값
+      subject_id: '7519',
       content: textAreaValue,
       team: '8-4',
     };
-    //7519 : 페이지에서 받아야 할 사용자 고유 키 값
+
     axios
       .post('https://openmind-api.vercel.app/8-4/subjects/7519/questions/', request)
       .then(response => {
         console.log('handleAxiosRequest', response);
-        onRequestClose();
-        //모달 창 꺼진 후 개별 피드 페이지 불러오기
-        navigate(`/post/${response.data.subjectId}`); //7519 : 페이지에서 받아야 할 사용자 고유 키 값
+        closeModal();
+        navigate('/post/7519');
       })
       .catch(error => console.log('request error', error));
-    console.log('handleAxiosRequest : ', request);
   };
 
   return (
     <div>
-      {/* 모달 창 */}
+      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
+        <StyledProfileImg src={profileImg} alt="프로필" />
+        <StyledUserName>{name}</StyledUserName>
+        <button onClick={closeModal}>닫기</button>
+      </Modal>
       <StyledModal isOpen={isOpen} onRequestClose={onRequestClose}>
-        {/* 모달 창 - header */}
         <StyledModalHeader>
           <StyledModalTitleWrapper>
             <StyledModalIcon src={messageIcon} alt="말풍선" />
@@ -57,27 +59,22 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId })
           </StyledModalTitleWrapper>
           <StyledCloseBtn onClick={onRequestClose}>X</StyledCloseBtn>
         </StyledModalHeader>
-        {/* 모달 창 - main */}
         <StyledModalContent>
           <StyledUserInfo>
             To.
             <StyledProfileImg src={profileImg} />
             <StyledUserName>{name}</StyledUserName>
           </StyledUserInfo>
-          <StyledTextArea
-            placeholder="질문을 입력해주세요!"
-            value={textAreaValue}
-            onChange={handleTextAreaChange}></StyledTextArea>
+          <StyledTextArea placeholder="질문을 입력해주세요!" value={textAreaValue} onChange={handleTextAreaChange} />
         </StyledModalContent>
-        {/* 모달 창 버튼 */}
         <StyledBtnContainer>
           <SendQuestionBtn
             type="submit"
-            pagePath={handleAxiosRequest}
+            onClick={handleAxiosRequest}
             width="100%"
             height="100%"
             disabled={!textAreaValue.trim()}
-            style={{ backgroundColor: 'var(--brown20)', color: 'var(--gray40)' }}>
+            style={{ backgroundColor: getThemeColor('brown20'), color: getThemeColor('gray40') }}>
             질문 보내기
           </SendQuestionBtn>
         </StyledBtnContainer>
@@ -85,7 +82,9 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId })
     </div>
   );
 }
+
 export default ModalComponent;
+
 const StyledModal = styled(Modal)`
   width: 612px;
   height: 420px;
@@ -99,13 +98,14 @@ const StyledModal = styled(Modal)`
   display: flex;
   flex-direction: column;
   align-items: center;
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media (min-width: 375px) and (max-width: 767px) {
     width: 90%;
     height: 80%;
     max-width: 300px;
     max-height: 600px;
   }
 `;
+
 const StyledModalHeader = styled.header`
   width: 100%;
   display: flex;
@@ -115,19 +115,23 @@ const StyledModalHeader = styled.header`
   border-bottom: 0.5px solid var(--gray30);
   height: 50px;
 `;
+
 const StyledModalTitleWrapper = styled.div`
   margin: 15px;
   display: flex;
   align-items: center;
   gap: 5px;
 `;
+
 const StyledModalTitle = styled.h2`
   font-size: 18px;
 `;
+
 const StyledModalIcon = styled.img`
   width: 25px;
   height: 25px;
 `;
+
 const StyledCloseBtn = styled.button`
   font-size: 28px;
   cursor: pointer;
@@ -135,12 +139,14 @@ const StyledCloseBtn = styled.button`
   font-weight: 400;
   margin-right: 15px;
 `;
+
 const StyledModalContent = styled.main`
   margin: 15px 15px;
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media (min-width: 375px) and (max-width: 767px) {
     margin: 10px 15px;
   }
 `;
+
 const StyledUserInfo = styled.div`
   padding-left: 5px;
   display: flex;
@@ -148,15 +154,18 @@ const StyledUserInfo = styled.div`
   gap: 7px;
   font-size: 23px;
 `;
+
 const StyledProfileImg = styled.img`
   width: 35px;
   height: 35px;
   border-radius: 50%;
 `;
+
 const StyledUserName = styled.h2`
   margin-left: 5px;
   font-size: 20px;
 `;
+
 const StyledTextArea = styled.textarea`
   margin-top: 15px;
   width: 558px;
@@ -164,15 +173,16 @@ const StyledTextArea = styled.textarea`
   background-color: var(--brown10);
   border-radius: 8px;
   padding: 16px;
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media (min-width: 375px) and (max-width: 767px) {
     width: 279px;
     height: 338px;
   }
 `;
+
 const StyledBtnContainer = styled.div`
   width: 558px;
   height: 50px;
-  @media ${({ theme }) => theme.windowSize.mobile} {
+  @media (min-width: 375px) and (max-width: 767px) {
     margin-top: 0;
     width: 279px;
     height: 40px;
