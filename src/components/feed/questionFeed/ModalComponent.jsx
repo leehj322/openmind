@@ -32,7 +32,7 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId })
     };
     //7519 : 페이지에서 받아야 할 사용자 고유 키 값
     axios
-      .post('https://openmind-api.vercel.app/8-4/subjects/7519/questions/', request)
+      .post('https://openmind-api.vercel.app/8-4/subjects/${subjectId}/questions/', request)
       .then(response => {
         console.log('handleAxiosRequest', response);
         onRequestClose();
