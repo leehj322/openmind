@@ -129,7 +129,7 @@ const StyledModalIcon = styled.img`
 const StyledCloseBtn = styled.button`
   font-size: 28px;
   cursor: pointer;
-  color: #f5a9a9;
+  color: var(--pink);
   font-weight: 400;
   margin-right: 15px;
 `;
