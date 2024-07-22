@@ -1,4 +1,4 @@
-import Modal from 'styled-react-modal';
+import Modal from 'react-modal';
 import { useState } from 'react';
 import styled, { css } from 'styled-components';
 import messageIcon from '../../../assets/images/message-icon.png';
@@ -71,7 +71,7 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
 
 export default ModalComponent;
 
-const StyledModal = Modal.styled`
+const StyledModal = styled(Modal)`
   width: 612px;
   height: 420px;
   position: absolute;
