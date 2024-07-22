@@ -87,6 +87,7 @@ function AnswerFeed() {
       <StyledAnswerFeedArea>
         <Button
           onClick={() => handleDeleteButtonClick(id)}
+          pagePath={'/'}
           shape={'pill'}
           btnColor={'deep'}
           style={deleteButtonStyle}
