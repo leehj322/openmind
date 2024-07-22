@@ -18,10 +18,7 @@ import styled, { css } from 'styled-components';
  * @returns {JSX.Element} 스타일된 버튼 JSX 엘리먼트
  */
 
-const StyledButton = styled.button.attrs(({ $btnColor, ...rest }) => ({
-  // `btncolor`를 제외한 나머지 속성만 전달
-  ...rest,
-}))`
+const StyledButton = styled(({ $btnColor, ...rest }) => <button {...rest} />)`
   background-color: ${({ $btnColor }) =>
     $btnColor === 'soft' ? softButtonStyle.background : deepButtonStyle.background};
   color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.text : deepButtonStyle.text)};
@@ -49,7 +46,7 @@ const StyledButton = styled.button.attrs(({ $btnColor, ...rest }) => ({
   &:hover {
     border: 1.5px solid;
     border-color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
-    opacity: ${({ disabled }) => (disabled ? '0.5' : '1.0')};
+    opacity: ${disabled => (disabled ? '0.5' : '1.0')};
   }
 
   &:active {
