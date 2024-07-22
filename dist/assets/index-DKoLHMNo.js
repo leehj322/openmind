@@ -66,7 +66,7 @@ var Fd = { exports: {} },
   $ = {};
 /**
  * @license React
- * react.production.min.js test
+ * react.production.min.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
  *
