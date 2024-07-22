@@ -1,32 +1,14 @@
 /* eslint-disable no-console */
 import React from 'react';
-import styled, { keyframes } from 'styled-components';
 
 import { StyledAnswerFeedCardListContainer } from '../../../styles/feed/answerFeedCardListStyles';
 import { StyledQuestionCountArea } from '../../../styles/feed/questionCountStyles';
 import { StyledMessagesImg } from '../../../styles/feed/messagesImgStyles';
 
 import MessagesIconUrl from '../../../assets/images/ic_Messages.svg';
-import SpinnerImg from '../../../assets/images/spinner.png';
 import AnswerCard from './AnswerCard';
 import { useInfiniteQueryWithScroll } from '../../../hooks/useInfiniteQueryWithScroll';
-
-const rotate = keyframes`
-  100% {
-    transform: rotate(360deg);
-  }
-`;
-
-const StyledSpinner = styled.div`
-  width: 48px;
-  height: 48px;
-  margin: 20px auto;
-  background-image: url('${SpinnerImg}');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  animation: ${rotate} 1.5s linear infinite;
-`;
+import Spinner from '../../../styles/feed/spinnerStyles';
 
 function AnswerCardList({ questionCount, subjectId }) {
   const { data, observerRef, hasNextPage, isLoading, isError } = useInfiniteQueryWithScroll(subjectId);
@@ -66,7 +48,7 @@ function AnswerCardList({ questionCount, subjectId }) {
       )}
       {hasNextPage && (
         <div ref={observerRef}>
-          <StyledSpinner />
+          <Spinner />
         </div>
       )}
     </StyledAnswerFeedCardListContainer>
