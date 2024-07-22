@@ -13,6 +13,8 @@ const ButtonContainer = styled.div`
   height: 100vh;
 `;
 
+// 수정함!
+
 function Home() {
   return (
     <ButtonContainer>
