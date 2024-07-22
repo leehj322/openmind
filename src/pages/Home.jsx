@@ -4,10 +4,12 @@ import { ThemeProvider } from 'styled-components';
 import theme from '../styles/@shared/theme';
 import { useState } from 'react';
 import { useThemeSetting } from '../contexts/ThemeContextProvider';
+import showToast from '../components/@shared/Toast';
 function Home() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const showModal = () => {
     setModalIsOpen(true);
+    showToast('토스트', 2000);
   };
   const closeModal = () => {
     setModalIsOpen(false);
