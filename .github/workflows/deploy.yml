@@ -8,31 +8,41 @@ on:
       - 'dist/**' # dist 폴더에 변화가 있을 때 감지
       - 'docs/jsdoc/**' # jsdoc 폴더에 변화가 있을 떄 감지
 
+  workflow_dispatch: # 해당 workflow 수동 실행 버튼 추가
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   deploy-openmind: # openmind 배포 (/dist)
+    environment:
+      name: github-pages
     runs-on: ubuntu-latest # 최신 Ubuntu 환경에서 실행
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
       - name: Deploy to GitHub Pages
         id: deploy-openmind
         uses: actions/deploy-pages@v4
-
-  deploy-jsdoc: # jsdoc 배포 (/docs/jsdoc)
+  deploy-jsdoc: # openmind 배포 (/dist)
+    environment:
+      name: github-pages
     runs-on: ubuntu-latest # 최신 Ubuntu 환경에서 실행
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './docs/jsdoc'
       - name: Deploy to GitHub Pages
