@@ -4,6 +4,7 @@ import PageRouter from './PageRouter';
 import '../src/styles/@shared/init.css';
 import '../src/components/@shared/Button';
 import ThemeContextProvider from './contexts/ThemeContextProvider';
+import { Toaster } from 'react-hot-toast';
 
 function App() {
   const queryClient = new QueryClient();
@@ -13,6 +14,7 @@ function App() {
       <GlobalStyle />
       <ThemeContextProvider>
         <PageRouter />
+        <Toaster />
       </ThemeContextProvider>
     </QueryClientProvider>
   );
