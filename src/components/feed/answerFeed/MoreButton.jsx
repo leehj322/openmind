@@ -2,10 +2,12 @@ import styled from 'styled-components';
 import moreIcon from '../../../assets/images/more-icon.png';
 import useToggle from '../../../hooks/useToggle';
 import DropdownBox from '../../@shared/DropdownBox';
+import EditIcon from '../../../assets/images/edit-icon.png';
+import RejectIcon from '../../../assets/images/reject-icon.png';
 
 const DROPDOWN_ITEM_LIST = [
-  { title: '답변 수정', value: 'edit', url: null },
-  { title: '답변 거절', value: 'reject', url: null },
+  { title: '답변 수정', value: 'edit', url: EditIcon },
+  { title: '답변 거절', value: 'reject', url: RejectIcon },
 ];
 
 /**
@@ -33,9 +35,9 @@ function MoreButton({ onEditButtonClick, onRejectButtonClick }) {
       <img src={moreIcon} alt={'더보기 아이콘'} />
       <DropdownBox
         isDropdownVisible={isOpen}
-        minWidth={103}
+        minWidth={110}
         topPosition={2.5}
-        leftPosition={-4}
+        leftPosition={-70}
         itemList={DROPDOWN_ITEM_LIST}
         isCurrentStateHighlight={false}
         onItemClick={handleDropdownItemClick}
@@ -48,8 +50,12 @@ export default MoreButton;
 
 const StyledMoreButton = styled.button`
   position: relative;
-  & img {
+  & > img {
     height: 26px;
     width: 26px;
   }
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 18px;
+  text-align: left;
 `;
