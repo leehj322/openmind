@@ -1,11 +1,28 @@
+import styled from 'styled-components';
 import PageNavigator from './PageNavigator';
 import SubjectCard from './SubjectCard';
-import StyledSubjectGrid from './StyledSubjectGrid';
-import { GRID_BREAKPOINT, NUM_OF_SUBJECTS } from '../../constants/subjectGrid';
 import useSubjectsQuery from '../../queries/useSubjectsQuery';
 import useWindowSize from '../../hooks/useWindowSize';
 import { useState } from 'react';
 import createCenteredArray from '../../utils/createCenteredArray';
+
+// 다른 반응형과 다른 px값에서 GRID가 바뀌어서 GRID_BREAKPOINT 상수 추가
+const GRID_BREAKPOINT = { tablet: 868, mobile: 767 };
+const NUM_OF_SUBJECTS = { pc: 8, other: 6 }; // limit 값 담은 상수
+
+const SubjectList = styled.ol`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+
+  @media screen and (max-width: ${GRID_BREAKPOINT.tablet}px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: 375px) and (max-width: ${GRID_BREAKPOINT.mobile}px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+`;
 
 function SubjectListGrid({ sortBy }) {
   const windowSize = useWindowSize();
@@ -131,11 +148,11 @@ function SubjectListGrid({ sortBy }) {
 
   return (
     <>
-      <StyledSubjectGrid>
+      <SubjectList>
         {results.map(result => (
           <SubjectCard key={result.id} subject={result} />
         ))}
-      </StyledSubjectGrid>
+      </SubjectList>
       <PageNavigator
         currentPage={currentPage}
         pageNumList={pageNumList}

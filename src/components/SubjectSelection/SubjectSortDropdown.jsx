@@ -2,28 +2,28 @@ import styled from 'styled-components';
 import DropdownBox from '../@shared/DropdownBox';
 import useToggle from '../../hooks/useToggle';
 import arrowDownImgUrl from '../../assets/images/Arrow-down.svg';
+import filter from '../../styles/@shared/filter';
 
-const StyledDropdownToggler = styled.div`
+const DropdownToggler = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 4px;
   position: relative;
 
-  border: 1px solid ${({ theme, $isDropdownVisible }) => ($isDropdownVisible ? theme.gray60 : theme.gray40)};
+  border: 1px solid ${({ $isDropdownVisible }) => ($isDropdownVisible ? 'var(--gray60)' : 'var(--gray40)')};
   border-radius: 8px;
   width: 79px;
   height: 34px;
 
-  color: ${({ theme, $isDropdownVisible }) => ($isDropdownVisible ? theme.gray60 : theme.gray40)};
-  background-color: ${({ theme }) => theme.gray10};
+  color: ${({ $isDropdownVisible }) => ($isDropdownVisible ? 'var(--gray60)' : 'var(--gray40)')};
   font-size: 14px;
   font-weight: 500;
 
   & img {
     width: 14px;
     height: 14px;
-    filter: ${({ theme, $isDropdownVisible }) => ($isDropdownVisible ? theme.gray60Filter : '')};
+    filter: ${({ $isDropdownVisible }) => ($isDropdownVisible ? filter.gray60 : '')};
     transform: ${({ $isDropdownVisible }) => ($isDropdownVisible ? 'rotate(180deg)' : '')};
   }
 
@@ -45,7 +45,7 @@ function SubjectSortDropdown({ sortBy, onSortChoice }) {
   const currentItemTitle = ITEM_LIST.find(item => item.value === sortBy).title;
 
   return (
-    <StyledDropdownToggler onClick={handleTogglerClick} $isDropdownVisible={isVisible}>
+    <DropdownToggler onClick={handleTogglerClick} $isDropdownVisible={isVisible}>
       {currentItemTitle}
       <img src={arrowDownImgUrl} alt="드롭다운화살표" />
       <DropdownBox
@@ -56,7 +56,7 @@ function SubjectSortDropdown({ sortBy, onSortChoice }) {
         itemList={ITEM_LIST}
         onItemClick={onSortChoice}
       />
-    </StyledDropdownToggler>
+    </DropdownToggler>
   );
 }
 
