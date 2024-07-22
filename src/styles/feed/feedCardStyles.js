@@ -7,6 +7,8 @@ export const StyledFeedCardContainer = styled.div`
   gap: 32px;
   background-color: ${getThemeColor('gray10')};
 
+  background-color: var(--gray10);
+
   max-width: 684px;
 
   padding: 32px 32px 20px 32px;
