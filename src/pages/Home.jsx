@@ -4,10 +4,25 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../components/@shared/Button';
+<<<<<<< HEAD
 import soft from '../assets/images/softarrow.png';
 import logo from '../assets/images/logo.svg';
 import icon from '../assets/images/input-img.png';
 import axios from 'axios';
+=======
+import SoftArrow from '../assets/images/softarrow.png';
+import DeepArrow from '../assets/images/deeparrow.png';
+import React, { useState } from 'react';
+import ThemeToggler from '../components/@shared/ThemeToggler';
+
+const ButtonContainer = styled.div`
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+>>>>>>> dev
 
 function Home() {
   //인풋창 아이콘
@@ -43,6 +58,7 @@ function Home() {
   };
 
   return (
+<<<<<<< HEAD
     <StyledContainer>
       <StyledLogo src={logo} alt="로고" />
       <StyledForm>
@@ -75,6 +91,14 @@ function Home() {
       </StyledBtnContainer>
       <StyledBgContainer />
     </StyledContainer>
+=======
+    <ButtonContainer>
+      <ThemeToggler />
+      <Button pagePath="/post/123" width="504px" height="100px" imgSrc={SoftArrow}>
+        질문하러 가기
+      </Button>
+    </ButtonContainer>
+>>>>>>> dev
   );
 }
 

@@ -16,8 +16,8 @@ const StyledAnswerStatus = styled.article`
   height: fit-content;
   width: fit-content;
   padding: 4px 12px;
-  border: ${({ theme }) => `1px solid ${theme.borderBrown}`};
-  color: ${({ theme }) => theme.borderBrown};
+  border: ${({ theme }) => `1px solid ${theme.brown40}`};
+  color: ${({ theme }) => theme.brown40};
 
   font-size: 14px;
   font-weight: 500;

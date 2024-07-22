@@ -6,12 +6,7 @@ import { useState, useEffect } from 'react';
 import useSelectReactionMutation from '../../queries/useReactionMutation';
 import ConfettiExplosion from 'react-confetti-explosion';
 import { EXPLODE_PROPS, LIMIT_DISLIKE_COUNT } from '../../constants/feedCard';
-
-const LIKE_ICON_FILTER =
-  'brightness(0) saturate(100%) invert(51%) sepia(61%) saturate(7062%) hue-rotate(203deg) brightness(97%) contrast(95%)';
-
-const DISLIKE_ICON_FILTER =
-  'brightness(0) saturate(100%) invert(27%) sepia(26%) saturate(3214%) hue-rotate(330deg) brightness(103%) contrast(101%)';
+import { getThemeColor } from '../../utils/getThemeColor';
 
 /**
  * 좋아요 싫어요를 보여주고 선택할 수 있다
@@ -108,7 +103,7 @@ const StyledReactionContainer = styled.section`
   display: flex;
   gap: 15px;
   align-items: center;
-  border-top: 1px solid var(--gray30);
+  border-top: 1px solid ${getThemeColor('gray30')};
   padding-top: 15px;
 `;
 
@@ -118,6 +113,7 @@ const StyledReactionButton = styled.button`
   /* background-color: red; */
   padding: 10px 8px;
   border-radius: 30px;
+  color: ${getThemeColor('defaultFont')};
 
   font-size: 14px;
   font-weight: 500;
@@ -125,19 +121,19 @@ const StyledReactionButton = styled.button`
   text-align: left;
 
   &.like-button {
-    color: ${({ $reactedType }) => $reactedType === 'like' && 'var(--blue)'};
+    color: ${({ $reactedType, theme }) => $reactedType === 'like' && theme.blue};
 
     & .like-icon {
       ${({ $isExplode }) => $isExplode && jelloHorizontalAnimation}
-      filter: ${({ $reactedType }) => $reactedType === 'like' && LIKE_ICON_FILTER};
+      filter: ${({ $reactedType, theme }) => $reactedType === 'like' && theme.blueFilter};
     }
   }
 
   &.dislike-button {
-    color: ${({ $reactedType }) => $reactedType === 'dislike' && 'var(--red)'};
+    color: ${({ $reactedType, theme }) => $reactedType === 'dislike' && theme.red};
 
     & .dislike-icon {
-      filter: ${({ $reactedType }) => $reactedType === 'dislike' && DISLIKE_ICON_FILTER};
+      filter: ${({ $reactedType, theme }) => $reactedType === 'dislike' && theme.redFilter};
     }
   }
 
@@ -145,20 +141,20 @@ const StyledReactionButton = styled.button`
     cursor: pointer;
 
     &.like-button {
-      color: var(--blue);
+      color: ${getThemeColor('blue')};
 
       & .like-icon {
         // 폭죽이 터지는 중이 아니거나, $reactedType가 falsy값일 경우에만 흔들림 애니메이션 적용
         // !$isExplode이 없으면 스타일 충돌이 일어날 수 있음, 동적인 변수를 사용하는데 위치에 따른 덮어쓰기는 좋지 않다고 판단
         ${({ $isExplode, $reactedType }) => !$isExplode && !$reactedType && shakeLeftAnimation}
-        filter: ${LIKE_ICON_FILTER};
+        filter: ${getThemeColor('blueFilter')};
       }
     }
 
     &.dislike-button {
-      color: var(--red);
+      color: ${getThemeColor('red')};
       & .dislike-icon {
-        filter: ${DISLIKE_ICON_FILTER};
+        filter: ${getThemeColor('redFilter')};
       }
     }
   }
