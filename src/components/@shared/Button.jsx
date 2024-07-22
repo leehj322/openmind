@@ -22,10 +22,10 @@ import styled, { css } from 'styled-components';
   
  */
 
-const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
-  background-color: ${({ btnColor }) =>
-    btnColor === 'soft' ? softButtonStyle.background : deepButtonStyle.background};
-  color: ${({ btnColor }) => (btnColor === 'soft' ? softButtonStyle.text : deepButtonStyle.text)};
+const StyledButton = styled(({ $btnColor, ...rest }) => <button {...rest} />)`
+  background-color: ${({ $btnColor }) =>
+    $btnColor === 'soft' ? softButtonStyle.background : deepButtonStyle.background};
+  color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.text : deepButtonStyle.text)};
   border: none;
   border-radius: 8px;
   font-size: 16px;
@@ -40,10 +40,6 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
 
   border-radius: ${({ shape }) => (shape === 'square' ? '8px' : '200px')};
 
-  @media (min-width: 375px) and (max-width: 767px) {
-    font-size: 0.75rem; // 텍스트 크기 조정
-  }
-
   ${({ disabled }) =>
     disabled &&
     css`
@@ -53,14 +49,14 @@ const StyledButton = styled(({ btnColor, ...rest }) => <button {...rest} />)`
 
   &:hover {
     border: 1.5px solid;
-    border-color: ${({ btnColor }) => (btnColor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
+    border-color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
     opacity: ${disabled => (disabled ? '0.5' : '1.0')};
   }
 
   &:active {
     border: 1px solid;
-    border-color: ${({ btnColor }) => (btnColor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
-    background-color: ${({ btnColor }) => (btnColor === 'soft' ? softButtonStyle.pressed : deepButtonStyle.pressed)};
+    border-color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.border : deepButtonStyle.border)};
+    background-color: ${({ $btnColor }) => ($btnColor === 'soft' ? softButtonStyle.pressed : deepButtonStyle.pressed)};
   }
 
   ${({ style }) =>
@@ -77,7 +73,7 @@ function Button({
   pagePath,
   disabled,
   shape = 'square',
-  btnColor,
+  $btnColor,
   width,
   height,
   type = 'button',
@@ -86,22 +82,24 @@ function Button({
   const navigate = useNavigate();
 
   const handleClick = () => {
-    if (!disabled && pagePath) {
+    if (!disabled) {
       if (onClick) {
         onClick();
       }
-      navigate();
+      if (pagePath) {
+        navigate(pagePath);
+      }
     }
   };
 
-  const btnColorDefault = btnColor || 'soft';
+  const btnColorDefault = $btnColor || 'soft';
 
   return (
     <StyledButton
       width={width}
       height={height}
-      btnColor={btnColorDefault}
-      onClick={pagePath}
+      $btnColor={btnColorDefault}
+      onClick={handleClick}
       disabled={disabled}
       shape={shape}
       type={type}

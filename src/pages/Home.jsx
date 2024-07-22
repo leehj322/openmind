@@ -27,7 +27,7 @@ function Home() {
       .post('https://openmind-api.vercel.app/8-4/subjects/', request)
       .then(response => {
         console.log('handleAxiosRequest', response);
-        sessionStorage.setItem('userKey', response.data.id);
+        localStorage.setItem('userKey', response.data.id);
         navigate(`/post/${response.data.id}`);
       })
       .catch(error => console.log('request error', error));
@@ -48,7 +48,7 @@ function Home() {
             onFocus={handleFocus}
           />
           <StyledSubmitBtnContainer>
-            <Button pagePath={handleAxiosRequest} type="submit" width="100%" btnColor="deep" disabled={!name.trim()}>
+            <Button onClick={handleAxiosRequest} type="submit" width="100%" $btnColor="deep" disabled={!name.trim()}>
               질문 받기
             </Button>
           </StyledSubmitBtnContainer>
@@ -60,7 +60,7 @@ function Home() {
           width="180px"
           height="43px"
           imgSrc={soft}
-          pagePath={() => navigate('list')}
+          pagePath="/list"
           style={{ border: '1.5px solid', borderColor: getThemeColor('brown40') }}>
           질문하러 가기
         </Button>
