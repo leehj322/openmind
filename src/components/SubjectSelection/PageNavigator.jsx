@@ -27,12 +27,16 @@ const StyledNavBtn = styled.div`
 `;
 
 function NavArrowBtn({ children, onNavBtnClick, isVisible }) {
-  return <StyledNavBtn onClick={onNavBtnClick}>{isVisible && children}</StyledNavBtn>;
+  return (
+    <StyledNavBtn className={'actor-font'} onClick={onNavBtnClick}>
+      {isVisible && children}
+    </StyledNavBtn>
+  );
 }
 
 function NavNumBtn({ children, isCurrentPage, onNavBtnClick }) {
   return (
-    <StyledNavBtn $isCurrentPage={isCurrentPage} onClick={onNavBtnClick}>
+    <StyledNavBtn className={'actor-font'} $isCurrentPage={isCurrentPage} onClick={onNavBtnClick}>
       {children}
     </StyledNavBtn>
   );
