@@ -6,4 +6,4 @@ export const EXPLODE_PROPS = {
   width: 2000,
 };
 
-export const LIMIT_DISLIKE_COUNT = 10;
+export const LIMIT_DISLIKE_COUNT = 1;
