@@ -1,4 +1,4 @@
-import { Route, Routes, HashRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import AnswererSelector from './pages/AnswererSelector';
 import AnswerManger from './pages/AnswerManger';
 import QnAPortal from './pages/QnAPortal';
@@ -7,7 +7,7 @@ import QuestionArchive from './pages/QuestionArchive';
 
 function PageRouter() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route path={'/'} element={<QnAPortal />} />
         <Route path={'/list'} element={<AnswererSelector />} />
@@ -18,7 +18,7 @@ function PageRouter() {
         {/* 팀원분들 Suspense + tanstack-query 예시용 샘플 */}
         <Route path={'/querysample'} element={<QuerySample />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
