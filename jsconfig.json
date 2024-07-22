@@ -3,6 +3,6 @@
     "module": "commonjs",
     "target": "ES6"
   },
-  "include": ["src"],
+  "include": ["src", "src/pages/QuestionFeed.jsx"],
   "exclude": ["node_modules", "dist"]
 }
