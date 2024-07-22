@@ -22,8 +22,4 @@ export const deepButtonStyle = {
 export const ArrowImg = styled.img`
   width: 20px;
   height: 20px;
-
-  @media (min-width: 375px) and (max-width: 767px) {
-    width: 15px; // 작은 화면에서 이미지 크기 조정
-  }
 `;

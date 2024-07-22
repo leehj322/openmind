@@ -1,56 +1,50 @@
 import Modal from 'react-modal';
 import { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import messageIcon from '../../../assets/images/message-icon.png';
-import SendQuestionBtn from '../../@shared/Button';
+import Button from '../../@shared/Button';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { getThemeColor } from '../../../utils/getThemeColor';
 
 Modal.setAppElement('#root');
 
-function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId }) {
   const [textAreaValue, setTextAreaValue] = useState('');
   const navigate = useNavigate();
 
-  const showModal = () => {
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-    onRequestClose();
-  };
+  //console.log(themeSet, 'test');
 
   const handleTextAreaChange = event => {
     setTextAreaValue(event.target.value);
   };
 
+  // const buttonStyle = css`
+  //   background-color: ${getThemeColor('brown20')};
+  //   color: ${getThemeColor('gray40')};
+  // `;
+
   const handleAxiosRequest = () => {
     const request = {
-      subject_id: '7519',
+      //페이지에서 받아야할 사용자의 고유 키 값
+      subject_id: subjectId, //페이지에서 받아야할 사용자의 고유 키 값
       content: textAreaValue,
-      team: '8-4',
     };
-
+    //7519 : 페이지에서 받아야 할 사용자 고유 키 값
     axios
       .post('https://openmind-api.vercel.app/8-4/subjects/7519/questions/', request)
       .then(response => {
         console.log('handleAxiosRequest', response);
-        closeModal();
-        navigate('/post/7519');
+        onRequestClose();
+        //모달 창 꺼진 후 개별 피드 페이지 불러오기
+        navigate(`/post/${response.data.subjectId}`); //7519 : 페이지에서 받아야 할 사용자 고유 키 값
       })
       .catch(error => console.log('request error', error));
+    console.log('handleAxiosRequest : ', request);
   };
 
   return (
     <div>
-      <Modal isOpen={modalIsOpen} onRequestClose={closeModal}>
-        <StyledProfileImg src={profileImg} alt="프로필" />
-        <StyledUserName>{name}</StyledUserName>
-        <button onClick={closeModal}>닫기</button>
-      </Modal>
       <StyledModal isOpen={isOpen} onRequestClose={onRequestClose}>
         <StyledModalHeader>
           <StyledModalTitleWrapper>
@@ -68,15 +62,15 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
           <StyledTextArea placeholder="질문을 입력해주세요!" value={textAreaValue} onChange={handleTextAreaChange} />
         </StyledModalContent>
         <StyledBtnContainer>
-          <SendQuestionBtn
+          <Button
             type="submit"
             onClick={handleAxiosRequest}
             width="100%"
             height="100%"
             disabled={!textAreaValue.trim()}
-            style={{ backgroundColor: getThemeColor('brown20'), color: getThemeColor('gray40') }}>
+            btncolor="deep">
             질문 보내기
-          </SendQuestionBtn>
+          </Button>
         </StyledBtnContainer>
       </StyledModal>
     </div>
