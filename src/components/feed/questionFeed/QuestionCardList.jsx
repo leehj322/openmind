@@ -1,8 +1,6 @@
 /* eslint-disable no-console */
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useInView } from 'react-intersection-observer';
-import { useInfiniteQuery } from '@tanstack/react-query';
 
 import { StyledFeedCardListContainer } from '../../../styles/feed/feedCardListStyles';
 import { StyledQuestionCountArea } from '../../../styles/feed/questionCountStyles';
@@ -11,7 +9,7 @@ import { StyledMessagesImg } from '../../../styles/feed/messagesImgStyles';
 import MessagesIconUrl from '../../../assets/images/ic_Messages.svg';
 import SpinnerImg from '../../../assets/images/spinner.png';
 import QuestionCard from './QuestionCard';
-import { axiosInstance } from '../../../apis/axiosSetup';
+import { useInfiniteQueryWithScroll } from '../../../hooks/useInfiniteQueryWithScroll';
 
 const rotate = keyframes`
   100% {
@@ -31,46 +29,7 @@ const StyledSpinner = styled.div`
 `;
 
 function QuestionCardList({ questionCount, subjectId }) {
-  // 관찰하는 객체를 ref로 설정
-  const [observerRef, inView] = useInView();
-  // useInfiniteQuery 훅을 사용하여 무한 스크롤 데이터를 관리
-  const { data, fetchNextPage, hasNextPage, isLoading, isError } = useInfiniteQuery({
-    queryKey: ['questions', subjectId],
-    queryFn: async ({ pageParam = 0 }) => {
-      try {
-        // subjectId가 없으면 빈 데이터를 반환하여 오류 방지
-        if (!subjectId) {
-          return { pages: [] };
-        }
-        const { data: responseData } = await axiosInstance.get(`/subjects/${subjectId}/questions/`, {
-          params: {
-            limit: 5,
-            offset: pageParam * 5, // 페이지 번호에 따라 오프셋 계산
-          },
-        });
-        return responseData;
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        throw new Error('Failed to fetch data');
-      }
-    },
-    // 마지막 페이지의 실제 데이터 수를 기반으로 계산
-    // lastPage.results.length: 현재 페이지의 데이터 수
-    getNextPageParam: (lastPage, allPages) => {
-      const currentPage = allPages.length; // 현재 페이지 번호
-      const nextPageHasData = lastPage.results.length > 0; // 다음 페이지에 데이터가 있는지 여부
-
-      return nextPageHasData ? currentPage : undefined;
-    },
-  });
-
-  // 스크롤 시에 observerRef가 노출되면 다음 페이지를 불러오는 함수 실행
-  useEffect(() => {
-    if (inView) {
-      console.log('data fetch');
-      fetchNextPage();
-    }
-  }, [inView]);
+  const { data, observerRef, hasNextPage, isLoading, isError } = useInfiniteQueryWithScroll(subjectId);
 
   // 데이터가 로딩 중이거나 오류가 발생하면 해당 상태를 처리
   if (isLoading) {
