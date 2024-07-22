@@ -36,7 +36,7 @@ function QuestionCardList({ questionCount, subjectId }) {
   // useInfiniteQuery 훅을 사용하여 무한 스크롤 데이터를 관리
   const { data, fetchNextPage, hasNextPage, isLoading, isError } = useInfiniteQuery({
     queryKey: ['questions', subjectId],
-    queryFn: async ({ pageParam = 1 }) => {
+    queryFn: async ({ pageParam = 0 }) => {
       try {
         // subjectId가 없으면 빈 데이터를 반환하여 오류 방지
         if (!subjectId) {
@@ -57,7 +57,10 @@ function QuestionCardList({ questionCount, subjectId }) {
     // 마지막 페이지의 실제 데이터 수를 기반으로 계산
     // lastPage.results.length: 현재 페이지의 데이터 수
     getNextPageParam: (lastPage, allPages) => {
-      return lastPage.results.length === 0 ? undefined : allPages.length + 1;
+      const currentPage = allPages.length; // 현재 페이지 번호
+      const nextPageHasData = lastPage.results.length > 0; // 다음 페이지에 데이터가 있는지 여부
+
+      return nextPageHasData ? currentPage : undefined;
     },
   });
 
