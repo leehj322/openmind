@@ -138,7 +138,7 @@ function DropdownBox({
     } else {
       timer = setTimeout(() => {
         setIsVisible(isDropdownVisible);
-      }, 200);
+      }, 190);
     }
     return () => clearTimeout(timer);
   }, [isDropdownVisible]);
