@@ -1,5 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const slideDown = keyframes`
   0% {
@@ -12,8 +12,23 @@ const slideDown = keyframes`
   }
 `;
 
+const slideUp = keyframes`
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30%);
+    opacity: 0;
+  }
+`;
+
 const dropdownSlideDownAnimation = css`
-  animation: ${slideDown} 0.8s ease;
+  animation: ${slideDown} 0.2s ease;
+`;
+
+const dropdownSlideUpAnimation = css`
+  animation: ${slideUp} 0.2s ease;
 `;
 
 const StyledDropdownListContainer = styled.div`
@@ -32,7 +47,8 @@ const StyledDropdownListContainer = styled.div`
 
   box-shadow: var(--shadow1pt);
 
-  ${({ $isAnimationEnabled }) => ($isAnimationEnabled ? dropdownSlideDownAnimation : '')};
+  ${({ $isOpenAnimation, $isAnimationEnabled }) =>
+    $isAnimationEnabled ? ($isOpenAnimation ? dropdownSlideDownAnimation : dropdownSlideUpAnimation) : ''};
 `;
 
 const StyledItemArea = styled.div`
@@ -100,6 +116,7 @@ function DropdownBox({
   onItemClick,
 }) {
   const [currentItem, setCurrentItem] = useState(null);
+  const [isVisible, setIsVisible] = useState(isDropdownVisible);
 
   const handleItemClick = event => {
     const { value } = event.currentTarget.dataset;
@@ -109,9 +126,27 @@ function DropdownBox({
     onItemClick(value);
   };
 
+  // 닫히는 애니메이션 적용
+  // isDropdownVisible : 외부에서 끌지 켤지 입력값을 받아옴
+  // isVisible : 실제로 box가 꺼지고 켜지는 것을 제어
+  // isDropdownVisible로 false 값을 받았을 때, isVisible이 animation 시간만큼 기다린 후에 false가 되도록 해주어야함.
+  // isDropdownVisible로 true 값을 받았을 때, isVisible이 바로 true가 되어야함.
+  useEffect(() => {
+    let timer;
+    if (isDropdownVisible) {
+      setIsVisible(isDropdownVisible);
+    } else {
+      timer = setTimeout(() => {
+        setIsVisible(isDropdownVisible);
+      }, 200);
+    }
+    return () => clearTimeout(timer);
+  }, [isDropdownVisible]);
+
   return (
     <StyledDropdownListContainer
-      $isVisible={isDropdownVisible}
+      $isVisible={isVisible}
+      $isOpenAnimation={isDropdownVisible}
       $isAnimationEnabled={isAnimationEnabled}
       $minWidth={minWidth}
       $top={topPosition}
