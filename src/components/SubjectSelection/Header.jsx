@@ -29,6 +29,7 @@ const StyledLogoImg = styled.img`
 const StyledButtonWrapper = styled.div`
   & button {
     border: 1px solid ${({ theme }) => theme.brown40};
+    padding: 0;
 
     @media ${MEDIA_QUERY_SIZES.mobile} {
       width: 127px;
