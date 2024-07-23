@@ -5,8 +5,8 @@ import HeroImgUrl from '../assets/images/HeroImage.png';
 import profileImg from '../assets/images/profile.png';
 import MessagesIconUrl from '../assets/images/ic_Messages.svg';
 import noQuestionImg from '../assets/images/no-question.png';
+import LogoImgUrl from '../assets/images/logo.svg';
 
-import Header from '../components/feed/questionFeed/Header';
 import QuestionCardList from '../components/feed/questionFeed/QuestionCardList';
 import { StyledFeedCardListContainer } from '../styles/feed/feedCardListStyles';
 import { StyledQuestionCountArea } from '../styles/feed/questionCountStyles';
@@ -16,12 +16,13 @@ import { StyledNoQuestionImg } from '../styles/feed/noQuestionImgStyles';
 import Button from '../components/@shared/Button';
 import ResponsiveText from '../components/feed/questionFeed/ResponsiveText';
 import ModalComponent from '../components/feed/questionFeed/ModalComponent';
+import { StyledLogoImg } from '../styles/feed/logoImgStyles';
+import { StyledHeader } from '../styles/feed/headerStyles';
+import ProfileArea from '../components/sns/ProfileArea';
 
 const StyledQuestionFeedPageContainer = styled.div`
   margin: 0px auto;
   width: 1200px;
-
-  background-color: ${({ theme }) => theme.gray20};
 
   position: relative;
 
@@ -84,8 +85,11 @@ function QuestionFeed() {
         <StyledHeroImgWrapper>
           <StyledHeroImg src={HeroImgUrl} alt="히어로 이미지" />
         </StyledHeroImgWrapper>
-        {/* Header, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
-        <Header name={name} imageSource={imageSource} />
+        {/* ProfileArea, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
+        <StyledHeader>
+          <StyledLogoImg src={LogoImgUrl} />
+          <ProfileArea subject={profileData} />
+        </StyledHeader>
         <QuestionCardList subjectId={id} questionCount={questionCount} />
         <Button
           onClick={handleQuestionButtonClick}
@@ -106,8 +110,11 @@ function QuestionFeed() {
         <StyledHeroImgWrapper>
           <StyledHeroImg src={HeroImgUrl} alt="히어로 이미지" />
         </StyledHeroImgWrapper>
-        {/* Header, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
-        <Header name={name} imageSource={imageSource} />
+        {/* ProfileArea, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
+        <StyledHeader>
+          <StyledLogoImg src={LogoImgUrl} />
+          <ProfileArea subject={profileData} />
+        </StyledHeader>
         <StyledFeedCardListContainer>
           <StyledQuestionCountArea>
             <StyledMessagesImg src={MessagesIconUrl} alt="말풍선 아이콘" />
