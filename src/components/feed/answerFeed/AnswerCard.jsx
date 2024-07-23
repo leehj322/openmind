@@ -10,6 +10,7 @@ import AnswerForm from './AnswerForm';
 import useCreateAnswerMutation from '../../../queries/useCreateAnswerMutation';
 import useUpdateAnswerMutation from '../../../queries/useUpdateAnswerMutation';
 import { LIMIT_DISLIKE_COUNT } from '../../../constants/feedCard';
+import showToast from '../../@shared/Toast';
 
 /**
  * 답변 피드 페이지에서의 답변 카드
@@ -45,7 +46,7 @@ function AnswerCard({
 
   const handleEditButtonClick = () => {
     if (isRejected) {
-      alert('이미 거절한 답변입니다.');
+      showToast('이미 거절한 답변입니다.', { style: { background: '#333', color: '#fff' } });
     } else if (!currentAnswer) {
       alert('아직 생성된 답변이 없습니다.');
     } else {
@@ -55,7 +56,7 @@ function AnswerCard({
 
   const handleRejectButtonClick = () => {
     if (isRejected) {
-      alert('이미 거절한 답변입니다.');
+      showToast('이미 거절한 답변입니다.', { style: { background: '#333', color: '#fff' } });
     } else {
       // isRejected가 false 인 경우에만 실행하면 됨
       const isOkay = confirm('답변 거절 후에는 철회 할 수 없습니다.\n답변을 거절하시겠습니까?');

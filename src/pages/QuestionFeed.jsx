@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 import HeroImgUrl from '../assets/images/HeroImage.png';
 import profileImg from '../assets/images/profile.png';
@@ -69,14 +70,16 @@ function QuestionFeed() {
     questionCount: 25,
   };
 
-  const [isOpen, setIsOpen] = useState(false);
+  const { id: subjectId } = useParams(); // useParams 이용해서 subjectId 가져오기
+  //모달 열고, 닫는 부분 수정
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleQuestionButtonClick = () => {
-    setIsOpen(true);
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   if (questionCount !== 0) {
@@ -92,7 +95,7 @@ function QuestionFeed() {
         </StyledHeader>
         <QuestionCardList subjectId={id} questionCount={questionCount} />
         <Button
-          onClick={handleQuestionButtonClick}
+          onClick={handleOpenModal}
           shape={'pill'}
           $btnColor={'deep'}
           style={questionButtonStyle}
@@ -100,7 +103,14 @@ function QuestionFeed() {
           height={'54px'}>
           <ResponsiveText />
         </Button>
-        <ModalComponent profileImg={imageSource} name={name} isOpen={isOpen} onRequestClose={closeModal} />
+        <ModalComponent
+          profileImg={imageSource}
+          subjectId={subjectId}
+          name={name}
+          isOpen={isModalOpen}
+          onRequestClose={handleCloseModal}
+          questionCount={questionCount}
+        />
       </StyledQuestionFeedPageContainer>
     );
   } else {
@@ -122,7 +132,7 @@ function QuestionFeed() {
           </StyledQuestionCountArea>
           <StyledNoQuestionImg src={noQuestionImg} alt="빈 박스 이미지" />
           <Button
-            onClick={handleQuestionButtonClick}
+            onClick={handleOpenModal}
             shape={'pill'}
             $btnColor={'deep'}
             style={questionButtonStyle}
@@ -130,7 +140,14 @@ function QuestionFeed() {
             height={'54px'}>
             <ResponsiveText />
           </Button>
-          <ModalComponent profileImg={imageSource} name={name} isOpen={isOpen} onRequestClose={closeModal} />
+          <ModalComponent
+            profileImg={imageSource}
+            subjectId={subjectId}
+            name={name}
+            isOpen={isModalOpen}
+            onRequestClose={handleCloseModal}
+            questionCount={questionCount}
+          />
         </StyledFeedCardListContainer>
       </StyledQuestionFeedPageContainer>
     );

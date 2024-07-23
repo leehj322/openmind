@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import copyClipboardIcon from '../../assets/images/copy_clipboard_icon.png';
 import Tooltip from './Tooltip';
+import showToast from '../@shared/Toast';
 
 const StyledShareIcon = styled.img`
   width: 40px;
@@ -26,7 +27,7 @@ function ClipboardCopyButton({ subject }) {
     document.body.removeChild(dummy);
 
     // 복사 완료 메시지(임시)
-    alert('URL이 클립보드에 복사되었습니다.');
+    showToast('URL이 클립보드에 복사되었습니다.', { style: { background: '#333', color: '#fff' } });
   };
   return (
     <Tooltip content="클립보드에 복사하기">

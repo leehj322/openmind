@@ -19,7 +19,7 @@ function Home() {
   // Handlers
   const handleFocus = () => {
     setIsIconVisible(false);
-    showToast('텍스트 영역에 포커스가 이동했습니다!', { style: { background: '#333', color: '#fff' } });
+    showToast('이름을 입력해주세요!', { style: { background: '#333', color: '#fff' } });
   };
   const handleInputChange = event => setName(event.target.value);
 
