@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import Header from '../components/subjectselection/Header';
-import TitledDropdown from '../components/subjectselection/TitledDropdown';
-import SubjectList from '../components/subjectselection/SubjectList';
+import Header from '../components/subjectSelection/Header';
+import TitledDropdown from '../components/subjectSelection/TitledDropdown';
+import SubjectList from '../components/subjectSelection/SubjectList';
 import { useState } from 'react';
 import { MEDIA_QUERY_SIZES } from '../constants/mediaQuerySizes';
 
