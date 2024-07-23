@@ -39,6 +39,7 @@ const StyledAnswerContainer = styled.div`
 const StyledProfileImage = styled.img`
   width: 48px;
   height: 48px;
+  border-radius: 50%;
   @media ${MEDIA_QUERY_SIZES.mobile} {
     width: 32px;
     height: 32px;

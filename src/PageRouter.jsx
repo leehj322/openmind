@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import SubjectSelection from './pages/SubjectSelection';
 import AnswerFeed from './pages/AnswerFeed';
@@ -13,8 +13,22 @@ function PageRouter() {
         <Route path={'/'} element={<Home />} />
         <Route path={'/list'} element={<SubjectSelection />} />
         <Route path={'/post/:id'}>
-          <Route index element={<QuestionFeed />} />
-          <Route path={'answer'} element={<AnswerFeed />} />
+          <Route
+            index
+            element={
+              <Suspense fallback={<div>...Loading</div>}>
+                <QuestionFeed />
+              </Suspense>
+            }
+          />
+          <Route
+            path={'answer'}
+            element={
+              <Suspense fallback={<div>...Loading</div>}>
+                <AnswerFeed />
+              </Suspense>
+            }
+          />
         </Route>
         {/* 팀원분들 Suspense + tanstack-query 예시용 샘플 */}
         <Route path={'/querysample'} element={<QuerySample />} />
