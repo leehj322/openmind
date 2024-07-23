@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 
 import HeroImgUrl from '../assets/images/HeroImage.png';
 import profileImg from '../assets/images/profile.png';
@@ -67,6 +68,16 @@ function QuestionFeed() {
     questionCount: 25,
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleQuestionButtonClick = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   if (questionCount !== 0) {
     return (
       <StyledQuestionFeedPageContainer>
@@ -76,10 +87,16 @@ function QuestionFeed() {
         {/* Header, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
         <Header name={name} imageSource={imageSource} />
         <QuestionCardList subjectId={id} questionCount={questionCount} />
-        <Button onClick shape={'pill'} $btnColor={'deep'} style={questionButtonStyle} width={'208px'} height={'54px'}>
+        <Button
+          onClick={handleQuestionButtonClick}
+          shape={'pill'}
+          $btnColor={'deep'}
+          style={questionButtonStyle}
+          width={'208px'}
+          height={'54px'}>
           <ResponsiveText />
-          <ModalComponent name={name} imageSource={imageSource} />
         </Button>
+        <ModalComponent profileImg={imageSource} name={name} isOpen={isOpen} onRequestClose={closeModal} />
       </StyledQuestionFeedPageContainer>
     );
   } else {
@@ -97,10 +114,16 @@ function QuestionFeed() {
             아직 질문이 없습니다
           </StyledQuestionCountArea>
           <StyledNoQuestionImg src={noQuestionImg} alt="빈 박스 이미지" />
-          <Button onClick shape={'pill'} $btnColor={'deep'} style={questionButtonStyle} width={'208px'} height={'54px'}>
+          <Button
+            onClick={handleQuestionButtonClick}
+            shape={'pill'}
+            $btnColor={'deep'}
+            style={questionButtonStyle}
+            width={'208px'}
+            height={'54px'}>
             <ResponsiveText />
-            <ModalComponent name={name} imageSource={imageSource} />
           </Button>
+          <ModalComponent profileImg={imageSource} name={name} isOpen={isOpen} onRequestClose={closeModal} />
         </StyledFeedCardListContainer>
       </StyledQuestionFeedPageContainer>
     );
