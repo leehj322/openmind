@@ -29,7 +29,6 @@ const StyledThemeButton = styled.button`
   border-radius: 30px;
   border: 1px solid ${getThemeColor('gray50')};
   z-index: 100;
-
   @media (min-width: 375px) and (max-width: 767px) {
     left: 20px;
     top: -200px;
