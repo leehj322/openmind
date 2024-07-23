@@ -47,6 +47,7 @@ const questionButtonStyle = {
   bottom: '24px',
 
   '@media screen and (min-width: 375px) and (max-width: 767px)': {
+    fontSize: '16px',
     width: '123px',
     height: '54px',
   },
@@ -75,7 +76,7 @@ function QuestionFeed() {
         {/* Header, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
         <Header name={name} imageSource={imageSource} />
         <QuestionCardList subjectId={id} questionCount={questionCount} />
-        <Button onClick shape={'pill'} btnColor={'deep'} style={questionButtonStyle} width={'208px'} height={'54px'}>
+        <Button onClick shape={'pill'} $btnColor={'deep'} style={questionButtonStyle} width={'208px'} height={'54px'}>
           <ResponsiveText />
           <ModalComponent name={name} imageSource={imageSource} />
         </Button>
@@ -96,7 +97,7 @@ function QuestionFeed() {
             아직 질문이 없습니다
           </StyledQuestionCountArea>
           <StyledNoQuestionImg src={noQuestionImg} alt="빈 박스 이미지" />
-          <Button onClick shape={'pill'} btnColor={'deep'} style={questionButtonStyle} width={'208px'} height={'54px'}>
+          <Button onClick shape={'pill'} $btnColor={'deep'} style={questionButtonStyle} width={'208px'} height={'54px'}>
             <ResponsiveText />
             <ModalComponent name={name} imageSource={imageSource} />
           </Button>
