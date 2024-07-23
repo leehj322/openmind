@@ -3,19 +3,20 @@ import styled from 'styled-components';
 
 import HeroImgUrl from '../assets/images/HeroImage.png';
 import profileImg from '../assets/images/profile.png';
+import LogoImgUrl from '../assets/images/logo.svg';
 
-import Header from '../components/feed/questionFeed/Header';
 import AnswerCardList from '../components/feed/answerFeed/AnswerCardList';
 import { StyledAnswerFeedArea } from '../styles/feed/answerFeedStyles';
 import { StyledHeroImg } from '../styles/feed/heroImgStyles';
 import Button from '../components/@shared/Button';
 import deleteSubject from '../apis/deleteSubject';
+import { StyledHeader } from '../styles/feed/headerStyles';
+import { StyledLogoImg } from '../styles/feed/logoImgStyles';
+import ProfileArea from '../components/sns/ProfileArea';
 
 const StyledAnswerFeedPageContainer = styled.div`
   margin: 0px auto;
   width: 1200px;
-
-  background-color: ${({ theme }) => theme.gray20};
 
   position: relative;
 
@@ -52,7 +53,7 @@ function AnswerFeed() {
   const profileData = profileDataString ? JSON.parse(profileDataString) : null;
 
   // 구조 분해 할당
-  const { id, name, imageSource, questionCount } = profileData || {
+  const { id, questionCount } = profileData || {
     // 기본값
     id: 7478,
     name: '아초는고양이',
@@ -83,8 +84,11 @@ function AnswerFeed() {
       <StyledHeroImgWrapper>
         <StyledHeroImg src={HeroImgUrl} alt="히어로 이미지" />
       </StyledHeroImgWrapper>
-      {/* Header, AnswerCardList 컴포넌트에 데이터를 props로 전달 */}
-      <Header name={name} imageSource={imageSource} />
+      {/* ProfileArea, AnswerCardList 컴포넌트에 데이터를 props로 전달 */}
+      <StyledHeader>
+        <StyledLogoImg src={LogoImgUrl} />
+        <ProfileArea subject={profileData} />
+      </StyledHeader>
       <StyledAnswerFeedArea>
         <Button
           onClick={() => handleDeleteButtonClick(id)}
