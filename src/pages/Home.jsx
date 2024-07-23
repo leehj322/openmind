@@ -10,6 +10,7 @@ import icon from '../assets/images/input-img.png';
 import axios from 'axios';
 import { getThemeColor } from '../utils/getThemeColor';
 import showToast from '../components/@shared/Toast';
+import ThemeToggler from '../components/@shared/ThemeToggler';
 
 function Home() {
   // State variables
@@ -59,6 +60,7 @@ function Home() {
         </StyledInputContainer>
       </StyledForm>
       <StyledBtnContainer>
+        <ThemeToggler />
         <Button
           type="submit"
           width="180px"
