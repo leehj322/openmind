@@ -28,8 +28,8 @@ const KakaoShareButton = ({ subject }) => {
           imageUrl: `${subject.imageSource}`,
           link: {
             //props로 뒷부분 아이디 받아와서 쓸 수 있도록 제작 예정
-            mobileWebUrl: 'http://localhost:5173/post/${subject.id}',
-            webUrl: 'http://localhost:5173/post//${subject.id}',
+            mobileWebUrl: 'https://fe08-4team-openmind.netlify.app/post/${subject.id}',
+            webUrl: 'https://fe08-4team-openmind.netlify.app/post/${subject.id}',
           },
         },
         buttons: [

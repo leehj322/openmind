@@ -12,7 +12,7 @@ const StyledShareIcon = styled.img`
 //props로 뒷부분 아이디 받아와서 쓸 수 있도록 제작 예정
 function ClipboardCopyButton({ subject }) {
   const handleCopy = () => {
-    const urlToCopy = `http://localhost:5173/post/${subject.id}`; // 복사할 URL
+    const urlToCopy = `https://fe08-4team-openmind.netlify.app/post/${subject.id}`; // 복사할 URL
 
     // 임시로 textarea 엘리먼트를 생성하여 클립보드에 복사할 URL을 설정
     const dummy = document.createElement('textarea');
