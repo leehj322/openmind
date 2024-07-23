@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import HeroImgUrl from '../assets/images/HeroImage.png';
 import profileImg from '../assets/images/profile.png';
@@ -20,6 +20,7 @@ import ModalComponent from '../components/feed/questionFeed/ModalComponent';
 import { StyledLogoImg } from '../styles/feed/logoImgStyles';
 import { StyledHeader } from '../styles/feed/headerStyles';
 import ProfileArea from '../components/sns/ProfileArea';
+import useSubjectQuery from '../hooks/useSubjectQuery';
 
 const StyledQuestionFeedPageContainer = styled.div`
   margin: 0px auto;
@@ -57,9 +58,8 @@ const questionButtonStyle = {
 };
 
 function QuestionFeed() {
-  // 세션 스토리지에서 반환된 값 역직렬화
-  const profileDataString = sessionStorage.getItem('profile');
-  const profileData = profileDataString ? JSON.parse(profileDataString) : null;
+  const { id: subjectId } = useParams(); // useParams 이용해서 subjectId 가져오기
+  const { data: profileData } = useSubjectQuery(subjectId);
 
   // 구조 분해 할당
   const { id, name, imageSource, questionCount } = profileData || {
@@ -70,7 +70,6 @@ function QuestionFeed() {
     questionCount: 25,
   };
 
-  const { id: subjectId } = useParams(); // useParams 이용해서 subjectId 가져오기
   //모달 열고, 닫는 부분 수정
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -90,7 +89,9 @@ function QuestionFeed() {
         </StyledHeroImgWrapper>
         {/* ProfileArea, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
         <StyledHeader>
-          <StyledLogoImg src={LogoImgUrl} />
+          <Link to={'/'}>
+            <StyledLogoImg src={LogoImgUrl} />
+          </Link>
           <ProfileArea subject={profileData} />
         </StyledHeader>
         <QuestionCardList subjectId={id} questionCount={questionCount} />
@@ -122,7 +123,9 @@ function QuestionFeed() {
         </StyledHeroImgWrapper>
         {/* ProfileArea, QuestionCardList 컴포넌트에 데이터를 props로 전달 */}
         <StyledHeader>
-          <StyledLogoImg src={LogoImgUrl} />
+          <Link to={'/'}>
+            <StyledLogoImg src={LogoImgUrl} />
+          </Link>
           <ProfileArea subject={profileData} />
         </StyledHeader>
         <StyledFeedCardListContainer>

@@ -13,6 +13,8 @@ import deleteSubject from '../apis/deleteSubject';
 import { StyledHeader } from '../styles/feed/headerStyles';
 import { StyledLogoImg } from '../styles/feed/logoImgStyles';
 import ProfileArea from '../components/sns/ProfileArea';
+import { Link, useParams } from 'react-router-dom';
+import useSubjectQuery from '../hooks/useSubjectQuery';
 
 const StyledAnswerFeedPageContainer = styled.div`
   margin: 0px auto;
@@ -48,9 +50,8 @@ const deleteButtonStyle = {
 };
 
 function AnswerFeed() {
-  // 세션 스토리지에서 반환된 값 역직렬화
-  const profileDataString = sessionStorage.getItem('profile');
-  const profileData = profileDataString ? JSON.parse(profileDataString) : null;
+  const { id: subjectId } = useParams(); // useParams 이용해서 subjectId 가져오기
+  const { data: profileData } = useSubjectQuery(subjectId);
 
   // 구조 분해 할당
   const { id, questionCount } = profileData || {
@@ -86,7 +87,9 @@ function AnswerFeed() {
       </StyledHeroImgWrapper>
       {/* ProfileArea, AnswerCardList 컴포넌트에 데이터를 props로 전달 */}
       <StyledHeader>
-        <StyledLogoImg src={LogoImgUrl} />
+        <Link to={'/'}>
+          <StyledLogoImg src={LogoImgUrl} />
+        </Link>
         <ProfileArea subject={profileData} />
       </StyledHeader>
       <StyledAnswerFeedArea>
