@@ -10,6 +10,7 @@ import icon from '../assets/images/input-img.png';
 import axios from 'axios';
 import { getThemeColor } from '../utils/getThemeColor';
 import showToast from '../components/@shared/Toast';
+import ThemeToggler from '../components/@shared/ThemeToggler';
 
 function Home() {
   // State variables
@@ -19,7 +20,7 @@ function Home() {
   // Handlers
   const handleFocus = () => {
     setIsIconVisible(false);
-    showToast('텍스트 영역에 포커스가 이동했습니다!', { style: { background: '#333', color: '#fff' } });
+    showToast('이름을 입력해주세요!', { style: { background: '#333', color: '#fff' } });
   };
   const handleInputChange = event => setName(event.target.value);
 
@@ -59,6 +60,7 @@ function Home() {
         </StyledInputContainer>
       </StyledForm>
       <StyledBtnContainer>
+        <ThemeToggler />
         <Button
           type="submit"
           width="180px"
