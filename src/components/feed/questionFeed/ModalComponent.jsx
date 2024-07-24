@@ -1,18 +1,16 @@
 import Modal from 'react-modal';
 import { useState } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import messageIcon from '../../../assets/images/message-icon.png';
 import Button from '../../@shared/Button';
 import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import { getThemeColor } from '../../../utils/getThemeColor';
+import { useNavigate } from 'react-router-dom';
 
 Modal.setAppElement('#root');
 
-function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
+function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId }) {
   const [textAreaValue, setTextAreaValue] = useState('');
   const navigate = useNavigate();
-  const { subjectId } = useParams(); // useParams 훅을 사용하여 subjectId를 가져옵니다.
 
   const handleTextAreaChange = event => {
     setTextAreaValue(event.target.value);
@@ -28,11 +26,13 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose }) {
       .post(`https://openmind-api.vercel.app/8-4/subjects/${subjectId}/questions/`, request)
       .then(response => {
         console.log('handleAxiosRequest', response);
+        sessionStorage.setItem('profile', JSON.stringify(response.data));
         onRequestClose();
+        window.location.reload(); //새로고침
+        // navigate(`/post/${response.data.subjectId}`);
         navigate(`/post/${response.data.subjectId}`);
       })
       .catch(error => console.log('request error', error));
-    console.log('handleAxiosRequest : ', request);
   };
 
   return (
