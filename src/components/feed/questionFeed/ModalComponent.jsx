@@ -26,7 +26,6 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId })
       .post(`https://openmind-api.vercel.app/8-4/subjects/${subjectId}/questions/`, request)
       .then(response => {
         console.log('handleAxiosRequest', response);
-        sessionStorage.setItem('profile', JSON.stringify(response.data));
         onRequestClose();
         window.location.reload(); //새로고침
         // navigate(`/post/${response.data.subjectId}`);
@@ -37,7 +36,10 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId })
 
   return (
     <div>
-      <StyledModal isOpen={isOpen} onRequestClose={onRequestClose}>
+      <StyledModal
+        isOpen={isOpen}
+        onRequestClose={onRequestClose}
+        style={{ overlay: { backgroundColor: 'rgba(0,0,0,0.75)' } }}>
         <StyledModalHeader>
           <StyledModalTitleWrapper>
             <StyledModalIcon src={messageIcon} alt="말풍선" />

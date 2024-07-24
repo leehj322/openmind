@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import LogoImgUrl from '../../assets/images/logo.svg';
 import Button from '../@shared/Button';
 import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import rightArrowImg from '../../assets/images/softarrow.png';
 
 const StyledHeaderArea = styled.header`
@@ -28,7 +28,7 @@ const StyledLogoImg = styled.img`
 
 const StyledButtonWrapper = styled.div`
   & button {
-    border: 1px solid ${({ theme }) => theme.brown40};
+    border: 1px solid var(--brown40);
     padding: 0;
 
     @media ${MEDIA_QUERY_SIZES.mobile} {
@@ -42,8 +42,20 @@ const StyledButtonWrapper = styled.div`
 `;
 
 function Header() {
-  const userSubjectId = window.localStorage.getItem('userKey');
-  const buttonNextPath = userSubjectId ? `/post/${userSubjectId}/answer` : '/';
+  const userInfoString = window.localStorage.getItem('userInfo');
+  const userInfo = JSON.parse(userInfoString);
+
+  const navigate = useNavigate();
+  const handleButtonClick = () => {
+    const buttonNextPath = userInfo ? `/post/${userInfo.id}/answer` : '/';
+    if (userInfo) {
+      navigate(buttonNextPath);
+    } else {
+      if (confirm('생성한 정보가 없습니다. 메인페이지에서 생성하시겠습니까?')) {
+        navigate(buttonNextPath);
+      }
+    }
+  };
 
   return (
     <StyledHeaderArea>
@@ -51,7 +63,7 @@ function Header() {
         <StyledLogoImg src={LogoImgUrl} />
       </Link>
       <StyledButtonWrapper>
-        <Button imgSrc={rightArrowImg} pagePath={buttonNextPath}>
+        <Button imgSrc={rightArrowImg} onClick={handleButtonClick}>
           답변하러 가기
         </Button>
       </StyledButtonWrapper>

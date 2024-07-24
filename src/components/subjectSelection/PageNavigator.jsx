@@ -16,7 +16,7 @@ const StyledNavBtn = styled.div`
   justify-content: center;
   align-items: center;
 
-  color: ${({ theme, $isCurrentPage }) => ($isCurrentPage ? theme.brown40 : theme.gray40)};
+  color: ${({ $isCurrentPage }) => ($isCurrentPage ? 'var(--brown40)' : 'var(--gray40)')};
   font-size: 20px;
   font-weight: 400;
 

@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import receivedQuestionIcon from '../../assets/images/messages_icon.png';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const waveAnimation = keyframes`
   0% {
@@ -14,14 +14,14 @@ const waveAnimation = keyframes`
   }
 `;
 
-const StyledQuestionCardContainer = styled.li`
+const StyledQuestionCardContainer = styled(Link)`
   width: 100%;
   min-width: 112px;
   height: 187px;
   border-radius: 16px;
-  border: 1px solid ${props => props.theme.gray40};
+  border: 1px solid var(--gray40);
   padding: 20px;
-  background-color: ${props => props.theme.gray10};
+  background-color: var(--gray10);
   transition: transform 1s ease-in-out;
 
   &:hover {
@@ -77,7 +77,7 @@ const StyledReceivedQuestionIcon = styled.img`
   width: 18px;
   height: 18px;
   margin-right: 4px;
-  filter: ${props => props.theme.gray50Filter};
+  filter: var(--gray50Filter);
   @media (max-width: 767px) {
     width: 16px;
     height: 16px;
@@ -88,32 +88,15 @@ const StyledReceivedQuestionText = styled.p`
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  color: ${props => props.theme.gray40};
+  color: var(--gray40);
   @media (max-width: 767px) {
     font-size: 14px;
   }
 `;
 
 function SubjectCard({ subject }) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (subject) {
-      const profile = {
-        id: subject.id,
-        name: subject.name,
-        imageSource: subject.imageSource,
-        questionCount: subject.questionCount,
-        createdAt: subject.createdAt,
-      };
-
-      sessionStorage.setItem('profile', JSON.stringify(profile));
-      navigate(`/post/${subject.id}`);
-    }
-  };
-
   return (
-    <StyledQuestionCardContainer onClick={handleClick}>
+    <StyledQuestionCardContainer to={`/post/${subject.id}`}>
       <StyledProfileImg src={subject.imageSource} alt="답변자 프로필 사진" />
       <StyledUserName>{subject.name}</StyledUserName>
       <StyledReceivedQuestionArea>
