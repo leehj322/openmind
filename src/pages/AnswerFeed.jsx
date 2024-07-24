@@ -71,8 +71,6 @@ function AnswerFeed() {
         // 해당 페이지의 ID가 로컬 스토리지의 userInfo와 같다면 삭제하기
         const userInfoString = window.localStorage.getItem('userInfo');
         const userInfo = JSON.parse(userInfoString);
-        console.log(typeof userInfo.id);
-        console.log(typeof subjectId);
         if (userInfo.id === subjectId) {
           window.localStorage.removeItem('userInfo');
         }
