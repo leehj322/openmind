@@ -7,7 +7,6 @@ import soft from '../assets/images/softarrow.png';
 import logo from '../assets/images/logo.svg';
 import icon from '../assets/images/input-img.png';
 import axios from 'axios';
-import { getThemeColor } from '../utils/getThemeColor';
 import showToast from '../components/@shared/Toast';
 import ThemeToggler from '../components/@shared/ThemeToggler';
 import UserInfoBox from '../components/feed/home/UserInfoBox';
@@ -81,7 +80,7 @@ function Home() {
           height="43px"
           imgSrc={soft}
           pagePath="/list"
-          style={{ border: '1.5px solid', borderColor: getThemeColor('brown40') }}>
+          style={{ border: '1.5px solid', borderColor: 'var(--brown40)' }}>
           질문하러 가기
         </Button>
       </StyledBtnContainer>
@@ -127,7 +126,8 @@ const StyledBgContainer = styled.div`
   margin: 0;
   position: fixed;
   overflow: hidden;
-  background-color: var(--gray20);
+  background-color: var(--bgColor);
+  background-blend-mode: multiply;
   background-image: url(${background});
   background-size: contain;
   background-repeat: no-repeat;

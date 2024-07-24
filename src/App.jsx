@@ -3,7 +3,7 @@ import GlobalStyle from './styles/@shared/GlobalStyles';
 import PageRouter from './PageRouter';
 import '../src/styles/@shared/init.css';
 import '../src/components/@shared/Button';
-import ThemeContextProvider from './contexts/ThemeContextProvider';
+import DarkModeProvider from './contexts/DarkModeProvider';
 import { Toaster } from 'react-hot-toast';
 
 function App() {
@@ -11,11 +11,11 @@ function App() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <ThemeContextProvider>
-        <GlobalStyle />
+      <GlobalStyle />
+      <DarkModeProvider>
         <PageRouter />
         <Toaster />
-      </ThemeContextProvider>
+      </DarkModeProvider>
     </QueryClientProvider>
   );
 }

@@ -40,8 +40,8 @@ const StyledDropdownListContainer = styled.div`
 
   min-width: ${({ $minWidth }) => $minWidth}px;
 
-  background-color: ${({ theme }) => theme.gray10};
-  border: 1px solid ${({ theme }) => theme.gray30};
+  background-color: var(--gray10);
+  border: 1px solid var(--gray30);
   border-radius: 8px;
   padding: 4px 0;
 
@@ -57,7 +57,7 @@ const StyledItemArea = styled.div`
   gap: 8px;
   padding: 0 16px;
 
-  color: ${({ theme, $isCurrent }) => ($isCurrent ? theme.blue : theme.gray50)};
+  color: ${({ $isCurrent }) => ($isCurrent ? 'var(--blue) ' : 'var(--gray50)')};
   font-size: 14px;
   font-weight: 500;
 
@@ -67,23 +67,23 @@ const StyledItemArea = styled.div`
   // font 및 img color값 hover시에 gray60, 현재 활성화된 값일시 blue
   // hover시에 child element인 img 까지 hover 전달
   &:hover {
-    color: ${({ theme, $isCurrent }) => ($isCurrent ? theme.blue : theme.gray60)};
-    background-color: ${({ theme }) => theme.gray20};
+    color: ${({ $isCurrent }) => ($isCurrent ? 'var(--blue) ' : 'var(--gray60)')};
+    background-color: var(--gray-20);
     & img {
-      filter: ${({ theme, $isCurrent }) => ($isCurrent ? theme.blueFilter : theme.gray60Filter)};
+      filter: ${({ $isCurrent }) => ($isCurrent ? 'var(--blueFilter) ' : 'var(--gray60Filter)')};
     }
   }
 
   &:active {
-    color: ${({ theme }) => theme.blue};
+    color: var(--blue);
     & img {
-      filter: ${({ theme }) => theme.blueFilter};
+      filter: var(--blueFilter);
     }
   }
 
   // img color값 gray50, 현재 활성화된 값일시 blue
   & img {
-    filter: ${({ theme, $isCurrent }) => ($isCurrent ? theme.blueFilter : theme.gray50Filter)};
+    filter: ${({ $isCurrent }) => ($isCurrent ? 'var(--blueFilter) ' : 'var(--gray50Filter)')};
   }
 `;
 
