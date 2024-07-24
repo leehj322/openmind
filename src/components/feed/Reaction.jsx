@@ -14,7 +14,7 @@ import { getThemeColor } from '../../utils/getThemeColor';
  * @param {integer} props.likeCount 좋아요 수
  * @param {string} props.questionId 질문 id
  */
-function Reaction({ likeCount, questionId = '123424' }) {
+function Reaction({ likeCount, questionId }) {
   // TODO: '123424'는 테스트값이므로 향후 삭제 예정
   const reactionList = JSON.parse(localStorage.getItem('reactionList'));
 

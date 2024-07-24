@@ -25,10 +25,10 @@ import showToast from '../../@shared/Toast';
 function AnswerCard({
   // TODO: 상위 컴포넌트에서 데이터를 넣어줄 수 있게 되면 테스트용 기본값 삭제 예정
   questionId,
-  questionContent = '좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?',
-  likeCount = 0,
-  dislikeCount = 0,
-  questionCreateAt = '',
+  questionContent,
+  likeCount,
+  dislikeCount,
+  questionCreateAt,
   answer,
 }) {
   const isHasAnswer = !!answer;

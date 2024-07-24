@@ -26,7 +26,6 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId })
       .post(`https://openmind-api.vercel.app/8-4/subjects/${subjectId}/questions/`, request)
       .then(response => {
         console.log('handleAxiosRequest', response);
-        sessionStorage.setItem('profile', JSON.stringify(response.data));
         onRequestClose();
         window.location.reload(); //새로고침
         // navigate(`/post/${response.data.subjectId}`);
