@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import receivedQuestionIcon from '../../assets/images/messages_icon.png';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const waveAnimation = keyframes`
   0% {
@@ -14,7 +14,7 @@ const waveAnimation = keyframes`
   }
 `;
 
-const StyledQuestionCardContainer = styled.li`
+const StyledQuestionCardContainer = styled(Link)`
   width: 100%;
   min-width: 112px;
   height: 187px;
@@ -95,25 +95,8 @@ const StyledReceivedQuestionText = styled.p`
 `;
 
 function SubjectCard({ subject }) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (subject) {
-      const profile = {
-        id: subject.id,
-        name: subject.name,
-        imageSource: subject.imageSource,
-        questionCount: subject.questionCount,
-        createdAt: subject.createdAt,
-      };
-
-      sessionStorage.setItem('profile', JSON.stringify(profile));
-      navigate(`/post/${subject.id}`);
-    }
-  };
-
   return (
-    <StyledQuestionCardContainer onClick={handleClick}>
+    <StyledQuestionCardContainer to={`/post/${subject.id}`}>
       <StyledProfileImg src={subject.imageSource} alt="답변자 프로필 사진" />
       <StyledUserName>{subject.name}</StyledUserName>
       <StyledReceivedQuestionArea>
