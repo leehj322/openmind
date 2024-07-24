@@ -32,7 +32,13 @@ function Home() {
       .post('https://openmind-api.vercel.app/8-4/subjects/', request)
       .then(response => {
         console.log('handleAxiosRequest', response);
-        localStorage.setItem('userKey', response.data.id);
+        const userInfoResponse = {
+          id: response.data.id,
+          imageSource: response.data.imageSource,
+          name: response.data.name,
+        };
+        const userInfo = JSON.stringify(userInfoResponse);
+        localStorage.setItem('userInfo', userInfo);
         navigate(`/post/${response.data.id}`);
       })
       .catch(error => console.log('request error', error));

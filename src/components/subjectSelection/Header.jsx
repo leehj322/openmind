@@ -42,8 +42,9 @@ const StyledButtonWrapper = styled.div`
 `;
 
 function Header() {
-  const userSubjectId = window.localStorage.getItem('userKey');
-  const buttonNextPath = userSubjectId ? `/post/${userSubjectId}/answer` : '/';
+  const userInfoString = window.localStorage.getItem('userInfo');
+  const userInfo = JSON.parse(userInfoString);
+  const buttonNextPath = userInfo ? `/post/${userInfo.id}/answer` : '/';
 
   return (
     <StyledHeaderArea>
