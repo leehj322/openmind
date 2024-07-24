@@ -68,7 +68,14 @@ function AnswerFeed() {
       if (statusCode === 204) {
         // 성공적으로 삭제됨
         console.log('Subject deleted successfully');
-        // 필요한 추가적인 작업 수행 가능
+        // 해당 페이지의 ID가 로컬 스토리지의 userInfo와 같다면 삭제하기
+        const userInfoString = window.localStorage.getItem('userInfo');
+        const userInfo = JSON.parse(userInfoString);
+        console.log(typeof userInfo.id);
+        console.log(typeof subjectId);
+        if (userInfo.id === subjectId) {
+          window.localStorage.removeItem('userInfo');
+        }
       } else {
         // 삭제 실패 혹은 에러 발생
         console.error('Failed to delete subject');
