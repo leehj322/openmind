@@ -3,9 +3,9 @@ name: Deploy jsdoc to GitHub Pages
 on:
   push:
     branches:
-      - dev # main 브랜치에 푸시될 때 실행
+      - main # main 브랜치에 푸시될 때 실행
     paths:
-      - 'docs/jsdoc/**' # dist 폴더에 변화가 있을 때 감지
+      - 'docs/jsdoc/**' # docs/jsdoc 폴더에 변화 감지
 
   workflow_dispatch: # 해당 workflow 수동 실행 버튼 추가
 
@@ -19,7 +19,7 @@ permissions:
   id-token: write
 
 jobs:
-  deploy: # openmind 배포 (/dist)
+  deploy: # jsdoc 배포
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
