@@ -1,5 +1,4 @@
 import background from '../assets/images/background-img.png';
-import theme from '../styles/@shared/theme';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -11,6 +10,7 @@ import axios from 'axios';
 import { getThemeColor } from '../utils/getThemeColor';
 import showToast from '../components/@shared/Toast';
 import ThemeToggler from '../components/@shared/ThemeToggler';
+import UserInfoBox from '../components/feed/home/UserInfoBox';
 
 function Home() {
   // State variables
@@ -32,32 +32,46 @@ function Home() {
       .post('https://openmind-api.vercel.app/8-4/subjects/', request)
       .then(response => {
         console.log('handleAxiosRequest', response);
-        localStorage.setItem('userKey', response.data.id);
-        navigate(`/post/${response.data.id}`);
+        const userInfoResponse = {
+          id: response.data.id,
+          imageSource: response.data.imageSource,
+          name: response.data.name,
+        };
+        const userInfo = JSON.stringify(userInfoResponse);
+        localStorage.setItem('userInfo', userInfo);
+        navigate(`/post/${response.data.id}/answer`);
       })
       .catch(error => console.log('request error', error));
   };
+
+  // 이미 localStorage에 생성된 user의 정보가 있는 경우 메인의 중앙에 이미 있는 프로필 정보 띄우기
+  const userInfoString = window.localStorage.getItem('userInfo');
+  const userInfo = JSON.parse(userInfoString);
 
   return (
     <StyledContainer>
       <StyledLogo src={logo} alt="로고" />
       <StyledForm>
-        <StyledInputContainer>
-          {isIconVisible && <StyledIcon src={icon} alt="아이콘" />}
-          <StyledInput
-            id="userName"
-            name="userName"
-            type="text"
-            placeholder="이름을 입력하세요"
-            onChange={handleInputChange}
-            onFocus={handleFocus}
-          />
-          <StyledSubmitBtnContainer>
-            <Button onClick={handleAxiosRequest} type="submit" width="100%" $btnColor="deep" disabled={!name.trim()}>
-              질문 받기
-            </Button>
-          </StyledSubmitBtnContainer>
-        </StyledInputContainer>
+        {userInfo ? (
+          <UserInfoBox userInfo={userInfo} />
+        ) : (
+          <StyledInputContainer>
+            {isIconVisible && <StyledIcon src={icon} alt="아이콘" />}
+            <StyledInput
+              id="userName"
+              name="userName"
+              type="text"
+              placeholder="이름을 입력하세요"
+              onChange={handleInputChange}
+              onFocus={handleFocus}
+            />
+            <StyledSubmitBtnContainer>
+              <Button onClick={handleAxiosRequest} type="submit" width="100%" $btnColor="deep" disabled={!name.trim()}>
+                질문 받기
+              </Button>
+            </StyledSubmitBtnContainer>
+          </StyledInputContainer>
+        )}
       </StyledForm>
       <StyledBtnContainer>
         <ThemeToggler />
