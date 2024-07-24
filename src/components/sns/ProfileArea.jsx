@@ -29,6 +29,10 @@ const StyledUserNameWrapper = styled.h1`
   line-height: 40px;
   text-align: center;
   margin-bottom: 12px;
+  width: 500px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @media (max-width: 767px) {
     font-size: 24px;
     line-height: 30px;
