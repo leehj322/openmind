@@ -5,6 +5,7 @@ import '../src/styles/@shared/init.css';
 import '../src/components/@shared/Button';
 import DarkModeProvider from './contexts/DarkModeProvider';
 import { Toaster } from 'react-hot-toast';
+import ThemeToggler from './components/@shared/ThemeToggler';
 
 function App() {
   const queryClient = new QueryClient();
@@ -13,6 +14,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <GlobalStyle />
       <DarkModeProvider>
+        <ThemeToggler />
         <PageRouter />
         <Toaster />
       </DarkModeProvider>

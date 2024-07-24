@@ -8,7 +8,6 @@ import logo from '../assets/images/logo.svg';
 import icon from '../assets/images/input-img.png';
 import axios from 'axios';
 import showToast from '../components/@shared/Toast';
-import ThemeToggler from '../components/@shared/ThemeToggler';
 import UserInfoBox from '../components/feed/home/UserInfoBox';
 
 function Home() {
@@ -73,7 +72,6 @@ function Home() {
         )}
       </StyledForm>
       <StyledBtnContainer>
-        <ThemeToggler />
         <Button
           type="submit"
           width="180px"
@@ -104,7 +102,7 @@ const StyledBtnContainer = styled.div`
   right: 40px;
   padding: 1rem;
   width: 100%;
-  z-index: 100;
+  z-index: 20;
   box-sizing: border-box;
   @media (min-width: 375px) and (max-width: 767px) {
     top: calc(120px + 100px);

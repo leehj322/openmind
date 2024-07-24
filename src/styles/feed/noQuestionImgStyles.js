@@ -4,6 +4,7 @@ export const StyledNoQuestionImg = styled.img`
   width: 150px;
   height: 154x;
   margin: 70px auto;
+  filter: var(--brown20Filter);
 
   @media screen and (min-width: 375px) and (max-width: 767px) {
     width: 114px;
