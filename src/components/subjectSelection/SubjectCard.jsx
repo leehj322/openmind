@@ -1,18 +1,33 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import receivedQuestionIcon from '../../assets/images/messages_icon.png';
-import filter from '../../styles/@shared/filter';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-const StyledQuestionCardContainer = styled.li`
-  min-width: 186px;
+const waveAnimation = keyframes`
+  0% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-5%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+`;
+
+const StyledQuestionCardContainer = styled(Link)`
   width: 100%;
+  min-width: 112px;
   height: 187px;
   border-radius: 16px;
-  border: 1px solid var(--gray40);
+  border: 1px solid ${props => props.theme.gray40};
   padding: 20px;
-  background-color: var(--gray10);
+  background-color: ${props => props.theme.gray10};
+  transition: transform 1s ease-in-out;
+
   &:hover {
     cursor: pointer;
+    position: relative;
+    animation: ${waveAnimation} 1s infinite;
   }
   @media (max-width: 767px) {
     height: 168px;
@@ -35,6 +50,9 @@ const StyledUserName = styled.h1`
   font-weight: 400;
   line-height: 25px;
   margin: 12px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   @media (max-width: 767px) {
     font-size: 18px;
   }
@@ -59,7 +77,7 @@ const StyledReceivedQuestionIcon = styled.img`
   width: 18px;
   height: 18px;
   margin-right: 4px;
-  filter: ${filter.gray50};
+  filter: ${props => props.theme.gray50Filter};
   @media (max-width: 767px) {
     width: 16px;
     height: 16px;
@@ -70,32 +88,15 @@ const StyledReceivedQuestionText = styled.p`
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  color: var(--gray40);
+  color: ${props => props.theme.gray40};
   @media (max-width: 767px) {
     font-size: 14px;
   }
 `;
 
 function SubjectCard({ subject }) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    if (subject) {
-      const profile = {
-        id: subject.id,
-        name: subject.name,
-        imageSource: subject.imageSource,
-        questionCount: subject.questionCount,
-        createdAt: subject.createdAt,
-      };
-
-      sessionStorage.setItem('profile', JSON.stringify(profile));
-      navigate(`/post/${subject.id}`);
-    }
-  };
-
   return (
-    <StyledQuestionCardContainer onClick={handleClick}>
+    <StyledQuestionCardContainer to={`/post/${subject.id}`}>
       <StyledProfileImg src={subject.imageSource} alt="답변자 프로필 사진" />
       <StyledUserName>{subject.name}</StyledUserName>
       <StyledReceivedQuestionArea>

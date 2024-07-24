@@ -16,6 +16,8 @@ const getTheme = () => {
     const isBrowserDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
     const initTheme = isBrowserDarkMode ? 'dark' : 'light';
     localStorage.setItem('theme', initTheme);
+    console.log(theme);
+
     return initTheme;
   }
 

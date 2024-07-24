@@ -12,10 +12,10 @@ export const softButtonStyle = {
 
 //진한 갈색 버튼
 export const deepButtonStyle = {
-  background: 'var(--brown40)',
-  text: 'var(--gray10)',
-  border: 'var(--brown50)',
-  pressed: 'var(--brown50)',
+  background: getThemeColor('brown40'),
+  text: getThemeColor('gray10'),
+  border: getThemeColor('brown50'),
+  pressed: getThemeColor('brown50'),
 };
 
 //화살표 이미지

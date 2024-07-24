@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
 
 const StyledPageNavigatorArea = styled.div`
   display: flex;
   justify-content: center;
   margin: 45px auto 0;
 
-  @media screen and (min-width: 375px) and (max-width: 767px) {
+  @media ${MEDIA_QUERY_SIZES.mobile} {
     margin: 60px auto 0;
   }
 `;
@@ -15,7 +16,7 @@ const StyledNavBtn = styled.div`
   justify-content: center;
   align-items: center;
 
-  color: ${({ $isCurrentPage }) => ($isCurrentPage ? 'var(--brown40)' : 'var(--gray40)')};
+  color: ${({ theme, $isCurrentPage }) => ($isCurrentPage ? theme.brown40 : theme.gray40)};
   font-size: 20px;
   font-weight: 400;
 
@@ -26,12 +27,16 @@ const StyledNavBtn = styled.div`
 `;
 
 function NavArrowBtn({ children, onNavBtnClick, isVisible }) {
-  return <StyledNavBtn onClick={onNavBtnClick}>{isVisible && children}</StyledNavBtn>;
+  return (
+    <StyledNavBtn className={'actor-font'} onClick={onNavBtnClick}>
+      {isVisible && children}
+    </StyledNavBtn>
+  );
 }
 
 function NavNumBtn({ children, isCurrentPage, onNavBtnClick }) {
   return (
-    <StyledNavBtn $isCurrentPage={isCurrentPage} onClick={onNavBtnClick}>
+    <StyledNavBtn className={'actor-font'} $isCurrentPage={isCurrentPage} onClick={onNavBtnClick}>
       {children}
     </StyledNavBtn>
   );
