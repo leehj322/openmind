@@ -3,7 +3,6 @@ import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import SubjectSelection from './pages/SubjectSelection';
 import AnswerFeed from './pages/AnswerFeed';
 import Home from './pages/Home';
-import QuerySample from './pages/QuerySample';
 import QuestionFeed from './pages/QuestionFeed';
 
 function PageRouter() {
@@ -30,8 +29,6 @@ function PageRouter() {
             }
           />
         </Route>
-        {/* 팀원분들 Suspense + tanstack-query 예시용 샘플 */}
-        <Route path={'/querysample'} element={<QuerySample />} />
       </Routes>
     </BrowserRouter>
   );
