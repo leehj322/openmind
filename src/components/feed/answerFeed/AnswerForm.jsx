@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 import Button from '../../@shared/Button';
-import { getThemeColor } from '../../../utils/getThemeColor';
 
 /**
  * 답변 생성, 수정 시 사용할 입력 폼
@@ -42,7 +41,7 @@ const StyledAnswerForm = styled.form`
     border-radius: 8px;
 
     padding: 16px;
-    background-color: ${getThemeColor('gray20')};
+    background-color: var(--gray20);
 
     font-size: 16px;
     font-weight: 400;
@@ -51,12 +50,12 @@ const StyledAnswerForm = styled.form`
     margin-bottom: 8px;
 
     &::placeholder {
-      color: ${getThemeColor('gray40')};
+      color: var(--gray40);
     }
 
     &:focus {
-      outline: 1px solid ${getThemeColor('brown40')};
-      background-color: ${getThemeColor('brown10')};
+      outline: 1px solid var(--brown40);
+      background-color: var(--brown10);
       color: var(--gray60);
     }
   }

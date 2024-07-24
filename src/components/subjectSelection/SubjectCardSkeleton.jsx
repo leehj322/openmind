@@ -7,9 +7,9 @@ const StyledSkeletonCardContainer = styled.li`
   width: 100%;
   height: 187px;
   border-radius: 16px;
-  border: 1px solid ${({ theme }) => theme.gray40};
+  border: 1px solid var(--gray40);
   padding: 20px;
-  background-color: ${({ theme }) => theme.gray10};
+  background-color: var(--gray10);
   &:hover {
     cursor: pointer;
   }

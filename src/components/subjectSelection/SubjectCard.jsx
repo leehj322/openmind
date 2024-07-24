@@ -19,9 +19,9 @@ const StyledQuestionCardContainer = styled(Link)`
   min-width: 112px;
   height: 187px;
   border-radius: 16px;
-  border: 1px solid ${props => props.theme.gray40};
+  border: 1px solid var(--gray40);
   padding: 20px;
-  background-color: ${props => props.theme.gray10};
+  background-color: var(--gray10);
   transition: transform 1s ease-in-out;
 
   &:hover {
@@ -77,7 +77,7 @@ const StyledReceivedQuestionIcon = styled.img`
   width: 18px;
   height: 18px;
   margin-right: 4px;
-  filter: ${props => props.theme.gray50Filter};
+  filter: var(--gray50Filter);
   @media (max-width: 767px) {
     width: 16px;
     height: 16px;
@@ -88,7 +88,7 @@ const StyledReceivedQuestionText = styled.p`
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  color: ${props => props.theme.gray40};
+  color: var(--gray40);
   @media (max-width: 767px) {
     font-size: 14px;
   }

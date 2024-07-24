@@ -36,7 +36,10 @@ function ModalComponent({ profileImg, name, isOpen, onRequestClose, subjectId })
 
   return (
     <div>
-      <StyledModal isOpen={isOpen} onRequestClose={onRequestClose}>
+      <StyledModal
+        isOpen={isOpen}
+        onRequestClose={onRequestClose}
+        style={{ overlay: { backgroundColor: 'rgba(0,0,0,0.75)' } }}>
         <StyledModalHeader>
           <StyledModalTitleWrapper>
             <StyledModalIcon src={messageIcon} alt="말풍선" />

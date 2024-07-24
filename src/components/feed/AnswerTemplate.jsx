@@ -1,7 +1,6 @@
 import { styled } from 'styled-components';
 import getElapsedPeriod from '../../utils/getElapsedPeriod';
 import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
-import { getThemeColor } from '../../utils/getThemeColor';
 import { useParams } from 'react-router-dom';
 import useSubjectQuery from '../../hooks/useSubjectQuery';
 
@@ -68,7 +67,7 @@ const StyledAnswerArea = styled.section`
       font-size: 14px;
       font-weight: 500;
       line-height: 18px;
-      color: ${getThemeColor('gray40')};
+      color: var(--gray40);
     }
   }
 `;
