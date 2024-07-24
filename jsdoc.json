@@ -20,7 +20,7 @@
     "scripts": [],
     "menu": {
       "Github repo": {
-        "href": "",
+        "href": "https://github.com/Codeit-FE08-Part2-Team4/openmind",
         "target": "_blank",
         "class": "menu-item",
         "id": "repository"
