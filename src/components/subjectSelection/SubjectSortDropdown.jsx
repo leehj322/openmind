@@ -10,20 +10,20 @@ const StyledDropdownToggler = styled.div`
   gap: 4px;
   position: relative;
 
-  border: 1px solid ${({ theme, $isDropdownVisible }) => ($isDropdownVisible ? theme.gray60 : theme.gray40)};
+  border: 1px solid ${({ $isDropdownVisible }) => ($isDropdownVisible ? 'var(--gray60)' : 'var(--gray40)')};
   border-radius: 8px;
   width: 79px;
   height: 34px;
 
-  color: ${({ theme, $isDropdownVisible }) => ($isDropdownVisible ? theme.gray60 : theme.gray40)};
-  background-color: ${({ theme }) => theme.gray10};
+  color: ${({ $isDropdownVisible }) => ($isDropdownVisible ? 'var(--gray60)' : 'var(--gray40)')};
+  background-color: var(--gray10);
   font-size: 14px;
   font-weight: 500;
 
   & img {
     width: 14px;
     height: 14px;
-    filter: ${({ theme, $isDropdownVisible }) => ($isDropdownVisible ? theme.gray60Filter : '')};
+    filter: ${({ $isDropdownVisible }) => ($isDropdownVisible ? 'var(--gray60Filter)' : '')};
     transform: ${({ $isDropdownVisible }) => ($isDropdownVisible ? 'rotate(180deg)' : '')};
   }
 

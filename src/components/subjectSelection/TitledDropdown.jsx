@@ -17,7 +17,7 @@ const StyledTitledDropdownArea = styled.div`
 `;
 
 const StyledTitle = styled.h1`
-  color: ${({ theme }) => theme.gray60};
+  color: var(--gray60);
   font-size: 40px;
   font-weight: 400;
   text-align: center;
