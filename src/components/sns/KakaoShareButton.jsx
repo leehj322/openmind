@@ -12,7 +12,6 @@ const StyledShareIcon = styled.img`
 
 const KakaoShareButton = ({ subject }) => {
   useEffect(() => {
-    console.log(import.meta.env.VITE_KAKAO_APP_KEY);
     // 카카오 SDK 초기화
     if (window.Kakao && !window.Kakao.isInitialized()) {
       window.Kakao.init(import.meta.env.VITE_KAKAO_APP_KEY); // 발급받은 앱 키로 초기화합니다.
@@ -29,8 +28,8 @@ const KakaoShareButton = ({ subject }) => {
           imageUrl: `${subject.imageSource}`,
           link: {
             //props로 뒷부분 아이디 받아와서 쓸 수 있도록 제작 예정
-            mobileWebUrl: 'http://localhost:5173/post/${subject.id}',
-            webUrl: 'http://localhost:5173/post//${subject.id}',
+            mobileWebUrl: 'https://fe08-4team-openmind.netlify.app/post/${subject.id}',
+            webUrl: 'https://fe08-4team-openmind.netlify.app/post/${subject.id}',
           },
         },
         buttons: [

@@ -1,17 +1,16 @@
 import styled from 'styled-components';
-import { useThemeSetting, useThemeToggle } from '../../contexts/ThemeContextProvider';
-import { getThemeColor } from '../../utils/getThemeColor';
+import { useIsDarkMode, useToggleDarkMode } from '../../contexts/DarkModeProvider';
 
 /**
  * 테마를 바꿔주는 버튼 컴포넌트
  */
 function ThemeToggler() {
-  const themeSetting = useThemeSetting();
-  const themeToggle = useThemeToggle();
-  const themeEmoji = themeSetting === 'dark' ? '🌙' : '☀️';
+  const isDarkMode = useIsDarkMode();
+  const toggleDarkMode = useToggleDarkMode();
+  const themeEmoji = isDarkMode ? '🌙' : '☀️';
 
   const handleThemeButtonClick = () => {
-    themeToggle();
+    toggleDarkMode();
   };
 
   return <StyledThemeButton onClick={handleThemeButtonClick}>{themeEmoji}</StyledThemeButton>;
@@ -20,9 +19,17 @@ function ThemeToggler() {
 export default ThemeToggler;
 
 const StyledThemeButton = styled.button`
-  background-color: ${getThemeColor('bgColor')};
-  padding: 10px 30px;
-  font-size: 30px;
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: var(--bgColor);
+  padding: 5px 15px;
+  font-size: 20px;
   border-radius: 30px;
-  border: 1px solid ${getThemeColor('gray50')};
+  border: 1px solid var(--gray50);
+  z-index: 21;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;

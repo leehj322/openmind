@@ -1,19 +1,20 @@
 import styled from 'styled-components';
-import Header from '../components/SubjectSelection/Header';
-import TitledDropdown from '../components/SubjectSelection/TitledDropdown';
-import SubjectList from '../components/SubjectSelection/SubjectList';
+import Header from '../components/subjectSelection/Header';
+import TitledDropdown from '../components/subjectSelection/TitledDropdown';
+import SubjectList from '../components/subjectSelection/SubjectList';
 import { useState } from 'react';
+import { MEDIA_QUERY_SIZES } from '../constants/mediaQuerySizes';
 
 const StyledSubjectSelectionPageContainer = styled.div`
   margin: 40px auto 100px;
   width: 1200px;
 
-  @media screen and (min-width: 768px) and (max-width: 1199px) {
+  @media ${MEDIA_QUERY_SIZES.tablet} {
     margin: 40px 0 90px;
     width: auto;
   }
 
-  @media screen and (min-width: 375px) and (max-width: 767px) {
+  @media ${MEDIA_QUERY_SIZES.mobile} {
     margin: 40px 0 40px;
     width: auto;
   }

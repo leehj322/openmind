@@ -12,7 +12,7 @@ const StyledShareIcon = styled.img`
 function TwitterShareButton({ subject }) {
   const shareTwitter = () => {
     const sendText = `${subject.name}님에게 궁금한 점을 물어보러 가요!`;
-    const sendUrl = `http://localhost:5173/post/${subject.id}`; //props로 뒷부분 아이디 받아와서 쓸 수 있도록 제작 예정
+    const sendUrl = `https://fe08-4team-openmind.netlify.app/post/${subject.id}`; //props로 뒷부분 아이디 받아와서 쓸 수 있도록 제작 예정
 
     window.open('https://twitter.com/intent/tweet?text=' + sendText + '&url=' + sendUrl);
   };

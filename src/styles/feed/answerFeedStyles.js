@@ -6,8 +6,6 @@ export const StyledAnswerFeedArea = styled.div`
   align-items: flex-end;
   gap: 16px;
 
-  background-color: ${({ theme }) => theme.gray20};
-
   max-width: 716px;
   margin: 145px auto 140px;
 

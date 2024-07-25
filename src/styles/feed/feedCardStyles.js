@@ -1,12 +1,9 @@
 import styled, { css, keyframes } from 'styled-components';
-import { getThemeColor } from '../../utils/getThemeColor';
 
 export const StyledFeedCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 32px;
-  background-color: ${getThemeColor('gray10')};
-
   background-color: var(--gray10);
 
   max-width: 684px;
@@ -21,7 +18,7 @@ export const StyledAnswerText = styled.p`
   font-size: 16px;
   font-weight: 400;
   line-height: 22px;
-  color: ${({ $isRejected, theme }) => $isRejected && theme.red};
+  color: ${({ $isRejected }) => $isRejected && 'var(--red)'};
 `;
 
 export const shakeLeft = keyframes`

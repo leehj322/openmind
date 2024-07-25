@@ -1,6 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
-import filter from '../../styles/@shared/filter';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const slideDown = keyframes`
   0% {
@@ -13,8 +12,23 @@ const slideDown = keyframes`
   }
 `;
 
+const slideUp = keyframes`
+  0% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30%);
+    opacity: 0;
+  }
+`;
+
 const dropdownSlideDownAnimation = css`
-  animation: ${slideDown} 0.8s ease;
+  animation: ${slideDown} 0.2s ease;
+`;
+
+const dropdownSlideUpAnimation = css`
+  animation: ${slideUp} 0.2s ease;
 `;
 
 const StyledDropdownListContainer = styled.div`
@@ -33,7 +47,8 @@ const StyledDropdownListContainer = styled.div`
 
   box-shadow: var(--shadow1pt);
 
-  ${({ $isAnimationEnabled }) => ($isAnimationEnabled ? dropdownSlideDownAnimation : '')};
+  ${({ $isOpenAnimation, $isAnimationEnabled }) =>
+    $isAnimationEnabled ? ($isOpenAnimation ? dropdownSlideDownAnimation : dropdownSlideUpAnimation) : ''};
 `;
 
 const StyledItemArea = styled.div`
@@ -42,9 +57,9 @@ const StyledItemArea = styled.div`
   gap: 8px;
   padding: 0 16px;
 
-  color: ${({ $isCurrent }) => ($isCurrent ? 'var(--blue)' : 'var(--gray50)')};
-  font-size: 14px; // fontSize(xsmall)
-  font-weight: 500; // fontWeight(medium)
+  color: ${({ $isCurrent }) => ($isCurrent ? 'var(--blue) ' : 'var(--gray50)')};
+  font-size: 14px;
+  font-weight: 500;
 
   height: 30px;
   cursor: pointer;
@@ -52,27 +67,27 @@ const StyledItemArea = styled.div`
   // font 및 img color값 hover시에 gray60, 현재 활성화된 값일시 blue
   // hover시에 child element인 img 까지 hover 전달
   &:hover {
-    color: ${({ $isCurrent }) => ($isCurrent ? 'var(--blue)' : 'var(--gray60)')};
-    background-color: var(--gray20);
+    color: ${({ $isCurrent }) => ($isCurrent ? 'var(--blue) ' : 'var(--gray60)')};
+    background-color: var(--gray-20);
     & img {
-      filter: ${({ $isCurrent }) => ($isCurrent ? filter.blue : filter.gray60)};
+      filter: ${({ $isCurrent }) => ($isCurrent ? 'var(--blueFilter) ' : 'var(--gray60Filter)')};
     }
   }
 
   &:active {
     color: var(--blue);
     & img {
-      filter: ${filter.blue};
+      filter: var(--blueFilter);
     }
   }
 
   // img color값 gray50, 현재 활성화된 값일시 blue
   & img {
-    filter: ${({ $isCurrent }) => ($isCurrent ? filter.blue : filter.gray50)};
+    filter: ${({ $isCurrent }) => ($isCurrent ? 'var(--blueFilter) ' : 'var(--gray50Filter)')};
   }
 `;
 
-const ItemImg = styled.img`
+const StyledItemImg = styled.img`
   display: block;
   width: 16px;
   height: 16px;
@@ -80,6 +95,7 @@ const ItemImg = styled.img`
 
 /**
  * dropdown trigger를 통해서 isDropdownVisible을 toggle시에 꺼졌다 켜졌다 하는 dropdown list box
+ * 사용시에 dropdown toggler 안에 배치시키고 사용해야 합니다 (position: absolute)
  * @param {boolean} isDropdownVisible dropdown box 끄기(false), 켜기(true)
  * @param {boolean} isCurrentStateHighlight 현재 값 파란색으로 하이라이트 / 기본값 true
  * @param {boolean} isAnimationEnabled 애니메이션 활성화 할지(true) 안할지(false) 결정 / 기본값 true
@@ -100,6 +116,7 @@ function DropdownBox({
   onItemClick,
 }) {
   const [currentItem, setCurrentItem] = useState(null);
+  const [isVisible, setIsVisible] = useState(isDropdownVisible);
 
   const handleItemClick = event => {
     const { value } = event.currentTarget.dataset;
@@ -109,9 +126,27 @@ function DropdownBox({
     onItemClick(value);
   };
 
+  // 닫히는 애니메이션 적용
+  // isDropdownVisible : 외부에서 끌지 켤지 입력값을 받아옴
+  // isVisible : 실제로 box가 꺼지고 켜지는 것을 제어
+  // isDropdownVisible로 false 값을 받았을 때, isVisible이 animation 시간만큼 기다린 후에 false가 되도록 해주어야함.
+  // isDropdownVisible로 true 값을 받았을 때, isVisible이 바로 true가 되어야함.
+  useEffect(() => {
+    let timer;
+    if (isDropdownVisible) {
+      setIsVisible(isDropdownVisible);
+    } else {
+      timer = setTimeout(() => {
+        setIsVisible(isDropdownVisible);
+      }, 190);
+    }
+    return () => clearTimeout(timer);
+  }, [isDropdownVisible]);
+
   return (
     <StyledDropdownListContainer
-      $isVisible={isDropdownVisible}
+      $isVisible={isVisible}
+      $isOpenAnimation={isDropdownVisible}
       $isAnimationEnabled={isAnimationEnabled}
       $minWidth={minWidth}
       $top={topPosition}
@@ -120,7 +155,7 @@ function DropdownBox({
         const { title, value, url } = item;
         return (
           <StyledItemArea data-value={value} key={value} $isCurrent={currentItem === value} onClick={handleItemClick}>
-            {url && <ItemImg src={url} alt={value} />}
+            {url && <StyledItemImg src={url} alt={value} />}
             {title}
           </StyledItemArea>
         );

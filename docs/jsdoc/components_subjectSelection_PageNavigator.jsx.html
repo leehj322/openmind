@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>components/subjectSelection/PageNavigator.jsx - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/Codeit-FE08-Part2-Team4/openmind" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Global</h3><ul><li><a href="global.html#AnswerCard">AnswerCard</a></li><li><a href="global.html#AnswerForm">AnswerForm</a></li><li><a href="global.html#AnswerStatus">AnswerStatus</a></li><li><a href="global.html#AnswerTemplate">AnswerTemplate</a></li><li><a href="global.html#DeferredComponent">DeferredComponent</a></li><li><a href="global.html#DropdownBox">DropdownBox</a></li><li><a href="global.html#MoreButton">MoreButton</a></li><li><a href="global.html#PageNavigator">PageNavigator</a></li><li><a href="global.html#QuestionCard">QuestionCard</a></li><li><a href="global.html#QuestionTitle">QuestionTitle</a></li><li><a href="global.html#Reaction">Reaction</a></li><li><a href="global.html#StyledButton">StyledButton</a></li><li><a href="global.html#ThemeToggler">ThemeToggler</a></li><li><a href="global.html#createCenteredArray">createCenteredArray</a></li><li><a href="global.html#createQuestion">createQuestion</a></li><li><a href="global.html#getElapsedPeriod">getElapsedPeriod</a></li><li><a href="global.html#getIsDarkMode">getIsDarkMode</a></li><li><a href="global.html#getSubjects">getSubjects</a></li><li><a href="global.html#postAnswer">postAnswer</a></li><li><a href="global.html#postReaction">postReaction</a></li><li><a href="global.html#putAnswer">putAnswer</a></li><li><a href="global.html#showToast">showToast</a></li><li><a href="global.html#useIsDarkMode">useIsDarkMode</a></li><li><a href="global.html#useSubjectQuery">useSubjectQuery</a></li><li><a href="global.html#useSubjectsQuery">useSubjectsQuery</a></li><li><a href="global.html#useToggle">useToggle</a></li><li><a href="global.html#useToggleDarkMode">useToggleDarkMode</a></li><li><a href="global.html#useWindowSize">useWindowSize</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">components/subjectSelection/PageNavigator.jsx</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import styled from 'styled-components';
+import { MEDIA_QUERY_SIZES } from '../../constants/mediaQuerySizes';
+
+const StyledPageNavigatorArea = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 45px auto 0;
+
+  @media ${MEDIA_QUERY_SIZES.mobile} {
+    margin: 60px auto 0;
+  }
+`;
+
+const StyledNavBtn = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: ${({ $isCurrentPage }) => ($isCurrentPage ? 'var(--brown40)' : 'var(--gray40)')};
+  font-size: 20px;
+  font-weight: 400;
+
+  width: 40px;
+  height: 40px;
+
+  cursor: pointer;
+`;
+
+function NavArrowBtn({ children, onNavBtnClick, isVisible }) {
+  return (
+    &lt;StyledNavBtn className={'actor-font'} onClick={onNavBtnClick}>
+      {isVisible &amp;&amp; children}
+    &lt;/StyledNavBtn>
+  );
+}
+
+function NavNumBtn({ children, isCurrentPage, onNavBtnClick }) {
+  return (
+    &lt;StyledNavBtn className={'actor-font'} $isCurrentPage={isCurrentPage} onClick={onNavBtnClick}>
+      {children}
+    &lt;/StyledNavBtn>
+  );
+}
+
+/**
+ * @param {number} currentPage 현재 페이지 상태
+ * @param {array} pageNumList 페이지 번호를 담은 리스트 값
+ * @param {function} onNavBtnClick 버튼 클릭시 동작을 담은 함수
+ * @param {string} arrowBtnVisible 왼쪽, 오른쪽 화살표 보이기 안보이기 옵션 (both: 둘 다 보임, left: 왼쪽 보임, right: 오른쪽 보임, none: 둘다 안보임)
+ */
+function PageNavigator({ currentPage, pageNumList, onNavBtnClick, arrowBtnVisible }) {
+  const { isLeftArrowVisible, isRightArrowVisible } = arrowBtnVisible;
+  return (
+    &lt;StyledPageNavigatorArea>
+      &lt;NavArrowBtn onNavBtnClick={onNavBtnClick} isVisible={isLeftArrowVisible}>
+        &amp;lt;
+      &lt;/NavArrowBtn>
+      {pageNumList.map(pageNum => (
+        &lt;NavNumBtn key={pageNum} onNavBtnClick={onNavBtnClick} isCurrentPage={pageNum === currentPage}>
+          {pageNum}
+        &lt;/NavNumBtn>
+      ))}
+      &lt;NavArrowBtn onNavBtnClick={onNavBtnClick} isVisible={isRightArrowVisible}>
+        &amp;gt;
+      &lt;/NavArrowBtn>
+    &lt;/StyledPageNavigatorArea>
+  );
+}
+
+export default PageNavigator;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Thu Jul 25 2024 01:12:02 GMT+0900 (대한민국 표준시) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

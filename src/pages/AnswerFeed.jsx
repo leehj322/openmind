@@ -3,19 +3,22 @@ import styled from 'styled-components';
 
 import HeroImgUrl from '../assets/images/HeroImage.png';
 import profileImg from '../assets/images/profile.png';
+import LogoImgUrl from '../assets/images/logo.svg';
 
-import Header from '../components/feed/questionFeed/Header';
 import AnswerCardList from '../components/feed/answerFeed/AnswerCardList';
 import { StyledAnswerFeedArea } from '../styles/feed/answerFeedStyles';
 import { StyledHeroImg } from '../styles/feed/heroImgStyles';
 import Button from '../components/@shared/Button';
 import deleteSubject from '../apis/deleteSubject';
+import { StyledHeader } from '../styles/feed/headerStyles';
+import { StyledLogoImg } from '../styles/feed/logoImgStyles';
+import ProfileArea from '../components/sns/ProfileArea';
+import { Link, useParams } from 'react-router-dom';
+import useSubjectQuery from '../hooks/useSubjectQuery';
 
 const StyledAnswerFeedPageContainer = styled.div`
   margin: 0px auto;
   width: 1200px;
-
-  background-color: ${({ theme }) => theme.gray20};
 
   position: relative;
 
@@ -35,23 +38,23 @@ const StyledHeroImgWrapper = styled.div`
 `;
 
 const deleteButtonStyle = {
-  fontSize: '15px',
+  fontSize: '14px',
   boxShadow: 'var(--shadow2pt)',
 
   '@media screen and (min-width: 375px) and (max-width: 767px)': {
     fontSize: '10px',
     width: '70px',
     height: '25px',
+    padding: '6px 12px',
   },
 };
 
 function AnswerFeed() {
-  // 세션 스토리지에서 반환된 값 역직렬화
-  const profileDataString = sessionStorage.getItem('profile');
-  const profileData = profileDataString ? JSON.parse(profileDataString) : null;
+  const { id: subjectId } = useParams(); // useParams 이용해서 subjectId 가져오기
+  const { data: profileData } = useSubjectQuery(subjectId);
 
   // 구조 분해 할당
-  const { id, name, imageSource, questionCount } = profileData || {
+  const { id, questionCount } = profileData || {
     // 기본값
     id: 7478,
     name: '아초는고양이',
@@ -65,7 +68,12 @@ function AnswerFeed() {
       if (statusCode === 204) {
         // 성공적으로 삭제됨
         console.log('Subject deleted successfully');
-        // 필요한 추가적인 작업 수행 가능
+        // 해당 페이지의 ID가 로컬 스토리지의 userInfo와 같다면 삭제하기
+        const userInfoString = window.localStorage.getItem('userInfo');
+        const userInfo = JSON.parse(userInfoString);
+        if (userInfo.id === subjectId) {
+          window.localStorage.removeItem('userInfo');
+        }
       } else {
         // 삭제 실패 혹은 에러 발생
         console.error('Failed to delete subject');
@@ -82,14 +90,19 @@ function AnswerFeed() {
       <StyledHeroImgWrapper>
         <StyledHeroImg src={HeroImgUrl} alt="히어로 이미지" />
       </StyledHeroImgWrapper>
-      {/* Header, AnswerCardList 컴포넌트에 데이터를 props로 전달 */}
-      <Header name={name} imageSource={imageSource} />
+      {/* ProfileArea, AnswerCardList 컴포넌트에 데이터를 props로 전달 */}
+      <StyledHeader>
+        <Link to={'/'}>
+          <StyledLogoImg src={LogoImgUrl} />
+        </Link>
+        <ProfileArea subject={profileData} />
+      </StyledHeader>
       <StyledAnswerFeedArea>
         <Button
           onClick={() => handleDeleteButtonClick(id)}
           pagePath={'/'}
           shape={'pill'}
-          btnColor={'deep'}
+          $btnColor={'deep'}
           style={deleteButtonStyle}
           width={'100px'}
           height={'35px'}>

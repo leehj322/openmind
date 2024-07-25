@@ -10,6 +10,7 @@ import AnswerForm from './AnswerForm';
 import useCreateAnswerMutation from '../../../queries/useCreateAnswerMutation';
 import useUpdateAnswerMutation from '../../../queries/useUpdateAnswerMutation';
 import { LIMIT_DISLIKE_COUNT } from '../../../constants/feedCard';
+import showToast from '../../@shared/Toast';
 
 /**
  * 답변 피드 페이지에서의 답변 카드
@@ -24,10 +25,10 @@ import { LIMIT_DISLIKE_COUNT } from '../../../constants/feedCard';
 function AnswerCard({
   // TODO: 상위 컴포넌트에서 데이터를 넣어줄 수 있게 되면 테스트용 기본값 삭제 예정
   questionId,
-  questionContent = '좋아하는 동물은?좋아하는 동물은?좋아하는 동물은? 좋아하동 물은?',
-  likeCount = 0,
-  dislikeCount = 0,
-  questionCreateAt = '',
+  questionContent,
+  likeCount,
+  dislikeCount,
+  questionCreateAt,
   answer,
 }) {
   const isHasAnswer = !!answer;
@@ -45,7 +46,7 @@ function AnswerCard({
 
   const handleEditButtonClick = () => {
     if (isRejected) {
-      alert('이미 거절한 답변입니다.');
+      showToast('이미 거절한 답변입니다.', { style: { background: '#333', color: '#fff' } });
     } else if (!currentAnswer) {
       alert('아직 생성된 답변이 없습니다.');
     } else {
@@ -55,7 +56,7 @@ function AnswerCard({
 
   const handleRejectButtonClick = () => {
     if (isRejected) {
-      alert('이미 거절한 답변입니다.');
+      showToast('이미 거절한 답변입니다.', { style: { background: '#333', color: '#fff' } });
     } else {
       // isRejected가 false 인 경우에만 실행하면 됨
       const isOkay = confirm('답변 거절 후에는 철회 할 수 없습니다.\n답변을 거절하시겠습니까?');

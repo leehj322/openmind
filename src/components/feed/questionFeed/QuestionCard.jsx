@@ -15,7 +15,7 @@ import Reaction from '../Reaction';
  * @param {object | null} props.answer 답변 객체
  */
 function QuestionCard({
-  // 상위 컴포넌트에서 데이터를 넣어줄 수 있게 되어 테스트용 기본값 삭제했습니다. (from. 재완)
+  // TODO: 상위 컴포넌트에서 데이터를 넣어줄 수 있게 되면 테스트용 기본값 삭제 예정
   questionId,
   questionContent,
   likeCount,
