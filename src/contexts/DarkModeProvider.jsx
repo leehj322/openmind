@@ -3,18 +3,18 @@ import { useEffect, useState, createContext, useContext } from 'react';
 const DarkModeContext = createContext();
 
 /**
- * 사용자의 이전 설정 또는 시스템 설정을 가져오는 함수
+ * 사용자의 이전 테마 설정 또는 시스템 테마 설정을 가져오는 함수
  * @returns {boolean} 사용자의 이전 테마 설정 또는 시스템 테마 설정이 다크모드인지?
  */
 const getIsDarkMode = () => {
   const isDarkMode = localStorage.getItem('isDarkMode');
 
-  if (!isDarkMode) {
+  if (isDarkMode === null) {
     // 지정해둔 themeStorage가 없다면 사용자 시스템 설정을 가져옴
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   }
 
-  return isDarkMode;
+  return isDarkMode === 'true';
 };
 
 /**
@@ -31,7 +31,7 @@ export default function DarkModeProvider({ children }) {
   useEffect(() => {
     // 다크 모드를 토글하고 로컬 스토리지에 상태를 저장
     document.documentElement.classList.toggle('dark', isDarkMode);
-    localStorage.isDarkMode = isDarkMode;
+    localStorage.setItem('isDarkMode', isDarkMode);
   }, [isDarkMode]);
 
   return <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>{children}</DarkModeContext.Provider>;
