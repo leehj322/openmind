@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import React from 'react';
 
-import { StyledFeedCardListContainer } from '../../../styles/feed/feedCardListStyles';
+import { StyledQuestionCardListContainer } from '../../../styles/feed/questionCardListStyles';
 import { StyledQuestionCountArea } from '../../../styles/feed/questionCountStyles';
 import { StyledMessagesImg } from '../../../styles/feed/messagesImgStyles';
 
@@ -26,7 +26,7 @@ function QuestionCardList({ questionCount, subjectId }) {
   }
 
   return (
-    <StyledFeedCardListContainer>
+    <StyledQuestionCardListContainer>
       <StyledQuestionCountArea>
         <StyledMessagesImg src={MessagesIconUrl} />
         {questionCount}개의 질문이 있습니다
@@ -51,7 +51,7 @@ function QuestionCardList({ questionCount, subjectId }) {
           <Spinner />
         </div>
       )}
-    </StyledFeedCardListContainer>
+    </StyledQuestionCardListContainer>
   );
 }
 
