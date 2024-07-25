@@ -19,6 +19,5 @@ export const StyledAnswerCardListContainer = styled.div`
 
   @media screen and (min-width: 375px) and (max-width: 767px) {
     max-width: 327px;
-    margin: 176px auto 126px;
   }
 `;
