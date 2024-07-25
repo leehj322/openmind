@@ -88,6 +88,8 @@ function AnswerFeed() {
     } catch (error) {
       console.error('Failed to delete subject:', error);
       // 필요한 오류 처리 작업 수행 가능
+    } finally {
+      location.reload(); // 삭제 이후에 메인 페이지 유저 정보 리로드 (새로고침)
     }
   };
 
