@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import HeroImgUrl from '../assets/images/HeroImage.png';
 import profileImg from '../assets/images/profile.png';
 import LogoImgUrl from '../assets/images/logo.svg';
+import MessagesIconUrl from '../assets/images/ic_Messages.svg';
+import noQuestionImg from '../assets/images/no-question.png';
 
 import AnswerCardList from '../components/feed/answerFeed/AnswerCardList';
 import { StyledAnswerFeedArea } from '../styles/feed/answerFeedStyles';
@@ -15,6 +17,10 @@ import { StyledLogoImg } from '../styles/feed/logoImgStyles';
 import ProfileArea from '../components/sns/ProfileArea';
 import { Link, useParams } from 'react-router-dom';
 import useSubjectQuery from '../hooks/useSubjectQuery';
+import { StyledAnswerCardListContainer } from '../styles/feed/answerCardListStyles';
+import { StyledQuestionCountArea } from '../styles/feed/questionCountStyles';
+import { StyledMessagesImg } from '../styles/feed/messagesImgStyles';
+import { StyledNoQuestionImg } from '../styles/feed/noQuestionImgStyles';
 
 const StyledAnswerFeedPageContainer = styled.div`
   margin: 0px auto;
@@ -82,36 +88,74 @@ function AnswerFeed() {
     } catch (error) {
       console.error('Failed to delete subject:', error);
       // 필요한 오류 처리 작업 수행 가능
+    } finally {
+      location.reload(); // 삭제 이후에 메인 페이지 유저 정보 리로드 (새로고침)
     }
   };
 
-  return (
-    <StyledAnswerFeedPageContainer>
-      <StyledHeroImgWrapper>
-        <StyledHeroImg src={HeroImgUrl} alt="히어로 이미지" />
-      </StyledHeroImgWrapper>
-      {/* ProfileArea, AnswerCardList 컴포넌트에 데이터를 props로 전달 */}
-      <StyledHeader>
-        <Link to={'/'}>
-          <StyledLogoImg src={LogoImgUrl} />
-        </Link>
-        <ProfileArea subject={profileData} />
-      </StyledHeader>
-      <StyledAnswerFeedArea>
-        <Button
-          onClick={() => handleDeleteButtonClick(id)}
-          pagePath={'/'}
-          shape={'pill'}
-          $btnColor={'deep'}
-          style={deleteButtonStyle}
-          width={'100px'}
-          height={'35px'}>
-          삭제하기
-        </Button>
-        <AnswerCardList subjectId={id} questionCount={questionCount} />
-      </StyledAnswerFeedArea>
-    </StyledAnswerFeedPageContainer>
-  );
+  if (questionCount !== 0) {
+    return (
+      <StyledAnswerFeedPageContainer>
+        <StyledHeroImgWrapper>
+          <StyledHeroImg src={HeroImgUrl} alt="히어로 이미지" />
+        </StyledHeroImgWrapper>
+        {/* ProfileArea, AnswerCardList 컴포넌트에 데이터를 props로 전달 */}
+        <StyledHeader>
+          <Link to={'/'}>
+            <StyledLogoImg src={LogoImgUrl} />
+          </Link>
+          <ProfileArea subject={profileData} />
+        </StyledHeader>
+        <StyledAnswerFeedArea>
+          <Button
+            onClick={() => handleDeleteButtonClick(id)}
+            pagePath={'/'}
+            shape={'pill'}
+            $btnColor={'deep'}
+            style={deleteButtonStyle}
+            width={'100px'}
+            height={'35px'}>
+            삭제하기
+          </Button>
+          <AnswerCardList subjectId={id} questionCount={questionCount} />
+        </StyledAnswerFeedArea>
+      </StyledAnswerFeedPageContainer>
+    );
+  } else {
+    return (
+      <StyledAnswerFeedPageContainer>
+        <StyledHeroImgWrapper>
+          <StyledHeroImg src={HeroImgUrl} alt="히어로 이미지" />
+        </StyledHeroImgWrapper>
+        {/* ProfileArea, AnswerCardList 컴포넌트에 데이터를 props로 전달 */}
+        <StyledHeader>
+          <Link to={'/'}>
+            <StyledLogoImg src={LogoImgUrl} />
+          </Link>
+          <ProfileArea subject={profileData} />
+        </StyledHeader>
+        <StyledAnswerFeedArea>
+          <Button
+            onClick={() => handleDeleteButtonClick(id)}
+            pagePath={'/'}
+            shape={'pill'}
+            $btnColor={'deep'}
+            style={deleteButtonStyle}
+            width={'100px'}
+            height={'35px'}>
+            삭제하기
+          </Button>
+          <StyledAnswerCardListContainer>
+            <StyledQuestionCountArea>
+              <StyledMessagesImg src={MessagesIconUrl} alt="말풍선 아이콘" />
+              아직 질문이 없습니다
+            </StyledQuestionCountArea>
+            <StyledNoQuestionImg src={noQuestionImg} alt="빈 박스 이미지" />
+          </StyledAnswerCardListContainer>
+        </StyledAnswerFeedArea>
+      </StyledAnswerFeedPageContainer>
+    );
+  }
 }
 
 export default AnswerFeed;

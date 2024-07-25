@@ -10,6 +10,8 @@ import axios from 'axios';
 import showToast from '../components/@shared/Toast';
 import UserInfoBox from '../components/feed/home/UserInfoBox';
 
+// 수정함!
+
 function Home() {
   // State variables
   const [isIconVisible, setIsIconVisible] = useState(true);

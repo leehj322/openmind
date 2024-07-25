@@ -9,7 +9,6 @@ import noQuestionImg from '../assets/images/no-question.png';
 import LogoImgUrl from '../assets/images/logo.svg';
 
 import QuestionCardList from '../components/feed/questionFeed/QuestionCardList';
-import { StyledFeedCardListContainer } from '../styles/feed/feedCardListStyles';
 import { StyledQuestionCountArea } from '../styles/feed/questionCountStyles';
 import { StyledHeroImg } from '../styles/feed/heroImgStyles';
 import { StyledMessagesImg } from '../styles/feed/messagesImgStyles';
@@ -21,6 +20,7 @@ import { StyledLogoImg } from '../styles/feed/logoImgStyles';
 import { StyledHeader } from '../styles/feed/headerStyles';
 import ProfileArea from '../components/sns/ProfileArea';
 import useSubjectQuery from '../hooks/useSubjectQuery';
+import { StyledQuestionCardListContainer } from '../styles/feed/questionCardListStyles';
 
 const StyledQuestionFeedPageContainer = styled.div`
   margin: 0px auto;
@@ -128,7 +128,7 @@ function QuestionFeed() {
           </Link>
           <ProfileArea subject={profileData} />
         </StyledHeader>
-        <StyledFeedCardListContainer>
+        <StyledQuestionCardListContainer>
           <StyledQuestionCountArea>
             <StyledMessagesImg src={MessagesIconUrl} alt="말풍선 아이콘" />
             아직 질문이 없습니다
@@ -151,7 +151,7 @@ function QuestionFeed() {
             onRequestClose={handleCloseModal}
             questionCount={questionCount}
           />
-        </StyledFeedCardListContainer>
+        </StyledQuestionCardListContainer>
       </StyledQuestionFeedPageContainer>
     );
   }
