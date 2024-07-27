@@ -90,8 +90,9 @@ $ pnpm run dev
 - 생성된 피드 > 카드 형태로 표시
 - 피드 정렬 > 이름순, 최신순
 
+
 <div>
-  <img src="https://github.com/user-attachments/assets/15720241-e4d4-49a3-bff0-3e4a8148632e" width="700px" heigth="500px"/>
+  <img src="https://github.com/user-attachments/assets/6c5cf3e8-8b59-4492-bb30-e16d6cd5986b" width="700px" heigth="500px"/>
 </div>
 <br />
 
@@ -108,19 +109,21 @@ $ pnpm run dev
 ### 답변 페이지
 - 답변 > 수정, 거절
 <div>
-  <img src="https://github.com/user-attachments/assets/11ab56eb-e488-4a97-a0de-506eb9e9c291" width="700px" heigth="500px"/>
+  <img src="https://github.com/user-attachments/assets/a29fca95-99c2-4bff-a62b-48504d1559c6" width="700px" heigth="500px"/>
 </div>
 <br />
+
 
 - 피드 삭제
 <div>
-  <img src="https://github.com/user-attachments/assets/723ac2e0-6da0-4e5c-b0f8-7df4caabb7b6" width="700px" heigth="500px"/>
+  <img src="https://github.com/user-attachments/assets/d090c871-1e17-45b1-9b4d-0217735f12ab" width="700px" heigth="500px"/>
 </div>
 <br />
 
+
 ### 다크 모드
 <div>
-  <img src="https://github.com/user-attachments/assets/1e6eb97b-63eb-405d-96d0-4427f2900264" width="700px" heigth="500px"/>
+  <img src="https://github.com/user-attachments/assets/8149335e-ffb4-48f7-8d78-47f230f57307" width="700px" heigth="500px"/>
 </div>
 
 
