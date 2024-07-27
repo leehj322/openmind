@@ -75,8 +75,55 @@ $ pnpm run dev
 > 🌐 배포주소 https://fe08-4team-openmind.netlify.app/ <br/>
 
 <br/>
+<br />
 
-![KakaoTalk_20240727_033914654 (1)](https://github.com/user-attachments/assets/5408e93f-c7b1-40b4-9904-000a3c6862fc)
+## 🔎 기능 소개
+### 메인페이지
+- 이름 입력 > 개인 피드 생성
+
+<div>
+  <img src="https://github.com/user-attachments/assets/5408e93f-c7b1-40b4-9904-000a3c6862fc" width="700px" height="500px"/>
+</div>
+<br />
+
+### 질문 리스트 페이지
+- 생성된 피드 > 카드 형태로 표시
+- 피드 정렬 > 이름순, 최신순
+
+<div>
+  <img src="https://github.com/user-attachments/assets/15720241-e4d4-49a3-bff0-3e4a8148632e" width="700px" heigth="500px"/>
+</div>
+<br />
+
+### 질문 작성 페이지
+- 질문 생성 > 모달창
+- 질문에 대한 응답 > 좋아요, 싫어요
+- 링크 복사, 카카오, X 공유
+- 무한 스크롤
+<div>
+  <img src="https://github.com/user-attachments/assets/201aebf0-d920-477c-bca4-dbff6522f788" width="700px" heigth="500px" />
+</div>
+<br />
+
+### 답변 페이지
+- 답변 > 수정, 거절
+<div>
+  <img src="https://github.com/user-attachments/assets/11ab56eb-e488-4a97-a0de-506eb9e9c291" width="700px" heigth="500px"/>
+</div>
+<br />
+
+- 피드 삭제
+<div>
+  <img src="https://github.com/user-attachments/assets/723ac2e0-6da0-4e5c-b0f8-7df4caabb7b6" width="700px" heigth="500px"/>
+</div>
+
+### 다크 모드
+<div>
+  <img src="https://github.com/user-attachments/assets/1e6eb97b-63eb-405d-96d0-4427f2900264" width="700px" heigth="500px"/>
+</div>
+
+
+
 
 
 
