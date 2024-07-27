@@ -116,6 +116,7 @@ $ pnpm run dev
 <div>
   <img src="https://github.com/user-attachments/assets/723ac2e0-6da0-4e5c-b0f8-7df4caabb7b6" width="700px" heigth="500px"/>
 </div>
+<br />
 
 ### 다크 모드
 <div>
