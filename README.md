@@ -102,7 +102,7 @@ $ pnpm run dev
 - 링크 복사, 카카오, X 공유
 - 무한 스크롤
 <div>
-  <img src="https://github.com/user-attachments/assets/201aebf0-d920-477c-bca4-dbff6522f788" width="700px" heigth="500px" />
+  <img src="https://github.com/user-attachments/assets/201aebf0-d920-477c-bca4-dbff6522f788" width="700px" heigth="300px" />
 </div>
 <br />
 
